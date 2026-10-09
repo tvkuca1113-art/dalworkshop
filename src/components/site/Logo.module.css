@@ -1,0 +1,26 @@
+.logo {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  background: #121211;
+  flex: none;
+  aspect-ratio: 1040 / 695;
+}
+.header {
+  width: 96px;
+}
+.footer {
+  width: 132px;
+}
+/* The square source is scaled so the lettering area (≈ 1040 × 695 px of the
+   original) fills the frame; the image itself is not altered. */
+.frame {
+  position: absolute;
+  width: 120.58%;
+  aspect-ratio: 1 / 1;
+  left: -10.58%;
+  top: -41.7%;
+}
+.img {
+  object-fit: cover;
+}

@@ -1,0 +1,27 @@
+.dialog {
+  width: min(92vw, 30rem);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  background: var(--bone);
+  color: var(--ink);
+}
+.dialog::backdrop {
+  background: rgba(23, 24, 22, 0.55);
+}
+.title {
+  font-size: 1.8rem;
+  margin-bottom: 0.75rem;
+}
+.body {
+  display: grid;
+  gap: 0.5rem;
+  color: var(--muted);
+}
+.actions {
+  margin-top: 1.25rem;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}

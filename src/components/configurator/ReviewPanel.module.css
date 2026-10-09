@@ -1,0 +1,97 @@
+.review {
+  display: grid;
+  gap: 1.4rem;
+}
+.heading {
+  font-size: 2rem;
+}
+.price {
+  display: grid;
+  gap: 0.35rem;
+  padding: 1rem 1.1rem;
+  background: #fff;
+  border-left: 3px solid var(--brass);
+}
+.field {
+  display: grid;
+  gap: 0.4rem;
+}
+.field label {
+  font-weight: 600;
+}
+.field textarea {
+  width: 100%;
+  min-height: 84px;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: #fff;
+  font-size: 1rem;
+  resize: vertical;
+}
+.blocking {
+  display: grid;
+  gap: 0.6rem;
+  padding: 0.75rem 0.9rem;
+  border-left: 3px solid var(--error);
+  background: #fff;
+  color: var(--error);
+  font-weight: 500;
+}
+.primary {
+  display: grid;
+  gap: 0.5rem;
+}
+.primary :global(.btn) {
+  width: 100%;
+  white-space: normal;
+  min-height: 54px;
+}
+.waNotice {
+  padding: 0.7rem 0.9rem;
+  background: #fff;
+  border-left: 3px solid var(--wa);
+  font-weight: 500;
+}
+.secondary {
+  display: grid;
+  gap: 0.6rem;
+}
+.optIn {
+  display: flex;
+  gap: 0.55rem;
+  align-items: center;
+  font-size: 0.92rem;
+  min-height: 44px;
+}
+.optIn input {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--charcoal);
+}
+.buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.ok {
+  font-size: 0.9rem;
+  color: var(--ok);
+  font-weight: 500;
+}
+.manual {
+  display: grid;
+  gap: 0.35rem;
+  font-size: 0.9rem;
+}
+.manual input {
+  width: 100%;
+  min-height: 44px;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid var(--line-strong);
+  font-size: 0.85rem;
+}
+.form {
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+}

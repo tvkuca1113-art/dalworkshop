@@ -1,0 +1,225 @@
+{
+  "reviewedOn": "2026-10-09",
+  "packagePurpose": "Claude Code reference and image bundle; not a runnable website",
+  "assets": [
+    {
+      "path": "public/brand/dal-logo-instagram-original.jpg",
+      "width": 150,
+      "height": 150,
+      "format": "JPEG",
+      "bytes": 3189,
+      "kind": "downloaded_original_raster",
+      "source": "https://www.instagram.com/dalworkshop.ba/",
+      "vectorOriginal": false,
+      "usage": "Original brand reference; preserve design."
+    },
+    {
+      "path": "public/brand/dal-logo-original.jpg",
+      "width": 1254,
+      "height": 1254,
+      "format": "JPEG",
+      "bytes": 167354,
+      "kind": "downloaded_original_raster",
+      "source": "https://www.facebook.com/photo/?fbid=122140190385109591&set=a.122100493497109591",
+      "vectorOriginal": false,
+      "usage": "Original brand reference; preserve design."
+    },
+    {
+      "path": "public/images/dal-daska-ambijent.png",
+      "width": 1536,
+      "height": 1024,
+      "format": "PNG",
+      "bytes": 2334365,
+      "kind": "imagegen_editorial_derivative",
+      "sourceReference": "/originals/daska-javor-bukva.jpg",
+      "usage": "Illustrative styled scene/material detail; original source is authoritative for product identity.",
+      "exactProductIdentityGuaranteed": false,
+      "section": "boards",
+      "recommendedWebVersion": false
+    },
+    {
+      "path": "public/images/dal-daska-ambijent.webp",
+      "width": 1536,
+      "height": 1024,
+      "format": "WEBP",
+      "bytes": 215968,
+      "kind": "imagegen_editorial_derivative",
+      "sourceReference": "/originals/daska-javor-bukva.jpg",
+      "usage": "Illustrative styled scene/material detail; original source is authoritative for product identity.",
+      "exactProductIdentityGuaranteed": false,
+      "section": "boards",
+      "recommendedWebVersion": true
+    },
+    {
+      "path": "public/images/dal-detalj-hrasta.png",
+      "width": 1536,
+      "height": 1024,
+      "format": "PNG",
+      "bytes": 2243064,
+      "kind": "imagegen_editorial_derivative",
+      "sourceReference": "/originals/stol-hrast.jpg",
+      "usage": "Illustrative styled scene/material detail; original source is authoritative for product identity.",
+      "exactProductIdentityGuaranteed": false,
+      "section": "material-detail",
+      "recommendedWebVersion": false
+    },
+    {
+      "path": "public/images/dal-detalj-hrasta.webp",
+      "width": 1536,
+      "height": 1024,
+      "format": "WEBP",
+      "bytes": 179698,
+      "kind": "imagegen_editorial_derivative",
+      "sourceReference": "/originals/stol-hrast.jpg",
+      "usage": "Illustrative styled scene/material detail; original source is authoritative for product identity.",
+      "exactProductIdentityGuaranteed": false,
+      "section": "material-detail",
+      "recommendedWebVersion": true
+    },
+    {
+      "path": "public/images/dal-stol-ambijent.png",
+      "width": 1672,
+      "height": 941,
+      "format": "PNG",
+      "bytes": 2404377,
+      "kind": "imagegen_editorial_derivative",
+      "sourceReference": "/originals/stol-hrast.jpg",
+      "usage": "Natural dining-room editorial scene, lower camera viewpoint. Place HTML heading outside the table area; preserve full product framing. Originals remain authoritative for exact product identity.",
+      "exactProductIdentityGuaranteed": false,
+      "section": "hero",
+      "recommendedWebVersion": false,
+      "sourceReferences": [
+        "/originals/stol-hrast.jpg",
+        "/originals/stol-hrast-02.jpg",
+        "/originals/stol-hrast-03.jpg"
+      ],
+      "revision": 2
+    },
+    {
+      "path": "public/images/dal-stol-ambijent.webp",
+      "width": 1672,
+      "height": 941,
+      "format": "WEBP",
+      "bytes": 300590,
+      "kind": "imagegen_editorial_derivative",
+      "sourceReference": "/originals/stol-hrast.jpg",
+      "usage": "Natural dining-room editorial scene, lower camera viewpoint. Place HTML heading outside the table area; preserve full product framing. Originals remain authoritative for exact product identity.",
+      "exactProductIdentityGuaranteed": false,
+      "section": "hero",
+      "recommendedWebVersion": true,
+      "sourceReferences": [
+        "/originals/stol-hrast.jpg",
+        "/originals/stol-hrast-02.jpg",
+        "/originals/stol-hrast-03.jpg"
+      ],
+      "revision": 2
+    },
+    {
+      "path": "public/originals/daska-javor-bukva.jpg",
+      "width": 1440,
+      "height": 1305,
+      "format": "JPEG",
+      "bytes": 168993,
+      "kind": "downloaded_original_post",
+      "source": "https://www.instagram.com/p/DQ4n6NAjKE4/",
+      "usage": "Product identity/reference; graphics with embedded text should not be used as full-page hero."
+    },
+    {
+      "path": "public/originals/daske-cjenovnik.jpg",
+      "width": 1350,
+      "height": 1687,
+      "format": "JPEG",
+      "bytes": 366315,
+      "kind": "downloaded_original_post",
+      "source": "https://www.instagram.com/p/DdYy3NSsTMl/",
+      "usage": "Product identity/reference; graphics with embedded text should not be used as full-page hero."
+    },
+    {
+      "path": "public/originals/daske-orah-jasen.jpg",
+      "width": 1440,
+      "height": 1440,
+      "format": "JPEG",
+      "bytes": 690568,
+      "kind": "downloaded_original_post",
+      "source": "https://www.instagram.com/p/DRSbYiljPqC/",
+      "usage": "Product identity/reference; graphics with embedded text should not be used as full-page hero."
+    },
+    {
+      "path": "public/originals/daske-rucni-rad.jpg",
+      "width": 1440,
+      "height": 1698,
+      "format": "JPEG",
+      "bytes": 544183,
+      "kind": "downloaded_original_post",
+      "source": "https://www.instagram.com/p/DQ5NcRXDKRH/",
+      "usage": "Product identity/reference; graphics with embedded text should not be used as full-page hero."
+    },
+    {
+      "path": "public/originals/ivice.jpg",
+      "width": 1254,
+      "height": 1254,
+      "format": "JPEG",
+      "bytes": 185433,
+      "kind": "downloaded_original_post",
+      "source": "https://www.instagram.com/p/DcrP_aYsTGf/",
+      "usage": "Product identity/reference; graphics with embedded text should not be used as full-page hero."
+    },
+    {
+      "path": "public/originals/izbor-drveta.jpg",
+      "width": 1254,
+      "height": 1254,
+      "format": "JPEG",
+      "bytes": 199553,
+      "kind": "downloaded_original_post",
+      "source": "https://www.instagram.com/p/DcqA9-3M7ZA/",
+      "usage": "Product identity/reference; graphics with embedded text should not be used as full-page hero."
+    },
+    {
+      "path": "public/originals/stol-hrast-02.jpg",
+      "width": 720,
+      "height": 964,
+      "format": "JPEG",
+      "bytes": 89199,
+      "kind": "downloaded_original_post",
+      "source": "https://www.instagram.com/p/DdZfSIajC34/",
+      "usage": "Product identity/reference; graphics with embedded text should not be used as full-page hero."
+    },
+    {
+      "path": "public/originals/stol-hrast-03.jpg",
+      "width": 720,
+      "height": 964,
+      "format": "JPEG",
+      "bytes": 79131,
+      "kind": "downloaded_original_post",
+      "source": "https://www.instagram.com/p/DdZfSIajC34/",
+      "usage": "Product identity/reference; graphics with embedded text should not be used as full-page hero."
+    },
+    {
+      "path": "public/originals/stol-hrast.jpg",
+      "width": 1088,
+      "height": 1456,
+      "format": "JPEG",
+      "bytes": 242483,
+      "kind": "downloaded_original_post",
+      "source": "https://www.instagram.com/p/DdZfSIajC34/",
+      "usage": "Product identity/reference; graphics with embedded text should not be used as full-page hero."
+    },
+    {
+      "path": "public/originals/vodic.jpg",
+      "width": 1254,
+      "height": 1254,
+      "format": "JPEG",
+      "bytes": 154660,
+      "kind": "downloaded_original_post",
+      "source": "https://www.instagram.com/p/Dck1-9HjPNt/",
+      "usage": "Product identity/reference; graphics with embedded text should not be used as full-page hero."
+    }
+  ],
+  "qaNotes": [
+    "Original Facebook logo downloaded at 1254x1254; no redesign or vector reconstruction.",
+    "Three final generated images visually inspected.",
+    "Board underside invented notches removed in final generation.",
+    "Original photos remain authoritative; generated scenes may vary slightly in grain and detail.",
+    "Only final generated variants are included."
+  ]
+}

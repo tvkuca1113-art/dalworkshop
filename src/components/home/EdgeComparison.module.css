@@ -1,0 +1,50 @@
+.wrap {
+  display: grid;
+  gap: 1rem;
+}
+.toggle {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+.btn {
+  min-height: 44px;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid rgba(241, 237, 229, 0.35);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--bone);
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn[aria-pressed='true'] {
+  background: var(--bone);
+  color: var(--ink);
+}
+.svg {
+  width: 100%;
+  max-width: 460px;
+  height: auto;
+}
+.active {
+  fill: #b98d5c;
+  stroke: #f1ede5;
+  stroke-width: 1.5;
+  transition: opacity 0.2s;
+}
+.ghost {
+  fill: none;
+  stroke: rgba(182, 154, 111, 0.6);
+  stroke-dasharray: 4 4;
+  stroke-width: 1.2;
+}
+.dim {
+  stroke: var(--brass);
+  stroke-width: 1;
+}
+.label {
+  fill: var(--brass);
+  font-size: 13px;
+  font-family: var(--font-sans);
+  font-weight: 600;
+}

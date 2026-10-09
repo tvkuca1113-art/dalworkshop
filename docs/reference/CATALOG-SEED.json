@@ -1,0 +1,210 @@
+{
+  "schemaVersion": 1,
+  "documentType": "research_seed_not_runtime_catalog",
+  "reviewedOn": "2026-10-09",
+  "brand": {
+    "name": "DAL Workshop",
+    "city": "Mostar",
+    "country": "BiH",
+    "instagram": "https://www.instagram.com/dalworkshop.ba/",
+    "facebook": "https://www.facebook.com/p/DAL-Workshop-61583287752988/",
+    "phonePrimary": "+38762704560",
+    "whatsappNumber": "38762704560",
+    "phoneSecondary": "+38763810946",
+    "email": "dalworkshop@hotmail.com",
+    "logo": "/brand/dal-logo-original.jpg"
+  },
+  "commercial": {
+    "orderFlow": "request_quote",
+    "tablePrice": null,
+    "priceCurrency": "BAM",
+    "priceUnit": "fening",
+    "approvedProductionCatalog": false,
+    "engravingServiceConfirmed": false,
+    "productionLeadTime": null,
+    "deliveryAreas": null
+  },
+  "observedExamples": [
+    {
+      "id": "dal-oak-table-150-70",
+      "type": "table",
+      "availability": "observed_example",
+      "source": "https://www.instagram.com/p/DdZfSIajC34/",
+      "wood": "oak",
+      "shape": "rectangle",
+      "dimensionsMm": {
+        "length": 1500,
+        "width": 700,
+        "topThickness": 35,
+        "totalHeight": null
+      },
+      "base": "black_trapezoidal_loop_pair",
+      "photos": [
+        "/originals/stol-hrast.jpg",
+        "/originals/stol-hrast-02.jpg",
+        "/originals/stol-hrast-03.jpg"
+      ],
+      "note": "Nijansa brijesta nije potvrda druge vrste drveta. Visina nije objavljena."
+    },
+    {
+      "id": "dal-maple-beech-board",
+      "type": "board",
+      "availability": "observed_example",
+      "source": "https://www.instagram.com/p/DQ4n6NAjKE4/",
+      "wood": [
+        "maple",
+        "beech"
+      ],
+      "construction": "longitudinal_strips",
+      "shape": "rectangle",
+      "dimensionsMm": null,
+      "groove": "source_pattern_near_short_ends",
+      "handles": "none_visible",
+      "photo": "/originals/daska-javor-bukva.jpg",
+      "finishStatement": "Caption mentions oil and wax suitable for food; exact product/brand not confirmed."
+    },
+    {
+      "id": "dal-handled-board",
+      "type": "board",
+      "availability": "observed_example",
+      "source": "https://www.instagram.com/p/DQ5NcRXDKRH/",
+      "wood": null,
+      "shape": "rectangle",
+      "dimensionsMm": null,
+      "handles": "two_black_metal_handles",
+      "photo": "/originals/daske-rucni-rad.jpg"
+    },
+    {
+      "id": "dal-two-wood-board",
+      "type": "board",
+      "availability": "observed_example",
+      "source": "https://www.instagram.com/p/DRSbYiljPqC/",
+      "wood": null,
+      "shape": "rectangle",
+      "dimensionsMm": null,
+      "photo": "/originals/daske-orah-jasen.jpg",
+      "mentionedSpeciesViaHashtags": [
+        "walnut",
+        "ash"
+      ],
+      "note": "Species not treated as confirmed by hashtags alone."
+    }
+  ],
+  "publishedPriceReferences": {
+    "source": "https://www.instagram.com/p/DdYy3NSsTMl/",
+    "validNowConfirmed": false,
+    "exactModelConfirmed": false,
+    "thicknessConfirmed": false,
+    "extrasConfirmed": false,
+    "appliesToConfigurator": false,
+    "prices": [
+      {
+        "lengthMm": 500,
+        "widthMm": 200,
+        "publishedPriceFening": 2500
+      },
+      {
+        "lengthMm": 600,
+        "widthMm": 200,
+        "publishedPriceFening": 3500
+      },
+      {
+        "lengthMm": 800,
+        "widthMm": 200,
+        "publishedPriceFening": 5000
+      }
+    ]
+  },
+  "developmentProposals": {
+    "availability": "requires_confirmation",
+    "limitsAreManufacturerApproved": false,
+    "tableDefaultHeightMm": 750,
+    "tableRangesMm": {
+      "rectangle": {
+        "length": [
+          1200,
+          2800
+        ],
+        "width": [
+          600,
+          1100
+        ]
+      },
+      "circle": {
+        "diameter": [
+          800,
+          1500
+        ]
+      },
+      "oval": {
+        "length": [
+          1400,
+          2600
+        ],
+        "width": [
+          800,
+          1100
+        ]
+      },
+      "topThickness": [
+        25,
+        50
+      ],
+      "totalHeight": [
+        720,
+        780
+      ]
+    },
+    "boardRangesMm": {
+      "length": [
+        250,
+        800
+      ],
+      "width": [
+        150,
+        400
+      ],
+      "thickness": [
+        15,
+        40
+      ]
+    },
+    "tableShapes": [
+      "rectangle",
+      "rounded_rectangle",
+      "circle",
+      "oval",
+      "natural_edge"
+    ],
+    "tableWoods": [
+      "oak",
+      "walnut",
+      "ash"
+    ],
+    "tableBases": [
+      "black_trapezoidal_loop_pair",
+      "u_frame_pair",
+      "x_frame_pair",
+      "central_base"
+    ],
+    "boardShapes": [
+      "rectangle",
+      "rounded_rectangle",
+      "circle",
+      "paddle"
+    ],
+    "personalization": {
+      "requestedFeature": true,
+      "availability": "requires_confirmation",
+      "maxTextCharacters": 40,
+      "supportedCharacters": "Bosnian Latin and standard Unicode text",
+      "defaultShareIncludesText": false
+    },
+    "endGrain": {
+      "featureFlag": false,
+      "availability": "requires_confirmation"
+    },
+    "pricingMode": "quote_only",
+    "publicCopy": "Prijedlog po mjeri — mogućnost izrade potvrđujemo uz ponudu."
+  }
+}

@@ -1,0 +1,75 @@
+.sheet {
+  font-family: var(--font-sans);
+  color: #000;
+}
+.head {
+  border-bottom: 1px solid #7d5236;
+  padding-bottom: 6mm;
+  margin-bottom: 6mm;
+}
+.brand {
+  font-size: 9pt;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #6b4429;
+}
+.title {
+  font-size: 24pt;
+  margin: 2mm 0;
+}
+.sub {
+  font-size: 9.5pt;
+}
+.visuals {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6mm;
+  align-items: center;
+  margin-bottom: 6mm;
+  break-inside: avoid;
+}
+.snapshot {
+  width: 100%;
+  height: auto;
+  border: 1px solid #ccc;
+}
+.plan svg {
+  width: 100%;
+  height: auto;
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 10pt;
+  break-inside: avoid;
+}
+.table th,
+.table td {
+  text-align: left;
+  vertical-align: top;
+  padding: 1.6mm 0;
+  border-bottom: 0.3mm solid #ddd;
+}
+.table th {
+  width: 36%;
+  font-weight: 500;
+  color: #444;
+}
+.status {
+  color: #555;
+}
+.note {
+  display: block;
+  font-size: 8.5pt;
+  color: #555;
+  margin-top: 3mm;
+}
+.link {
+  margin-top: 4mm;
+  font-size: 8.5pt;
+  word-break: break-all;
+}
+.contact {
+  margin-top: 3mm;
+  font-size: 9pt;
+}

@@ -1,0 +1,44 @@
+[
+  {
+    "asset": "hero",
+    "prompt": "Use case: precise-object-edit. Create one premium photorealistic wide 16:9 website hero photograph for DAL Workshop by editing the supplied REAL product photo. Image 1 is the edit target. Preserve the exact table identity: same 150 by 70 cm rectangular laminated golden oak top, 3.5 cm thickness, same slightly rounded corners, same distinctive lengthwise plank layout and grain, same TWO black rectangular steel trapezoidal loop leg frames fixed underneath at the short ends. Keep the product proportions and physically plausible joining/supports. Replace ONLY its outdoor patio surroundings and harsh plant shadow with a refined understated modern interior: charcoal limewash wall, warm stone floor, soft natural window light. Retain recognizable real wood tones, texture and modest handcrafted scale. Full table visible entirely, diagonally seen from the same above three-quarter camera angle as source; move the complete table as one rigid object to the right 60 percent of the wide frame. Left 38 percent calm empty dark wall/floor space for HTML headline; no baked in text. All feet touch floor with accurate contact shadows, not floating, no chairs occluding legs. Luxurious real editorial photography with subtle natural imperfection, clean focal product. Do not invent a new tabletop shape, live edge, X legs, pedestal, epoxy river, extra legs or engraving. No people, text, logos, watermarks, no UI, no collage. Keep exact table as the original photo as closely as possible.",
+    "reference": [
+      "/workspace/scratch/e5423aa721ca/DAL-Workshop/public/originals/stol-hrast.jpg"
+    ],
+    "superseded": true,
+    "reason": "User rejected unnatural overhead perspective and oversaturated wood."
+  },
+  {
+    "asset": "board",
+    "prompt": "Use case: precise-object-edit. Produce a single premium photorealistic landscape 3:2 website category asset, editing the provided REAL DAL Workshop cutting board photograph. Image 1 is the edit target. Preserve THIS EXACT rectangular board identity, proportions, thickness, lightly eased corners, alternating long maple and beech strips with their exact widths and count, the original shallow groove pattern on top at the two short ends, the grain and color. Do not convert groove to an invented full perimeter rectangle. Do not add handles, feet, engraving, checkerboard/end-grain pattern, new rounded outline or darker exotic wood. Replace only the background kitchen countertop/scene with a beautiful warm modern kitchen surface of quiet pale limestone, subtle charcoal cabinetry softly out of focus and daylight from side. Board entirely visible at same diagonal three-quarter perspective, on the countertop and not floating. Put a small folded linen cloth and modest olive branch in background outside board, no other props, no food covering the original wood. Composition board centered-right with generous breathing room, premium natural product photography, restrained walnut/cream/stone palette. No humans, hands, knife, text, logo, watermark, UI or collage. Preserve source product rather than designing a different product.",
+    "reference": [
+      "/workspace/scratch/e5423aa721ca/DAL-Workshop/public/originals/daska-javor-bukva.jpg"
+    ]
+  },
+  {
+    "asset": "detail",
+    "prompt": "Use case: precise-object-edit. Make one premium editorial macro landscape 3:2 website image from the supplied real DAL Workshop oak table photograph. Image 1 is the edit target, preserve the golden oak plank layout and grain identity. A close photograph of the front-right corner of this exact 3.5 cm thick rectangular solid oak tabletop with the same subtle softened edge and corner, continuous believable grain across joined planks, realistic end grain on short edge. Include a small blurred portion of its black rectangular steel loop support underneath as in original; no X or pedestal legs. Background is very dark calm contemporary interior, soft grazing window light reveals the tactile satin oiled wood rather than glossy plastic. Composition diagonal top edge, wood fills most of frame, precise real joinery, natural wood pore details, restrained elegant tonal range. No new features, no live edge, no epoxy river, no humans or tools, no text, no logo, no UI, no collage. It is a styled close-up of the original product, not evidence of a particular workshop space.",
+    "reference": [
+      "/workspace/scratch/e5423aa721ca/DAL-Workshop/public/originals/stol-hrast.jpg"
+    ]
+  },
+  {
+    "asset": "board-correction",
+    "prompt": "Remove invented underside handhold notches; preserve board and scene; final result inspected.",
+    "reference": [
+      "generated board first pass"
+    ]
+  },
+  {
+    "asset": "hero-natural-revision-2",
+    "selected": true,
+    "output": "public/images/dal-stol-ambijent.webp",
+    "reference": [
+      "/workspace/scratch/e5423aa721ca/DAL-Workshop/public/originals/stol-hrast.jpg",
+      "/workspace/scratch/e5423aa721ca/DAL-Workshop/public/originals/stol-hrast-02.jpg",
+      "/workspace/scratch/e5423aa721ca/DAL-Workshop/public/originals/stol-hrast-03.jpg"
+    ],
+    "prompt": "Photorealistic wide architectural dining-room photograph based on the original DAL oak table: rectangular oak top, broad longitudinal planks, 3.5 cm edge, two black trapezoidal loop frames at the ends. Change the original overhead camera to a 110 cm high level camera with 50 mm lens and restrained three-quarter view across the long edge. Tabletop is horizontal, feet grounded, physically consistent proportions and contact shadows. Warm greige plaster, pale stone floor, soft window daylight, two neutral chairs behind, small ceramic bowl and linen book. Natural oak brown and satin surface, no vivid orange, no glossy CGI, no extreme perspective, no added text or logos. Styled editorial image; verify exact construction against originals.",
+    "review": "Inspected: tabletop reads level, supports visibly grounded, soft contact shadows, natural interior. Entire product remains visible. This composition does not supply the large dark left copy area of the previous version."
+  }
+]

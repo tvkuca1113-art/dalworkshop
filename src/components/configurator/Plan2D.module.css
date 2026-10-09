@@ -1,0 +1,16 @@
+.svg {
+  width: 100%;
+  height: auto;
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
+}
+.caption {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  fill: #5a5249;
+}
+.dim text {
+  font-weight: 600;
+}

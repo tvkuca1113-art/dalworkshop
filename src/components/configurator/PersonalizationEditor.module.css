@@ -1,0 +1,96 @@
+.editor {
+  display: grid;
+  gap: 1.4rem;
+}
+.intro {
+  display: grid;
+  gap: 0.5rem;
+}
+.title {
+  font-size: 1.6rem;
+}
+.toggle {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  min-height: 48px;
+  font-weight: 600;
+}
+.toggle input {
+  width: 22px;
+  height: 22px;
+  accent-color: var(--charcoal);
+}
+.field {
+  display: grid;
+  gap: 0.4rem;
+}
+.field label {
+  font-weight: 600;
+}
+.field textarea {
+  width: 100%;
+  min-height: 72px;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: #fff;
+  font-size: 1.05rem;
+  resize: vertical;
+}
+.over {
+  color: var(--error);
+}
+.sizeRow {
+  display: flex;
+  gap: 0.4rem;
+  max-width: 16rem;
+}
+.step {
+  width: 48px;
+  min-height: 48px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: transparent;
+  font-size: 1.35rem;
+  cursor: pointer;
+}
+.step:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.size {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 48px;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: #fff;
+  font-size: 1.05rem;
+  font-weight: 600;
+  text-align: center;
+}
+.status {
+  min-height: 1.5rem;
+}
+.ok {
+  color: var(--ok);
+  font-weight: 500;
+}
+.warn {
+  color: var(--error);
+  font-weight: 500;
+}
+.conflict {
+  display: grid;
+  gap: 0.6rem;
+  padding: 0.8rem 0.9rem;
+  background: #fff;
+  border-left: 3px solid var(--error);
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}

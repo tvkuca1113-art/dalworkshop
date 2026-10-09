@@ -1,0 +1,90 @@
+.form,
+.disabled,
+.success {
+  display: grid;
+  gap: 0.9rem;
+}
+.disabled,
+.success {
+  padding: 1.1rem 1.2rem;
+  border: 1px solid var(--line-strong);
+  background: #fff;
+}
+.title {
+  font-size: 1.55rem;
+}
+.field {
+  display: grid;
+  gap: 0.35rem;
+}
+.field label,
+.check label {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+.optional {
+  font-weight: 400;
+  color: var(--muted);
+}
+.field input,
+.field textarea {
+  width: 100%;
+  min-height: 48px;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: #fff;
+  font-size: 1rem;
+}
+.field textarea {
+  resize: vertical;
+}
+.field [aria-invalid='true'],
+.check [aria-invalid='true'] {
+  border-color: var(--error);
+  outline-color: var(--error);
+}
+.pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+@media (max-width: 520px) {
+  .pair {
+    grid-template-columns: 1fr;
+  }
+}
+.check {
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
+}
+.check input {
+  width: 22px;
+  height: 22px;
+  margin-top: 0.1rem;
+  flex: none;
+  accent-color: var(--charcoal);
+}
+.check label {
+  font-weight: 400;
+}
+.error {
+  color: var(--error);
+  font-size: 0.88rem;
+  font-weight: 500;
+}
+.honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.actions {
+  display: flex;
+  gap: 0.5rem;
+}
+.live:empty {
+  display: none;
+}
