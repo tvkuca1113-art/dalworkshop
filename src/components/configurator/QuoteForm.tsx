@@ -44,10 +44,9 @@ export function QuoteForm({
   if (!enabled) {
     return (
       <div className={styles.disabled} data-testid="form-disabled">
-        <h3 className={styles.title}>Web obrazac još nije povezan</h3>
+        <h3 className={styles.title}>Dogovor počinje porukom.</h3>
         <p>
-          Slanje putem web obrasca bit će dostupno kad radionica poveže e-mail servis. Do tada pošaljite upit na WhatsApp —
-          poruka sa specifikacijom je pripremljena — ili ispišite / sačuvajte specifikaciju kao PDF.
+          Pošaljite nam svoju ideju na WhatsApp. Zajedno ćemo dogovoriti detalje, cijenu i rok izrade.
         </p>
         <a className="btn" href={whatsappHref ?? whatsappLink()} target="_blank" rel="noopener">
           <WhatsAppIcon className="btn__wa" /> Pošaljite upit na WhatsApp

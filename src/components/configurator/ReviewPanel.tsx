@@ -165,9 +165,9 @@ export function ReviewPanel({
         </div>
       </div>
 
-      <div className={styles.form} id="web-upit" hidden={Boolean(blockingIssue)}>
+      {formEnabled && <div className={styles.form} id="web-upit" hidden={Boolean(blockingIssue)}>
         <QuoteForm enabled={formEnabled} product={config.productType} configQuery={encodeConfig(config, { includePersonalText: true })} whatsappHref={waHref} />
-      </div>
+      </div>}
     </section>
   );
 }

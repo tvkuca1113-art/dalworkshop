@@ -14,10 +14,9 @@ export default function WorksPage() {
     <>
       <section className="wrap page-hero">
         <p className="eyebrow">Radovi</p>
-        <h1>Stvarni radovi iz radionice</h1>
+        <h1>Drvo, oblikovano s pažnjom.</h1>
         <p className="lead">
-          Mala, poštena galerija: proizvodi koje je DAL Workshop objavio. Fotografije istog stola iz tri ugla prikazujemo kao jedan
-          proizvod.
+          Pogledajte stolove i daske iz naše radionice na originalnim fotografijama. Svaki komad može biti početak ideje za vaš dom.
         </p>
       </section>
       <section className="wrap" style={{ paddingBottom: 'clamp(3rem, 6vw, 6rem)' }}>

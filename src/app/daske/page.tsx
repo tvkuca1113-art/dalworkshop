@@ -13,8 +13,7 @@ import { AVAILABILITY_LABEL } from '@/lib/catalog/status';
 import { WORKS } from '@/lib/catalog/works';
 import { formatCm, formatKm } from '@/lib/config/units';
 import { visibleConstructions } from '@/lib/config/rules';
-import { whatsappLink } from '@/lib/catalog/brand';
-import { WhatsAppIcon } from '@/components/site/WhatsAppIcon';
+import { ProductIntro } from '@/components/site/ProductIntro';
 import styles from '../content.module.css';
 
 export const metadata: Metadata = {
@@ -32,28 +31,15 @@ export default function BoardsPage() {
   const reviewed = new Date(PUBLISHED_BOARD_PRICES.reviewedOn).toLocaleDateString('bs-BA', { timeZone: 'UTC' });
   return (
     <>
-      <section className="wrap page-hero">
-        <p className="eyebrow">Daske za rezanje i serviranje</p>
-        <h1>Daska za svaki dan — od rezanja do serviranja.</h1>
-        <p className="lead">
-          Uzdužne trake masivnog drveta, utori za sokove, ručke za nošenje. Izaberite polazni model, dimenzije i detalje, a
-          personalizaciju dogovaramo uz ponudu.
-        </p>
-        <div className={styles.ctaRow}>
-          <Link href="/konfigurator/daska" className="btn">
-            Kreirajte svoju dasku
-          </Link>
-          <a href={whatsappLink()} className="btn btn--ghost" target="_blank" rel="noopener">
-            <WhatsAppIcon className="btn__wa" /> Zatražite ponudu
-          </a>
-        </div>
-      </section>
+      <ProductIntro eyebrow="Daske za rezanje i serviranje" title="Od pripreme do lijepog serviranja." image="/images/dal-daska-ambijent.webp" alt="Daska od javora i bukve na kamenoj kuhinjskoj ploči — vizualizacija ambijenta" href="/konfigurator/daska" action="Kreirajte svoju dasku">
+        <p>Masivno drvo za male svakodnevne rituale. Izaberite model i dimenzije, dodajte detalje za lakše korištenje ili predložite personalizaciju za poseban poklon.</p>
+      </ProductIntro>
 
       <section className="section section--stone" aria-labelledby="primjeri">
         <div className="wrap">
           <div className="section-head">
-            <p className="eyebrow">Stvarni primjeri</p>
-            <h2 id="primjeri">Daske iz objava radionice</h2>
+            <p className="eyebrow">Iz naše radionice</p>
+            <h2 id="primjeri">Tri ideje za vašu kuhinju.</h2>
           </div>
           <div className={styles.cards}>
             {boards.map((w) => (
@@ -67,7 +53,7 @@ export default function BoardsPage() {
                     <li key={f}>{f}</li>
                   ))}
                 </ul>
-                {w.note && <p className="note">{w.note}</p>}
+                <Link href="/konfigurator/daska" className="text-link">Prilagodite svoju dasku</Link>
                 <a href={w.source} className="text-link" target="_blank" rel="noopener">
                   Objava na Instagramu
                 </a>
@@ -96,8 +82,7 @@ export default function BoardsPage() {
               <a href={PUBLISHED_BOARD_PRICES.source} className="text-link" target="_blank" rel="noopener">
                 objava cjenovnika na Instagramu
               </a>
-              , pregledano {reviewed}. Objava ne navodi debljinu, tačnu varijantu ni dodatke (ručke, utore, graviranje), pa ove cijene
-              ne primjenjujemo automatski u konfiguratoru. Varijantu i cijenu radionica potvrđuje uz ponudu.
+              , pregledano {reviewed}. Referentne cijene iz objave; cijenu vašeg modela, debljine i dodataka potvrđujemo uz ponudu.
             </p>
           </div>
           <div className={styles.stack}>
@@ -141,9 +126,9 @@ export default function BoardsPage() {
               </ul>
             </div>
             <p className="note">
-              Razvojni rasponi: dužina {formatCm(BOARD_RANGES.length[0])}–{formatCm(BOARD_RANGES.length[1])} cm, širina{' '}
+              Prijedlozi dimenzija: dužina {formatCm(BOARD_RANGES.length[0])}–{formatCm(BOARD_RANGES.length[1])} cm, širina{' '}
               {formatCm(BOARD_RANGES.width[0])}–{formatCm(BOARD_RANGES.width[1])} cm, debljina {formatCm(BOARD_RANGES.thickness[0])}–
-              {formatCm(BOARD_RANGES.thickness[1])} cm. Nisu katalog radionice.
+              {formatCm(BOARD_RANGES.thickness[1])} cm. Druga mjera ili poseban detalj? Opišite želju na kraju konfiguratora.
             </p>
             <div className={styles.ctaRow}>
               <Link href="/konfigurator/daska" className="btn">

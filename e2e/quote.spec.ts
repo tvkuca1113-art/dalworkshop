@@ -26,8 +26,8 @@ test.describe('Upit — server i obrazac', () => {
     await page.goto('/konfigurator/stol');
     await waitForViewer(page);
     await goToStep(page, /Pregled/);
-    await expect(page.getByTestId('form-disabled')).toContainText('Web obrazac još nije povezan');
-    await expect(page.getByTestId('form-disabled').getByRole('link', { name: /WhatsApp/ })).toHaveAttribute('href', /wa\.me\/38762704560/);
+    await expect(page.getByTestId('whatsapp-cta')).toHaveAttribute('href', /wa\.me\/38762704560/);
+    await expect(page.getByRole('link', { name: 'Pošaljite upit na WhatsApp', exact: true })).toHaveCount(1);
     await expect(page.getByTestId('quote-form')).toHaveCount(0);
     const res = await request.post('/api/upit', { data: body() });
     expect(res.status()).toBe(503);

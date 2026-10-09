@@ -36,14 +36,14 @@ export default defineConfig({
   ],
   webServer: [
     {
-      command: 'npx next start -p 3200',
+      command: 'npx next start -H 127.0.0.1 -p 3200',
       url: 'http://localhost:3200',
       reuseExistingServer: false,
       timeout: 120_000,
       env: { QUOTE_TEST_OUTBOX_DIR: '', RESEND_API_KEY: '', UPSTASH_REDIS_REST_URL: '' },
     },
     {
-      command: 'npx next start -p 3201',
+      command: 'npx next start -H 127.0.0.1 -p 3201',
       url: 'http://localhost:3201',
       reuseExistingServer: false,
       timeout: 120_000,

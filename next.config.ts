@@ -9,6 +9,7 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  allowedDevOrigins: ['terminal.local'],
   poweredByHeader: false,
   images: {
     formats: ['image/avif', 'image/webp'],

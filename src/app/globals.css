@@ -90,15 +90,15 @@
 :root {
   --charcoal: #171816;
   --charcoal-2: #20211e;
-  --bone: #f1ede5;
-  --bone-2: #e8e1d5;
+  --bone: #f6f2e9;
+  --bone-2: #ebe3d6;
   --stone: #d9d1c4;
   --copper: #7d5236;
   --copper-deep: #6b4429;
   --brass: #b69a6f;
   --ink: #1d1c1a;
   --muted: #5a5249;
-  --muted-dark: #a59a8a;
+  --muted-dark: #c0b5a4;
   --line: rgba(29, 28, 26, 0.16);
   --line-strong: rgba(29, 28, 26, 0.32);
   --line-dark: rgba(241, 237, 229, 0.16);
@@ -112,9 +112,9 @@
   --font-script: 'Great Vibes', 'Brush Script MT', cursive;
 
   --radius: 2px;
-  --gutter: clamp(1rem, 4vw, 3rem);
+  --gutter: clamp(1.25rem, 5vw, 5rem);
   --max: 1440px;
-  --header-h: 72px;
+  --header-h: 80px;
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
   color-scheme: light;
 }
@@ -363,7 +363,7 @@ textarea {
 
 /* ------------------------------------------------------------- sections */
 .section {
-  padding-block: clamp(4rem, 9vw, 8rem);
+  padding-block: clamp(3.5rem, 7vw, 6.5rem);
 }
 .section--dark {
   background: var(--charcoal);
@@ -482,3 +482,6 @@ textarea {
     display: block !important;
   }
 }
+
+@media (max-width: 899px) { :root { --header-h: 72px; } }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }

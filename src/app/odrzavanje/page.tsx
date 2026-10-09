@@ -15,8 +15,7 @@ export default function CarePage() {
         <p className="eyebrow">Održavanje</p>
         <h1>Kako da drvo dugo ostane lijepo</h1>
         <p className="lead">
-          Kratke, praktične upute. To su opći savjeti za masivno drvo, ne garancija za konkretan proizvod — njegu uvijek prilagodite
-          završnoj obradi koju radionica potvrdi za vaš komad.
+          Malo pažnje za mnogo lijepih godina. Pranje, sušenje i njega površine su jednostavni; završnu obradu svog komada provjerite s radionicom.
         </p>
       </section>
       <section className="wrap" style={{ paddingBottom: 'clamp(3rem, 6vw, 6rem)' }}>

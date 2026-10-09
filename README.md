@@ -5,6 +5,7 @@ Web stranica za DAL Workshop iz Mostara: stolovi od masivnog drveta po mjeri i d
 - Specifikacija i istraživanje: `docs/reference/`
 - Plan i pretpostavke: `IMPLEMENTATION-PLAN.md`
 - Izvještaj o testiranju: `TEST-REPORT.md` · snimke: `docs/screenshots/`
+- Redizajn verzije 1: `docs/REDESIGN-REPORT.md` · vizualna provjera: `design-qa.md`
 - Licence asseta: `ASSET-LICENSES.md`
 - Šta DAL treba potvrditi: `DAL-POTVRDA-PODATAKA.md`
 

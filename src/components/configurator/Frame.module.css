@@ -18,6 +18,8 @@
   align-content: start;
   padding: clamp(1.25rem, 2.6vw, 2.25rem);
   border-left: 1px solid var(--line);
+  background: #faf7f0;
+  scroll-margin-top: calc(var(--header-h) + 1rem);
   min-width: 0;
 }
 .head {
@@ -57,8 +59,9 @@
 .summary {
   display: grid;
   gap: 0.6rem;
-  padding: 1rem 1.1rem;
+  padding: 1.1rem 1.25rem;
   background: var(--bone-2);
+  border-radius: var(--radius);
 }
 .summary h2 {
   font-size: 1.4rem;
@@ -94,6 +97,7 @@
   .panel {
     border-left: 0;
     padding-bottom: calc(6rem + env(safe-area-inset-bottom));
+    scroll-margin-top: calc(50svh + 1rem);
   }
   .bar {
     position: fixed;
@@ -106,7 +110,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 0.6rem var(--gutter) calc(0.6rem + env(safe-area-inset-bottom));
-    background: rgba(241, 237, 229, 0.97);
+    background: #f6f2e9;
     border-top: 1px solid var(--line-strong);
   }
   .bar[data-hidden='true'] {

@@ -2,12 +2,12 @@
   "name": "dal-workshop-web",
   "version": "0.1.0",
   "private": true,
-  "description": "DAL Workshop — web stranica s 3D konfiguratorima stolova i dasaka (prijedlog / pregled).",
+  "description": "DAL Workshop \u2014 web stranica s 3D konfiguratorima stolova i dasaka (prijedlog / pregled).",
   "engines": {
     "node": ">=20.9"
   },
   "scripts": {
-    "dev": "next dev",
+    "dev": "node scripts/dev.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",

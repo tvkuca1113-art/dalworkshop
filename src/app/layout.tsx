@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'bs_BA',
     siteName: BRAND.name,
-    images: [{ url: '/og/dal-og.jpg', width: 1200, height: 630, alt: 'Hrastov stol DAL Workshop u svijetlom enterijeru (ilustracija)' }],
+    images: [{ url: '/og/dal-og.jpg', width: 1200, height: 630, alt: 'Hrastov stol DAL Workshop u toplom enterijeru (vizualizacija ambijenta)' }],
   },
   formatDetection: { telephone: false },
 };
@@ -54,7 +54,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   preload('/fonts/cormorant-garamond-latin-500-normal.woff2', { as: 'font', type: 'font/woff2', crossOrigin: '' });
   preload('/fonts/manrope-latin-wght-normal.woff2', { as: 'font', type: 'font/woff2', crossOrigin: '' });
   return (
-    <html lang="bs">
+    <html lang="bs" data-scroll-behavior="smooth">
       <body>
         <a href="#sadrzaj" className="skip-link">
           Preskoči na sadržaj

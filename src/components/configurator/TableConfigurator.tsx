@@ -84,7 +84,7 @@ export function TableConfigurator({ formEnabled }: { formEnabled: boolean }) {
             <p className="eyebrow">Konfigurator · stol po mjeri</p>
             <h1>Kreirajte svoj stol</h1>
             <p className="note">
-              Polazni model je objavljeni DAL hrastov stol 150 × 70 cm. {CUSTOM_PROPOSAL_COPY}
+              Počnite od hrastovog stola 150 × 70 cm i prilagodite ga sebi. Izradu i cijenu potvrđujemo uz ponudu.
             </p>
           </header>
 
@@ -144,7 +144,7 @@ export function TableConfigurator({ formEnabled }: { formEnabled: boolean }) {
                   value={config.woodId}
                   onChange={(v) => apply({ type: 'wood', value: v })}
                   options={TABLE_WOODS.map((w) => ({ id: w.id, label: w.label, description: w.description, status: w.status, swatch: WOOD_LOOK[w.species].base }))}
-                  hint="Cijena drugog drveta nije potvrđena — dolazi uz ponudu."
+                  hint="Izaberite karakter drveta koji vam se sviđa. Cijenu potvrđujemo uz ponudu."
                 />
                 <fieldset className="dims" style={{ border: 0, padding: 0, margin: 0, display: 'grid', gap: '1rem' }}>
                   <legend style={{ fontFamily: 'var(--font-serif)', fontSize: '1.45rem', marginBottom: '0.5rem' }}>Dimenzije</legend>
@@ -189,7 +189,7 @@ export function TableConfigurator({ formEnabled }: { formEnabled: boolean }) {
                     const st = baseStates.find((s) => s.id === b.id)!;
                     return { id: b.id, label: b.label, description: b.description, status: b.status, disabled: st.disabled, reason: st.reason };
                   })}
-                  hint="Pravila osiguravaju smislen vizuelni prijedlog; nisu statički proračun. Konačnu konstrukciju potvrđuje radionica."
+                  hint="Postolje prilagođavamo obliku ploče. Konačnu konstrukciju potvrđujemo uz ponudu."
                 />
               </>
             )}

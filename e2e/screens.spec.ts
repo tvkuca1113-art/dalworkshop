@@ -10,6 +10,11 @@ test('snimke provjere: početna, oba konfiguratora i pregled', async ({ page }, 
   await page.goto('/');
   await page.waitForLoadState('networkidle');
   await page.screenshot({ path: path.join(DIR, `pocetna-${tag}.png`) });
+  // Match the selected design's content area for visual comparison (without device frames).
+  const viewport = page.viewportSize()!;
+  await page.setViewportSize(info.project.name.startsWith('mobile') ? { width: 390, height: 938 } : { width: 1172, height: 768 });
+  await page.screenshot({ path: path.join(DIR, `pocetna-reference-${tag}.png`) });
+  await page.setViewportSize(viewport);
   await page.getByTestId('hero-3d').click();
   await waitForViewer(page);
   await page.getByTestId('viewer').screenshot({ path: path.join(DIR, `pocetna-3d-${tag}.png`) });

@@ -127,7 +127,7 @@ export function BoardConfigurator({ formEnabled }: { formEnabled: boolean }) {
           <header className={styles.head}>
             <p className="eyebrow">Konfigurator · daska za rezanje i serviranje</p>
             <h1>Kreirajte svoju dasku</h1>
-            <p className="note">Polazni modeli su DAL daske s objavljenih fotografija. {CUSTOM_PROPOSAL_COPY}</p>
+            <p className="note">Izaberite model, prilagodite dimenzije i dodajte svoje detalje. Izradu i cijenu potvrđujemo uz ponudu.</p>
           </header>
 
           {url.message && (
@@ -233,7 +233,7 @@ export function BoardConfigurator({ formEnabled }: { formEnabled: boolean }) {
                     </p>
                   )}
                   {model.dimensionsEstimated && <p className="note">Dimenzije objavljene daske nisu navedene; polazne mjere su procjena prema fotografiji.</p>}
-                  <p className="note">{CUSTOM_PROPOSAL_COPY} Rasponi su razvojni prijedlog, ne katalog radionice.</p>
+                  <p className="note">{CUSTOM_PROPOSAL_COPY} Trebate drugu mjeru? Dodajte je u poseban zahtjev na pregledu.</p>
                 </fieldset>
               </>
             )}
@@ -249,7 +249,7 @@ export function BoardConfigurator({ formEnabled }: { formEnabled: boolean }) {
                     const st = boardGrooveStates(config).find((s) => s.id === g.id)!;
                     return { id: g.id, label: g.label, description: g.description, status: g.status, disabled: st.disabled, reason: st.reason };
                   })}
-                  hint={`Utor je stvarno izdubljen u modelu; dubina oko ${formatCm(layout.grooveDepthMm)} cm ostavlja najmanje 65 % debljine.`}
+                  hint={`Prijedlog dubine utora: oko ${formatCm(layout.grooveDepthMm)} cm. Izradu potvrđujemo uz ponudu.`}
                 />
                 <OptionGroup
                   legend="Ručke"

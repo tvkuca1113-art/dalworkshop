@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
   gap: clamp(1.5rem, 4vw, 4rem);
-  align-items: start;
+  align-items: center;
 }
 @media (max-width: 900px) {
   .split {
@@ -85,7 +85,7 @@
 }
 .cardImg {
   position: relative;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 1 / 1;
   overflow: hidden;
   background: var(--stone);
 }
@@ -98,7 +98,7 @@
   display: grid;
   gap: 0.8rem;
   padding: clamp(1.25rem, 3vw, 2rem);
-  background: #fff;
+  background: #fffdf8;
   border-top: 2px solid var(--brass);
   max-width: 40rem;
 }

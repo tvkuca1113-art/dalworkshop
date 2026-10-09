@@ -13,10 +13,10 @@ export const metadata = {
 };
 
 const STEPS = [
-  { title: 'Birate proizvod i detalje', text: 'U konfiguratoru podesite oblik, drvo, dimenzije i detalje te pogledajte rezultat u 3D.' },
-  { title: 'Šaljete konfiguraciju', text: 'Jednim klikom pripremite poruku za WhatsApp sa svim mjerama i linkom na vaš izbor.' },
-  { title: 'Dogovaramo izradu, cijenu i rok', text: 'Radionica provjerava mogućnost izrade i šalje ponudu za vašu konfiguraciju.' },
-  { title: 'Izrada i dogovorena isporuka', text: 'Ručna izrada od masivnog drveta, preuzimanje ili dostava prema dogovoru.' },
+  { title: 'Zamislite svoj komad', text: 'U konfiguratoru podesite oblik, drvo, dimenzije i detalje te pogledajte rezultat u 3D.' },
+  { title: 'Podijelite svoj izbor', text: 'Jednim klikom pripremite poruku za WhatsApp sa svim mjerama i linkom na vaš izbor.' },
+  { title: 'Dogovorimo detalje', text: 'Radionica provjerava mogućnost izrade i šalje ponudu za vašu konfiguraciju.' },
+  { title: 'Izrađujemo za vas', text: 'Ručna izrada od masivnog drveta, preuzimanje ili dostava prema dogovoru.' },
 ];
 
 const FAQ = [
@@ -86,49 +86,35 @@ export default function HomePage() {
   const table = WORKS[0]!;
   return (
     <>
-      <section className={styles.hero} aria-labelledby="hero-title">
+      <HeroMedia>
         <div className={`wrap ${styles.heroText}`}>
-          <p className="eyebrow">DAL Workshop · Mostar</p>
-          <div className={styles.heroGrid}>
-            <h1 id="hero-title" className={styles.h1}>
-              Drvo s karakterom. Izrađeno po vašoj mjeri.
-            </h1>
-            <div className={styles.heroSide}>
-              <p className="lead">Stolovi od masivnog drveta i daske za rezanje i serviranje, oblikovani prema vašim željama.</p>
-              <div className={styles.ctas}>
-                <Link href="/konfigurator/stol" className="btn">
-                  Kreirajte svoj stol
-                </Link>
-                <Link href="/konfigurator/daska" className="btn btn--ghost">
-                  Kreirajte svoju dasku
-                </Link>
-              </div>
-              <ul className={styles.categories} aria-label="Kategorije">
-                <li>
-                  <Link href="/stolovi">Stolovi po mjeri</Link>
-                </li>
-                <li>
-                  <Link href="/daske">Daske za rezanje i serviranje</Link>
-                </li>
-              </ul>
-            </div>
+          <p className="eyebrow">Ručno izrađeno u Mostaru</p>
+          <h1 id="hero-title" className={styles.h1}>Stol koji pripada<br />vašem prostoru.</h1>
+          <p className={styles.heroLead}>Stolovi po mjeri i daske od masivnog drveta.<br className={styles.desktopBreak} /> Za vaš dom, prema vašim željama.</p>
+          <div className={styles.ctas}>
+            <Link href="/konfigurator/stol" className="btn btn--light">Kreirajte svoj stol</Link>
+            <Link href="/daske" className={styles.heroLink}>Pogledajte daske</Link>
           </div>
+          <p className={styles.heroNote}>Vi birate mjere. Mi izrađujemo.</p>
         </div>
-        <div className="wrap">
-          <HeroMedia />
+        <a href="#izbor" className={styles.heroExplore}>Stolovi po mjeri · Daske za rezanje i serviranje</a>
+      </HeroMedia>
+      <div className={styles.promise}>
+        <div className={`wrap ${styles.promiseInner}`}>
+          <span>Masivno drvo</span><span>Izrada po mjeri</span><span>Direktan dogovor s radionicom</span>
         </div>
-      </section>
+      </div>
 
       <section className="section" aria-labelledby="izbor">
         <div className="wrap">
           <div className="section-head">
-            <p className="eyebrow">Dvije kategorije</p>
-            <h2 id="izbor">Šta pravimo</h2>
+            <p className="eyebrow">Za vaš dom</p>
+            <h2 id="izbor">Komadi koji ostaju dio svakodnevice.</h2>
           </div>
           <div className={styles.choice}>
             <article className={styles.choiceItem}>
               <Link href="/konfigurator/stol" className={styles.choiceMedia} aria-label="Stol po vašoj mjeri — otvori konfigurator">
-                <Image src="/originals/stol-hrast-02.jpg" alt="Hrastov stol DAL, pogled duž ploče" fill sizes="(min-width: 900px) 46vw, 100vw" className={styles.cover} />
+                <Image src="/images/dal-hero-desktop.webp" alt="Hrastov stol u toplom enterijeru — vizualizacija ambijenta" fill sizes="(min-width: 900px) 46vw, 100vw" className={styles.cover} />
               </Link>
               <div className={styles.choiceText}>
                 <h3>Stol po vašoj mjeri</h3>
@@ -174,10 +160,9 @@ export default function HomePage() {
           </div>
           <div className={styles.materialText}>
             <p className="eyebrow">Materijal i detalj</p>
-            <h2 id="materijal">Svaka ploča ima svoj crtež.</h2>
+            <h2 id="materijal">Ljepota je u detaljima.</h2>
             <p className="lead">
-              Šare, nijanse i godovi ne ponavljaju se. Masivno drvo zadržava toplinu i težinu materijala — zato je svaki komad pomalo
-              drugačiji od prikaza.
+              Godovi koji pričaju svoju priču. Ivica ugodna pod rukom. Masivno drvo donosi toplinu u prostor, a svaki komad ima vlastite šare i nijanse.
             </p>
             <h3 className={styles.small}>Pogledajte razliku: ravna ili zaobljena ivica</h3>
             <EdgeComparison />
@@ -189,7 +174,7 @@ export default function HomePage() {
         <div className="wrap">
           <div className="section-head">
             <p className="eyebrow">Kako nastaje vaš komad</p>
-            <h2 id="proces">Od izbora do izrade, u četiri koraka.</h2>
+            <h2 id="proces">Vaša ideja. Naša izrada.</h2>
           </div>
           <ol className={styles.steps}>
             {STEPS.map((s, i) => (
@@ -206,9 +191,9 @@ export default function HomePage() {
       <section className="section section--stone" aria-labelledby="proizvodi">
         <div className="wrap">
           <div className="section-head">
-            <p className="eyebrow">Stvarni proizvodi</p>
-            <h2 id="proizvodi">Iz radionice, kako su objavljeni.</h2>
-            <p className="lead">Čiste fotografije stvarnih DAL proizvoda s Instagrama. Ništa izmišljeno, ništa iz kataloga drugih.</p>
+            <p className="eyebrow">Iz radionice</p>
+            <h2 id="proizvodi">Upoznajte naše radove.</h2>
+            <p className="lead">Hrastov stol i daske iz naše radionice. Pogledajte izradu, površine i detalje na originalnim fotografijama.</p>
           </div>
           <div className={styles.works}>
             <article className={styles.workFeature}>
@@ -226,9 +211,9 @@ export default function HomePage() {
                     <li key={f}>{f}</li>
                   ))}
                 </ul>
-                <p className="note">Tri fotografije istog stola. {table.note}</p>
+                <p className="note">Hrastova ploča 150 × 70 cm, debljine 3,5 cm.</p>
                 <Link href="/konfigurator/stol" className="text-link">
-                  Ovaj stol je polazni model konfiguratora
+                  Kreirajte svoju varijantu
                 </Link>
               </div>
             </article>
@@ -239,7 +224,6 @@ export default function HomePage() {
                 </div>
                 <h3>{w.title}</h3>
                 <p>{w.facts.join(' · ')}</p>
-                {w.note && <p className="note">{w.note}</p>}
               </article>
             ))}
           </div>
@@ -255,7 +239,7 @@ export default function HomePage() {
         <div className={`wrap ${styles.faq}`}>
           <div className="section-head">
             <p className="eyebrow">Pitanja</p>
-            <h2 id="pitanja">Prije nego što pošaljete upit</h2>
+            <h2 id="pitanja">Dobro je znati.</h2>
           </div>
           <Faq items={FAQ} />
         </div>
@@ -263,7 +247,7 @@ export default function HomePage() {
 
       <section className="section section--dark on-dark" aria-labelledby="ideja">
         <div className={`wrap ${styles.final}`}>
-          <h2 id="ideja">Imate svoju ideju? Pretvorimo je u komad od drveta.</h2>
+          <h2 id="ideja">Vaš sljedeći omiljeni komad počinje jednom idejom.</h2>
           <div className={styles.finalCtas}>
             <Link href="/konfigurator/stol" className="btn btn--light">
               Kreirajte svoj stol

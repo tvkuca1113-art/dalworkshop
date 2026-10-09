@@ -9,10 +9,12 @@ Sve što se učitava u runtimeu nalazi se u ovom repozitoriju i servira se s ist
 | `public/brand/dal-logo-original.jpg` (1254 × 1254) | Javna Facebook profilna grafika DAL Workshopa | Logo u zaglavlju i podnožju, prikazan kroz CSS okvir bez izmjene | Raster, nije izvorni vektor. Potrebna dozvola vlasnika za javnu objavu i izvorni SVG/PDF/AI. |
 | `public/brand/dal-logo-instagram-original.jpg` (150 × 150) | Instagram avatar | Arhivska referenca, ne koristi se na stranici | — |
 | `src/app/icon.png`, `src/app/apple-icon.png` | Smanjen i kvadratno izrezan isti originalni logo (ImageMagick, bez precrtavanja) | Favicon | Isto kao logo |
-| `public/og/dal-og.jpg` | Izrez 1200 × 630 iz `dal-stol-ambijent.webp` | Open Graph slika | Isto kao vizual ispod |
+| `public/og/dal-og.jpg` | Izrez 1200 × 630 iz `dal-hero-desktop.webp` | Open Graph slika | Isto kao vizual ispod |
 | `public/originals/*.jpg` | Objave na Instagramu @dalworkshop.ba (pregledano 9. 10. 2026) | Stvarni proizvodi, galerija, reference modela | Potvrditi korištenje s vlasnikom prije javne objave |
 | `public/images/dal-stol-ambijent.webp`, `dal-daska-ambijent.webp`, `dal-detalj-hrasta.webp` | Generirani/stilizirani vizuali iz DAL fotografija (vidi `docs/reference/IMAGE-PROMPTS.json`) | Hero, sekcija dasaka, detalj materijala | Označeni na stranici kao ilustracija ambijenta, ne dokumentacija radionice |
 | `docs/reference/source-images/*.png` | PNG izvori istih vizuala | Ne služe se na webu | — |
+| `public/images/dal-hero-desktop.webp`, `dal-hero-mobile-close.webp` | Novi AI generisani vizuali za odabranu verziju 1; topla kamena blagovaonica, hrastov stol i crni trapezni metalni okviri prema DAL proizvodu | Responsive hero i produktni uvod stolova | Vizualizacija ambijenta, nije fotografija stvarne lokacije ili dokumentacija radionice |
+| `docs/reference/selected-design-1.webp` | Odabrani AI generisani koncept početne stranice | Referenca za vizualnu provjeru; ne služi se kao pozadina stranice | Korisnik izabrao verziju 1 |
 
 Opis porijekla svakog fajla: `docs/reference/ASSET-MANIFEST.json`.
 

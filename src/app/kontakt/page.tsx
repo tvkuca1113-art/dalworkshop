@@ -20,9 +20,9 @@ export default function ContactPage() {
     <>
       <section className="wrap page-hero">
         <p className="eyebrow">Kontakt</p>
-        <h1>Zatražite ponudu</h1>
+        <h1>Recite nam šta imate na umu.</h1>
         <p className="lead">
-          Najbrže je preko WhatsAppa. Za upit s tačnim mjerama koristite{' '}
+          Pošaljite ideju, mjere ili fotografiju prostora na WhatsApp. Za pregled svog izbora otvorite{' '}
           <Link href="/konfigurator/stol" className="text-link">
             konfigurator stola
           </Link>{' '}
@@ -30,7 +30,7 @@ export default function ContactPage() {
           <Link href="/konfigurator/daska" className="text-link">
             daske
           </Link>{' '}
-          — poruka se pripremi automatski.
+          — dobit ćete pripremljenu poruku sa specifikacijom.
         </p>
       </section>
       <section className="wrap" style={{ paddingBottom: 'clamp(3rem, 6vw, 6rem)' }}>
@@ -46,7 +46,7 @@ export default function ContactPage() {
               <li>
                 <span className={styles.label}>Telefon</span>
                 <a href={`tel:${BRAND.phonePrimaryE164}`}>{BRAND.phonePrimary}</a>
-                <span className="note">Dodatni broj iz jedne objave: {BRAND.phoneSecondary}</span>
+
               </li>
               <li>
                 <span className={styles.label}>E-mail</span>
@@ -68,7 +68,7 @@ export default function ContactPage() {
             </ul>
           </div>
           <div id="upit" className={styles.stack}>
-            <QuoteForm enabled={formEnabled} product="none" configQuery="" title="Opći upit putem web obrasca" />
+            <QuoteForm enabled={formEnabled} product="none" configQuery="" title="Pošaljite nam svoj upit" />
           </div>
         </div>
       </section>
