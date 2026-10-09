@@ -8,7 +8,7 @@ export function SiteHeader() {
   return (
     <header className={`site-header on-dark ${styles.header}`}>
       <div className={`wrap ${styles.inner}`}>
-        <Logo priority />
+        <Logo eager />
         <nav aria-label="Glavna navigacija" className={styles.nav}>
           <ul>
             {NAV.map((item) => (

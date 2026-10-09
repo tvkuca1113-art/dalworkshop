@@ -9,7 +9,7 @@ import { buildBoardBody, buildBoardHandles } from '@/lib/three/board-geometry';
 import { boardMaterials, type WoodMaterialSet } from '@/lib/three/wood-materials';
 import { construction } from '@/lib/catalog/board';
 import { handleMaterial } from './materials';
-import { useDisposable } from './useDisposable';
+import { useDebouncedValue, useDisposable } from './useDisposable';
 import { EngravingMesh } from './EngravingMesh';
 import type { EngravingRender, TextureQualityLevel } from './types';
 
@@ -68,7 +68,8 @@ export function BoardModel({
   useEffect(() => () => handles?.dispose(), [handles]);
 
   const cons = construction(config.constructionId);
-  const widthKey = Math.round(widthM * 1000);
+  // textures follow the width (strips keep their layout) — regenerate once the value settles
+  const widthKey = useDebouncedValue(Math.round(widthM * 1000), 350);
   const mats = useDisposable<WoodMaterialSet>(
     () => boardMaterials(cons.strips, widthKey / 1000, config.seed, quality, Boolean(cons.endGrain)),
     (m) => m.dispose(),

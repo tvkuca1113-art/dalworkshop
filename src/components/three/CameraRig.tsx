@@ -17,6 +17,8 @@ export interface Framing {
   edgeDistance: number;
   /** Default viewing direction. */
   defaultDir: [number, number, number];
+  /** <1 frames the product tighter (hero). */
+  distanceScale?: number;
 }
 
 const DIRS: Record<'front' | 'top', [number, number, number]> = {
@@ -68,7 +70,7 @@ export function CameraRig({
       return { pos: p.clone().add(dir.multiplyScalar(f.edgeDistance)), target: p };
     }
     const dir = new THREE.Vector3(...(preset === 'front' ? DIRS.front : preset === 'top' ? DIRS.top : f.defaultDir)).normalize();
-    return { pos: center.clone().add(dir.multiplyScalar(fitDistance(f.radius))), target: center };
+    return { pos: center.clone().add(dir.multiplyScalar(fitDistance(f.radius) * (f.distanceScale ?? 1))), target: center };
   }
 
   // First frame: place the camera without animation.
@@ -115,9 +117,14 @@ export function CameraRig({
     invalidate();
   });
 
+  // OrbitControls writes `touch-action: none` on the element it listens to. While the
+  // customer has not opted into rotation, it listens to a detached element so the
+  // page keeps scrolling normally over the canvas (touch and wheel).
+  const detached = useMemo(() => (typeof document === 'undefined' ? undefined : document.createElement('div')), []);
   const f = framing;
   return (
     <OrbitControls
+      domElement={enabled ? undefined : detached}
       ref={(c) => {
         controls.current = c as unknown as OrbitControlsImpl | null;
       }}

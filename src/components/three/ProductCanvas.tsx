@@ -65,7 +65,8 @@ function framingFor(config: TableConfig | BoardConfig, variant: 'configurator' |
         radius,
         edgePoint,
         edgeDistance: Math.max(0.32, T * 9),
-        defaultDir: variant === 'hero' ? [0.42, 0.32, 1] : [0.85, 0.62, 1.2],
+        defaultDir: variant === 'hero' ? [0.42, 0.3, 1] : [0.85, 0.62, 1.2],
+        distanceScale: variant === 'hero' ? 0.74 : 1,
       },
       dims,
       labelScale: 0.07,
@@ -195,12 +196,23 @@ function DebugBridge({ product, phase, geometryKey }: { product: 'table' | 'boar
           };
         }
         const ctl = controls as unknown as { target?: THREE.Vector3 } | null;
+        let triangles = 0;
+        let drawCalls = 0;
+        scene.traverseVisible((o) => {
+          const m = o as THREE.Mesh;
+          if (!m.isMesh || !m.geometry) return;
+          const g = m.geometry;
+          const count = g.index ? g.index.count : (g.getAttribute('position')?.count ?? 0);
+          triangles += count / 3;
+          drawCalls += Array.isArray(m.material) ? Math.max(1, g.groups.length) : 1;
+        });
         return {
           phase,
           product,
           geometryKey,
-          triangles: gl.info.render.triangles,
-          drawCalls: gl.info.render.calls,
+          triangles: Math.round(triangles),
+          drawCalls,
+          memory: { geometries: gl.info.memory.geometries, textures: gl.info.memory.textures },
           camera: {
             position: camera.position.toArray() as [number, number, number],
             target: (ctl?.target?.toArray() ?? [0, 0, 0]) as [number, number, number],
@@ -266,7 +278,7 @@ export default function ProductCanvas(props: ProductCanvasProps) {
         gl.outputColorSpace = THREE.SRGBColorSpace;
         if (!readyOnce.current) report('materials');
       }}
-      style={{ touchAction: interactive ? 'none' : 'pan-y' }}
+      style={interactive ? undefined : { touchAction: 'pan-y' }}
       aria-hidden="true"
       tabIndex={-1}
     >

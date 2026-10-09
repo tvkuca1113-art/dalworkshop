@@ -28,8 +28,12 @@ export interface ViewerDebugInfo {
   phase: ViewerPhase;
   product: 'table' | 'board' | null;
   geometryKey: string;
+  /** Triangles of visible meshes in the scene (one pass). */
   triangles: number;
+  /** Draw calls of visible meshes in the main pass (shadow pass adds casters). */
   drawCalls: number;
+  /** GPU resources currently held by the renderer. */
+  memory: { geometries: number; textures: number };
   camera: { position: [number, number, number]; target: [number, number, number] };
   engraving: null | {
     placement: EngravingPlacementId;

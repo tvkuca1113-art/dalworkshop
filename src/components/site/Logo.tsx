@@ -8,7 +8,7 @@ import { BRAND } from '@/lib/catalog/brand';
  * Shown through a CSS frame on its own dark ground — no redrawing,
  * no recolouring, no stretching.
  */
-export function Logo({ size = 'header', priority = false }: { size?: 'header' | 'footer'; priority?: boolean }) {
+export function Logo({ size = 'header', eager = false }: { size?: 'header' | 'footer'; eager?: boolean }) {
   return (
     <Link href="/" className={`${styles.logo} ${styles[size]}`} aria-label={`${BRAND.name} — početna`}>
       <span className={styles.frame}>
@@ -17,7 +17,7 @@ export function Logo({ size = 'header', priority = false }: { size?: 'header' | 
           alt=""
           fill
           sizes={size === 'header' ? '128px' : '180px'}
-          priority={priority}
+          loading={eager ? 'eager' : 'lazy'}
           quality={80}
           className={styles.img}
         />

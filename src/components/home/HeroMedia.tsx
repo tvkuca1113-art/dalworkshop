@@ -23,7 +23,7 @@ function Photo({ priority }: { priority?: boolean }) {
       priority={priority}
       fetchPriority={priority ? 'high' : undefined}
       quality={80}
-      sizes="(min-width: 1440px) 1376px, calc(100vw - 2 * clamp(1rem, 4vw, 3rem))"
+      sizes="(min-width: 1440px) 1376px, 94vw"
       className={styles.photo}
     />
   );

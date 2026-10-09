@@ -45,3 +45,13 @@ export function useDisposable<T>(create: () => Promise<T>, dispose: (value: T) =
   );
   return value;
 }
+
+/** Value that follows `value` after it stopped changing for `ms` (expensive rebuilds). */
+export function useDebouncedValue<T>(value: T, ms: number): T {
+  const [debounced, setDebounced] = useState(value);
+  useEffect(() => {
+    const t = window.setTimeout(() => setDebounced(value), ms);
+    return () => window.clearTimeout(t);
+  }, [value, ms]);
+  return debounced;
+}
