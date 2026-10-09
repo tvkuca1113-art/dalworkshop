@@ -10,7 +10,7 @@ Datum: 9. 10. 2026. Okruženje: Linux kontejner, Node.js 22.22, Chromium 141 (Pl
 | ESLint (next core-web-vitals + typescript + React Compiler pravila) | `npm run lint` | prolazi, 0 grešaka / 0 upozorenja |
 | Unit testovi (Vitest) | `npm test` | **111 / 111** prolazi (7 datoteka) |
 | Produkcijski build | `npm run build` | prolazi (Next.js 16.4, Turbopack) |
-| E2E (Playwright, Chromium desktop 1440 × 900 + mobilni Pixel 7 390 × 844) | `npm run test:e2e` | prvi puni prolaz 32 / 33; jedini pad bio je test s pogrešnom pretpostavkom o visini kamere (ispravljen, zatim 3 / 3 ponavljanja prolaze) — vidi napomenu ispod tabele tokova |
+| E2E (Playwright, Chromium desktop 1440 × 900 + mobilni Pixel 7 390 × 844) | `npm run test:e2e` | **33 / 33 prolazi** (završni puni prolaz, 16,2 min na softverskom WebGL-u). U prvom punom prolazu 32 / 33 — vidi napomenu ispod tabele tokova |
 | npm audit (produkcijske zavisnosti) | `npm audit --omit=dev` | 0 ranjivosti |
 
 Napomena o `npm audit` bez `--omit=dev`: 5 „high“ nalaza u razvojnim alatima (`braces`/`micromatch` preko `eslint-config-next` → `fast-glob`). Ne ulaze u build ni runtime stranice; predloženi „fix“ bi vratio eslint-config-next na 14.x, pa nije primijenjen.
