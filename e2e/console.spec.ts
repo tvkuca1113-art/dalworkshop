@@ -26,8 +26,8 @@ test('bez runtime/hydration grešaka, 404 asseta i WebGL grešaka', async ({ pag
     await waitForViewer(page);
   }
   await page.goto('/');
-  await page.getByTestId('hero-3d').click();
-  await waitForViewer(page);
+  await expect(page.getByTestId('viewer')).toHaveCount(0);
+  await expect(page.locator('canvas')).toHaveCount(0);
   expect(problems).toEqual([]);
   expect(warnings.filter((w) => /hydrat|WebGL|GL_INVALID/i.test(w))).toEqual([]);
 });

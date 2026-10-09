@@ -10,16 +10,16 @@
 .btn {
   min-height: 44px;
   padding: 0.45rem 0.9rem;
-  border: 1px solid rgba(241, 237, 229, 0.35);
+  border: 1px solid var(--line-strong);
   border-radius: var(--radius);
   background: transparent;
-  color: var(--bone);
+  color: var(--ink);
   font-weight: 600;
   cursor: pointer;
 }
 .btn[aria-pressed='true'] {
-  background: var(--bone);
-  color: var(--ink);
+  background: var(--charcoal);
+  color: var(--bone);
 }
 .svg {
   width: 100%;
@@ -28,7 +28,7 @@
 }
 .active {
   fill: #b98d5c;
-  stroke: #f1ede5;
+  stroke: var(--copper);
   stroke-width: 1.5;
   transition: opacity 0.2s;
 }
@@ -43,7 +43,7 @@
   stroke-width: 1;
 }
 .label {
-  fill: var(--brass);
+  fill: var(--copper);
   font-size: 13px;
   font-family: var(--font-sans);
   font-weight: 600;

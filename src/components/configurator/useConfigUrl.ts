@@ -62,3 +62,16 @@ export function useTyping(): boolean {
   }, []);
   return typing;
 }
+
+/** The step bar belongs to the configurator, so it yields to the footer. */
+export function useFooterVisible(): boolean {
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const footer = document.querySelector('.site-footer');
+    if (!footer) return;
+    const observer = new IntersectionObserver(([entry]) => setVisible(entry?.isIntersecting ?? false));
+    observer.observe(footer);
+    return () => observer.disconnect();
+  }, []);
+  return visible;
+}

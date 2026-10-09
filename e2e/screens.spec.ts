@@ -15,13 +15,21 @@ test('snimke provjere: početna, oba konfiguratora i pregled', async ({ page }, 
   await page.setViewportSize(info.project.name.startsWith('mobile') ? { width: 390, height: 938 } : { width: 1172, height: 768 });
   await page.screenshot({ path: path.join(DIR, `pocetna-reference-${tag}.png`) });
   await page.setViewportSize(viewport);
-  await page.getByTestId('hero-3d').click();
-  await waitForViewer(page);
-  await page.getByTestId('viewer').screenshot({ path: path.join(DIR, `pocetna-3d-${tag}.png`) });
+  await page.screenshot({ path: path.join(DIR, `pocetna-cijela-${tag}.jpg`), fullPage: true, quality: 85 });
+  if (info.project.name.startsWith('mobile')) {
+    await page.getByRole('button', { name: 'Meni', exact: true }).click();
+    await page.screenshot({ path: path.join(DIR, `meni-${tag}.png`) });
+    await page.keyboard.press('Escape');
+  }
 
   await page.goto('/konfigurator/stol');
   await waitForViewer(page);
+  if (info.project.name.startsWith('mobile')) await page.getByRole('button', { name: 'Rotirajte model' }).waitFor({ state: 'visible' });
   await page.screenshot({ path: path.join(DIR, `konfigurator-stol-${tag}.png`) });
+  if (info.project.name.startsWith('mobile')) {
+    await page.locator('.site-footer').scrollIntoViewIfNeeded();
+    await page.screenshot({ path: path.join(DIR, `podnozje-konfigurator-${tag}.png`) });
+  }
   await page.goto('/konfigurator/stol?v=1&sh=natural_edge&w=walnut&l=2200&wd=950&t=45&h=760&e=rounded&b=x_frame_pair&f=natural&s=424242');
   await waitForViewer(page);
   await page.getByRole('button', { name: 'Prikaži dimenzije' }).click();

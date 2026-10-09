@@ -1,0 +1,20 @@
+{
+  "full_e2e": {
+    "startTime": "2026-10-09T22:14:31.128Z",
+    "duration": 468266.38,
+    "expected": 38,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "final_e2e": {
+    "startTime": "2026-10-09T22:28:09.424Z",
+    "duration": 156838.462,
+    "expected": 23,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "final_command": "npm run test:e2e -- e2e/home.spec.ts e2e/mobile.spec.ts e2e/screens.spec.ts e2e/console.spec.ts e2e/board.spec.ts e2e/table.spec.ts",
+  "resolved_issue": "Mobilni odabir polja tokom smooth skrolanja: konfigurator sada koristi neposredno skrolanje i scroll-padding za sticky scenu i donju traku."
+}

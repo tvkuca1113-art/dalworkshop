@@ -58,6 +58,7 @@ export function ViewerShell({ config, variant, engraving, engravingDraw, capture
   const expandBtn = useRef<HTMLButtonElement>(null);
   const coarse = useMediaQuery('(pointer: coarse)');
   const small = useMediaQuery('(max-width: 767px)');
+  const touchLayout = coarse || small;
   const mounted = useMounted();
   const supported = useWebgl2();
   const phase: ShellPhase = supported ? rawPhase : 'unsupported';
@@ -109,7 +110,7 @@ export function ViewerShell({ config, variant, engraving, engravingDraw, capture
 
   const failed = phase === 'error' || phase === 'lost' || phase === 'timeout' || phase === 'unsupported';
   const loading = !failed && phase !== 'ready';
-  const interactive = rotateMode || (!coarse && variant === 'configurator');
+  const interactive = rotateMode || (!touchLayout && variant === 'configurator');
   const isBoard = config.productType === 'board';
 
   const failText = useMemo(() => {
@@ -134,6 +135,12 @@ export function ViewerShell({ config, variant, engraving, engravingDraw, capture
       aria-label={label}
     >
       <div className={styles.stage}>
+        {variant === 'configurator' && !failed && (
+          <div className={styles.caption} aria-hidden="true">
+            <span>DAL Workshop</span>
+            <strong>{isBoard ? 'Vaša daska' : 'Vaš stol'}</strong>
+          </div>
+        )}
         {!failed && env && (
           <div className={`${styles.canvas} ${loading ? styles.hidden : ''}`}>
             <CanvasBoundary
@@ -149,7 +156,7 @@ export function ViewerShell({ config, variant, engraving, engravingDraw, capture
                 view={view}
                 showDimensions={showDims}
                 interactive={interactive}
-                allowWheelZoom={variant === 'configurator' ? !coarse || rotateMode : rotateMode}
+                allowWheelZoom={variant === 'configurator' ? !touchLayout || rotateMode : rotateMode}
                 quality={env.quality}
                 maxDpr={env.maxDpr}
                 flipped={isBoard && flipped}
@@ -185,7 +192,7 @@ export function ViewerShell({ config, variant, engraving, engravingDraw, capture
       </div>
 
       <div className={`${styles.toolbar} no-print`} role="toolbar" aria-label="Alati prikaza">
-        {coarse && !failed && (
+        {touchLayout && !failed && (
           <button type="button" className={styles.tool} aria-pressed={rotateMode} onClick={() => setRotateMode((v) => !v)} disabled={loading}>
             {rotateMode ? 'Završi rotaciju' : 'Rotirajte model'}
           </button>

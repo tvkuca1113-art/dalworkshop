@@ -30,8 +30,8 @@ export interface ProductCanvasProps {
   captureRef?: MutableRefObject<(() => string | null) | null>;
 }
 
-const BG = { configurator: '#e9e2d7', hero: '#e6dfd4' } as const;
-const FLOOR = { configurator: '#d2cbc1', hero: '#d1c8bb' } as const;
+const BG = { configurator: '#eee8de', hero: '#e6dfd4' } as const;
+const FLOOR = { configurator: '#e7e1d7', hero: '#d1c8bb' } as const;
 
 function framingFor(config: TableConfig | BoardConfig, variant: 'configurator' | 'hero'): { framing: Framing; dims: DimSpec[]; labelScale: number; shadowExtent: number } {
   if (config.productType === 'table') {
@@ -65,7 +65,7 @@ function framingFor(config: TableConfig | BoardConfig, variant: 'configurator' |
         radius,
         edgePoint,
         edgeDistance: Math.max(0.32, T * 9),
-        defaultDir: variant === 'hero' ? [0.42, 0.3, 1] : [0.85, 0.62, 1.2],
+        defaultDir: variant === 'hero' ? [0.42, 0.3, 1] : [0.85, 0.5, 1.4],
         distanceScale: variant === 'hero' ? 0.74 : 1,
       },
       dims,
@@ -262,13 +262,13 @@ export default function ProductCanvas(props: ProductCanvasProps) {
   const T = isTable ? 0 : config.dimensionsMm.thickness / 1000;
   const shade = useMemo(() => {
     const r = framing.radius;
-    return isTable ? { w: r * 2.0, d: r * 1.3, o: 0.55 } : { w: r * 2.1, d: r * 1.7, o: 0.45 };
+    return isTable ? { w: r * 2.0, d: r * 1.3, o: 0.28 } : { w: r * 2.1, d: r * 1.7, o: 0.35 };
   }, [framing.radius, isTable]);
 
   return (
     <Canvas
       frameloop="demand"
-      shadows={{ enabled: true, type: THREE.PCFShadowMap }}
+      shadows={{ enabled: true, type: THREE.VSMShadowMap }}
       dpr={dpr}
       camera={{ fov: 32, near: 0.01, far: 60, position: [3, 2, 4] }}
       gl={{ antialias: true, powerPreference: 'high-performance', preserveDrawingBuffer: false, alpha: false }}
@@ -285,15 +285,17 @@ export default function ProductCanvas(props: ProductCanvasProps) {
       <PerformanceMonitor onDecline={() => setDpr(1)} onIncline={() => setDpr(Math.min(maxDpr, window.devicePixelRatio || 1))} />
       <color attach="background" args={[BG[variant]]} />
       <fog attach="fog" args={[BG[variant], framing.radius * 5, framing.radius * 12]} />
-      <hemisphereLight args={['#fff8ee', '#b8aa96', 0.4]} />
+      <hemisphereLight args={['#fffdf8', '#c5bbae', 0.7]} />
       <directionalLight
         castShadow
-        position={[framing.radius * 1.4, framing.radius * 3, framing.radius * 2]}
-        intensity={2.1}
-        color="#fff6ea"
-        shadow-mapSize={[2048, 2048]}
+        position={[framing.radius * 1.2, framing.radius * 4, framing.radius * 1.5]}
+        intensity={1.65}
+        color="#fffaf2"
+        shadow-mapSize={[1024, 1024]}
         shadow-bias={-0.0003}
-        shadow-radius={5}
+        shadow-radius={6}
+        shadow-blurSamples={8}
+        shadow-intensity={0.45}
         shadow-normalBias={0.015}
         shadow-camera-left={-shadowExtent}
         shadow-camera-right={shadowExtent}

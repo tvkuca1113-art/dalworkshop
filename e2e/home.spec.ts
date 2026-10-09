@@ -1,18 +1,14 @@
 import { expect, test } from '@playwright/test';
-import { waitForViewer } from './helpers';
 
-test('3D pregled u dijalogu se zatvara Escape tipkom i vraća fokus', async ({ page }) => {
+test('početna prikazuje fotografiju bez 3D modula', async ({ page }) => {
+  const viewerRequests: string[] = [];
+  page.on('request', (r) => { if (/ProductCanvas|ViewerShell/.test(r.url())) viewerRequests.push(r.url()); });
   await page.goto('/');
-  const trigger = page.getByTestId('hero-3d');
-  await trigger.click();
-  const dialog = page.getByRole('dialog', { name: '3D prikaz hrastovog stola' });
-  await expect(dialog).toBeVisible();
-  await waitForViewer(page);
-  await page.keyboard.press('Escape');
-  await expect(dialog).toBeHidden();
-  await expect(trigger).toBeFocused();
+  await expect(page.getByTestId('hero-photo')).toBeVisible();
   await expect(page.getByTestId('viewer')).toHaveCount(0);
-  expect(await page.evaluate(() => document.body.style.overflow)).toBe('');
+  await expect(page.getByTestId('hero-3d')).toHaveCount(0);
+  await expect(page.locator('canvas')).toHaveCount(0);
+  expect(viewerRequests).toEqual([]);
 });
 
 test('navigacija s početne prikazuje vrh stranice proizvoda', async ({ page }) => {

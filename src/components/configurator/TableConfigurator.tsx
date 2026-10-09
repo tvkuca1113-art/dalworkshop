@@ -24,7 +24,7 @@ import { DimensionField, NoticeList, OptionGroup, SpecList, Stepper } from './ui
 import { ReviewPanel } from './ReviewPanel';
 import { PrintSheet } from './PrintSheet';
 import { ConfirmDialog } from './ConfirmDialog';
-import { useConfigUrl, useTyping } from './useConfigUrl';
+import { useConfigUrl, useFooterVisible, useTyping } from './useConfigUrl';
 import { usePrint } from './usePrint';
 import { permalink } from '@/lib/config/url';
 import { useMounted, useOrigin } from '../useClient';
@@ -50,6 +50,7 @@ export function TableConfigurator({ formEnabled }: { formEnabled: boolean }) {
   const { snapshot, print } = usePrint(captureRef);
   const url = useConfigUrl('table', config, replace, DEFAULT_TABLE);
   const typing = useTyping();
+  const footerVisible = useFooterVisible();
   const panelTop = useRef<HTMLDivElement>(null);
   const origin = useOrigin();
   const mounted = useMounted();
@@ -61,7 +62,7 @@ export function TableConfigurator({ formEnabled }: { formEnabled: boolean }) {
 
   const go = (i: number) => {
     setStep(Math.max(0, Math.min(STEPS.length - 1, i)));
-    panelTop.current?.scrollIntoView({ block: 'start', behavior: 'smooth' });
+    panelTop.current?.scrollIntoView({ block: 'start', behavior: 'auto' });
   };
 
   const requestReset = () => {
@@ -250,7 +251,7 @@ export function TableConfigurator({ formEnabled }: { formEnabled: boolean }) {
             <span className="note">Vraća polazni hrastov stol. Pogled kamere ostaje isti.</span>
           </div>
         </div>
-        <div className={styles.bar} data-hidden={typing}>
+        <div className={styles.bar} data-hidden={typing || footerVisible}>
           <span className={styles.barText}>
             Korak {step + 1}/{STEPS.length} · {STEPS[step]}
           </span>

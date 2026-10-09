@@ -32,7 +32,7 @@ export function SiteHeader() {
           </ul>
         </nav>
         <div className={styles.actions}>
-          <Link href="/kontakt" className={`btn btn--light btn--small ${styles.cta}`}>
+          <Link href="/kontakt" className={`btn btn--ghost-light btn--small ${styles.cta}`}>
             Zatražite ponudu
           </Link>
           <MobileMenu />

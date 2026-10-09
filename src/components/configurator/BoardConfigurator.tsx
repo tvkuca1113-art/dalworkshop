@@ -40,7 +40,7 @@ import { ReviewPanel } from './ReviewPanel';
 import { PrintSheet } from './PrintSheet';
 import { ConfirmDialog } from './ConfirmDialog';
 import { PersonalizationEditor } from './PersonalizationEditor';
-import { useConfigUrl, useTyping } from './useConfigUrl';
+import { useConfigUrl, useFooterVisible, useTyping } from './useConfigUrl';
 import { usePrint } from './usePrint';
 import { useMounted, useOrigin } from '../useClient';
 import type { EngravingDraw } from './Plan2D';
@@ -68,6 +68,7 @@ export function BoardConfigurator({ formEnabled }: { formEnabled: boolean }) {
   const { snapshot, print } = usePrint(captureRef);
   const url = useConfigUrl('board', config, replace, DEFAULT_BOARD);
   const typing = useTyping();
+  const footerVisible = useFooterVisible();
   const panelTop = useRef<HTMLDivElement>(null);
   const origin = useOrigin();
   const mounted = useMounted();
@@ -114,7 +115,7 @@ export function BoardConfigurator({ formEnabled }: { formEnabled: boolean }) {
   const current = steps[step]!;
   const go = (i: number) => {
     setStep(Math.max(0, Math.min(steps.length - 1, i)));
-    panelTop.current?.scrollIntoView({ block: 'start', behavior: 'smooth' });
+    panelTop.current?.scrollIntoView({ block: 'start', behavior: 'auto' });
   };
 
   return (
@@ -337,7 +338,7 @@ export function BoardConfigurator({ formEnabled }: { formEnabled: boolean }) {
             <span className="note">Vraća dasku od javora i bukve. Pogled kamere ostaje isti.</span>
           </div>
         </div>
-        <div className={styles.bar} data-hidden={typing}>
+        <div className={styles.bar} data-hidden={typing || footerVisible}>
           <span className={styles.barText}>
             Korak {step + 1}/{steps.length} · {current}
           </span>

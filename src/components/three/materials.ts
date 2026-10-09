@@ -6,7 +6,7 @@ let handleMetal: THREE.MeshStandardMaterial | null = null;
 
 /** Powder-coated black steel: a satin dielectric coat over metal. */
 export function frameMaterial(): THREE.MeshStandardMaterial {
-  metal ??= new THREE.MeshStandardMaterial({ color: '#1c1c1b', metalness: 0.3, roughness: 0.48, envMapIntensity: 0.8, name: 'powder-coated-steel' });
+  metal ??= new THREE.MeshStandardMaterial({ color: '#242623', metalness: 0.25, roughness: 0.42, envMapIntensity: 1, name: 'powder-coated-steel' });
   return metal;
 }
 

@@ -83,3 +83,41 @@ test('meni radi tastaturom i vraća fokus', async ({ page }) => {
   await expect(dialog).toBeHidden();
   await expect(trigger).toBeFocused();
 });
+
+
+test('mobilni naslov i dugmad ne pokrivaju fotografiju stola', async ({ page }) => {
+  for (const size of [{ width: 360, height: 740 }, { width: 390, height: 844 }]) {
+    await page.setViewportSize(size);
+    await page.goto('/');
+    const photo = (await page.getByTestId('hero-photo').boundingBox())!;
+    for (const el of [page.locator('#hero-title'), page.getByRole('link', { name: /^Kreirajte svoj stol/ }).first(), page.getByRole('link', { name: /^Pogledajte daske/ }).first()]) {
+      const box = (await el.boundingBox())!;
+      expect(box.y).toBeGreaterThanOrEqual(photo.y + photo.height);
+    }
+    await expect(page.locator('canvas')).toHaveCount(0);
+  }
+});
+
+test('traka koraka se povlači pred podnožjem i vraća u konfiguratoru', async ({ page }) => {
+  for (const product of ['stol', 'daska']) {
+    await page.goto(`/konfigurator/${product}`);
+    await waitForViewer(page);
+    const bar = page.locator('[data-hidden]').filter({ hasText: 'Korak' });
+    await expect(bar).toHaveAttribute('data-hidden', 'false');
+    await page.locator('.site-footer').scrollIntoViewIfNeeded();
+    await expect(bar).toHaveAttribute('data-hidden', 'true');
+    await page.getByRole('heading', { level: 1 }).scrollIntoViewIfNeeded();
+    await expect(bar).toHaveAttribute('data-hidden', 'false');
+  }
+});
+
+test('odabir trenutne stranice u meniju ga zatvara i vraća skrolanje', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: 'Meni', exact: true }).click();
+  const dialog = page.getByRole('dialog', { name: 'Meni', exact: true });
+  await expect(dialog).toBeVisible();
+  expect(await page.evaluate(() => document.body.style.overflow)).toBe('hidden');
+  await dialog.getByRole('link', { name: 'Početna', exact: true }).click();
+  await expect(dialog).toBeHidden();
+  expect(await page.evaluate(() => document.body.style.overflow)).toBe('');
+});

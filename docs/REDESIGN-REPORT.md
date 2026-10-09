@@ -1,30 +1,38 @@
-# Redizajn DAL Workshop — odabrana verzija 1
+# DAL Workshop — dorada prema mobilnim snimkama
 
-Korisnik je izabrao toplu ambijentalnu verziju 1 i odobrio usklađivanje cijele stranice te GitHub objavu.
+Korisnik je zadržao toplu ambijentalnu verziju 1, zatražio uklanjanje početnog 3D prikaza, bolju kompoziciju na mobitelu, usklađen logo/meni/podnožje, bolje vizuale konfiguratora i GitHub objavu.
 
-## Šta je promijenjeno
+## Primijenjene promjene
 
-- Početna: responsive ambijentalni hero bez ugrađenog teksta u fotografiji, naslov i CTA iz odabrane verzije, diskretno otvaranje 3D dijaloga.
-- Cijela stranica: zajednička krem/charcoal paleta, serif naslovi, bolji razmaci i jasniji copywriting.
-- Stolovi i daske: produktni uvodi s fotografijom, direktan ulaz u konfigurator i kontakt, odvojene originalne fotografije izrađenih proizvoda.
-- Navigacija: aktivna stranica, početno fiksirano zaglavlje, čitljiv meni tokom skrolanja, ispravan povrat na vrh kod prelaska na proizvodnu stranicu.
-- Konfiguratori i pregled: tople površine, jasnije oznake i objašnjenja; postojeće mjere, geometrija, 3D/2D, gravura, permalink i slanje upita zadržani.
-- Kontakt: korisniku razumljiv WhatsApp tok kad e-mail infrastruktura nije konfigurirana; stvarni obrazac ostaje aktivan kada su postavljene postojeće servisne varijable.
-- Hero fotografije optimizovane u lokalni WebP (~230KB desktop, ~215KB mobile), nova Open Graph fotografija. Fontovi i asseti lokalni.
+- Na mobitelu fotografija stola ima zaseban prostor, prije naslova i akcija. Tekst ne prekriva proizvod. Desktop koristi prazni lijevi dio ambijenta za kraći, dvoredni naslov.
+- Početna je sada server-renderovana fotografija bez 3D dijaloga, WebGL canvasa ili uvoza ViewerShell-a.
+- Originalni DAL logo je manji; SVG filter u prikazu uklanja tamnu pozadinu, bez izmjene originalnog raster fajla. Zaglavlje ima diskretan fotografski sloj, slim CTA i punu tamnu pozadinu pri skrolanju.
+- Mobilni meni je svijetli panel sa sažetim linkovima i dvije akcije. Escape, fokus, blokada skrolanja i zatvaranje linkom na trenutnu stranicu rade.
+- Mobilno podnožje koristi dvije kolone i manji brend blok. Traka koraka konfiguratora se skriva kada je podnožje vidljivo, kao i dok korisnik unosi tekst.
+- Materijali na početnoj su na toploj svijetloj površini, uz iste tipografske proporcije i tanke linije. Završni poziv i podnožje dijele jednu tamnu cjelinu.
+- Uvodi za stolove i daske na mobitelu također daju prednost fotografiji, pa tok od početne do proizvoda i konfiguratora ostaje usklađen.
+- 3D prikaz: prirodniji ugao kamere, blaže osvjetljenje, svjetlija studijska pozadina, VSM sjene s blur-om, niža intenzivnost sjene i kontaktne sjenke, finiji bump drveta i satin metal. Prikaz se renderuje na zahtjev; geometrija, mjere i statusi opcija ostaju zasnovani na istom validiranom izboru.
+- Kontrole prikaza imaju manje vizuelne težine; mobilna scena zauzima 44svh uključujući alatnu traku. Odabrane kartice imaju jasan bočni marker.
+
+## Istraženi primarni primjeri
+
+Ovo su relevantni primjeri, bez tvrdnje da postoji objektivno rangiranje „najboljih“ stranica. Primijenjeni su obrasci, a nisu kopirani njihovi kod, fotografije ili poslovne tvrdnje.
+
+| Primjer | Ideja primijenjena na DAL |
+| --- | --- |
+| [TAKT, Danska](https://taktcph.com/) | Fotografija u fokusu, kratka poruka, mirna navigacija i jasan put do proizvoda |
+| [TEAM 7, Austrija](https://www.team7-home.com/de/en/configurable-products/) | Poseban prostor za konfiguraciju, jasni materijali i kontrolisan pregled izbora |
+| [Room & Board, SAD](https://www.roomandboard.com/design/inspiration/top-plus-base-tables) | Razdvajanje izbora ploče, postolja i dimenzija; isti princip ostaje u DAL koracima |
+| [Fyrn, SAD](https://fyrn.com/pages/keyhole-table) | Fokus na proizvod, izradu i prilagodbu prostoru, uz sažet copy |
+| [Benchmark, UK](https://benchmarkfurniture.com/bespoke-furniture/) | Jasno objašnjenje prilagodbe i direktnog dogovora za izradu po mjeri |
+| [HEM, Švedska](https://hem.com/en-eu/furniture/tables-and-side-tables) | Fotografije i kratke kategorijske poruke uz ujednačene rubove i razmake |
+
+Tehnički oslonac za VSM blur/intenzivnost: [Three.js LightShadow](https://threejs.org/docs/pages/LightShadow.html). Provjera na instaliranom Next.js 16.4, React 19.3 i Three.js 0.186.1.
 
 ## Validacija
 
-| Provjera | Rezultat |
-| --- | --- |
-| TypeScript, ESLint, produkcijski build | prošlo |
-| Unit testovi | 111/111 |
-| Kompletna E2E provjera | 35/35, bez retry-a |
-| Završni homepage/mobile/screenshot testovi nakon dorada | 9/9 |
-| Završni runtime/asset/SEO testovi | 3/3 |
-| Vizualna usporedba verzije 1 | `design-qa.md`: passed |
+TypeScript, ESLint, svih 111 unit testova i produkcijski build su prošli. Cijeli E2E paket: 38/38 prošlo. Nakon završne dorade skrolanja, kontrasta i touch kontrola: 23/23 relevantna E2E testa prošla bez ponavljanja. Završna vizuelna provjera i usporedbe su zabilježene u `design-qa.md`, rezultat passed. Statistike: `docs/qa-results.json`.
 
-E2E pokriva tokove upita, sve opcije stolova/dasaka, graviranje, ispis, WebGL fallback, vraćanje stanja, memorijski budžet nakon 100 izmjena, mobilni meni i prelijevanje. Upiti u testu koriste lokalni transport i ne šalju poruke radionici.
+Stvarne fotografije radionice, originalni raster logo, izabrane ambijentalne slike, katalog, statusi dostupnosti, cijene, mjere, upiti, permalink, gravura i štampa ostaju povezani s postojećim izvorima. Testni upiti ne šalju stvarne poruke radionici.
 
-Lokalni build bez Vercel/site URL varijabli prikazuje postojeće upozorenje o metadataBase; produkcija koristi postojeći `deploymentOrigin()` i Vercel URL. Postojeći prekidač indeksiranja nije mijenjan.
-
-Snimke završne implementacije i kombinovane usporedbe dostupne su u `docs/screenshots/`. Izvorni odabrani koncept čuva se u `docs/reference/selected-design-1.webp`.
+Konfigurator koristi neposredno skrolanje između koraka i razmake koji čuvaju polja od sticky scene/trake; time je zatvoren nalaz pomicanja gravura opcije tokom mobilnog klika.

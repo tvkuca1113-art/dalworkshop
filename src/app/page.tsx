@@ -89,11 +89,11 @@ export default function HomePage() {
       <HeroMedia>
         <div className={`wrap ${styles.heroText}`}>
           <p className="eyebrow">Ručno izrađeno u Mostaru</p>
-          <h1 id="hero-title" className={styles.h1}>Stol koji pripada<br />vašem prostoru.</h1>
-          <p className={styles.heroLead}>Stolovi po mjeri i daske od masivnog drveta.<br className={styles.desktopBreak} /> Za vaš dom, prema vašim željama.</p>
+          <h1 id="hero-title" className={styles.h1}>Stol koji pripada vašem prostoru.</h1>
+          <p className={styles.heroLead}>Masivno drvo. Vaše mjere. Komad oko kojeg nastaje svakodnevica.</p>
           <div className={styles.ctas}>
-            <Link href="/konfigurator/stol" className="btn btn--light">Kreirajte svoj stol</Link>
-            <Link href="/daske" className={styles.heroLink}>Pogledajte daske</Link>
+            <Link href="/konfigurator/stol" className={`btn ${styles.heroPrimary}`}>Kreirajte svoj stol <span aria-hidden="true">↗</span></Link>
+            <Link href="/daske" className={styles.heroLink}>Pogledajte daske <span aria-hidden="true">↗</span></Link>
           </div>
           <p className={styles.heroNote}>Vi birate mjere. Mi izrađujemo.</p>
         </div>
@@ -146,7 +146,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section section--dark on-dark" aria-labelledby="materijal">
+      <section className={`section section--stone ${styles.materialSection}`} aria-labelledby="materijal">
         <div className={`wrap ${styles.material}`}>
           <div className={styles.materialMedia}>
             <Image
@@ -247,7 +247,8 @@ export default function HomePage() {
 
       <section className="section section--dark on-dark" aria-labelledby="ideja">
         <div className={`wrap ${styles.final}`}>
-          <h2 id="ideja">Vaš sljedeći omiljeni komad počinje jednom idejom.</h2>
+          <p className="eyebrow">Od ideje do vašeg doma</p>
+          <h2 id="ideja">Napravimo prostor za vaše priče.</h2>
           <div className={styles.finalCtas}>
             <Link href="/konfigurator/stol" className="btn btn--light">
               Kreirajte svoj stol

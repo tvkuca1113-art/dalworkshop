@@ -60,10 +60,11 @@ function makeMaterial(set: WoodTextureSet, species: WoodSpecies, endGrain: boole
     map: set.map,
     roughnessMap: set.data,
     bumpMap: set.data,
-    bumpScale: endGrain ? 1.2 : 0.8,
+    // Satin wood has fine pores rather than centimetre-deep ridges.
+    bumpScale: endGrain ? 0.045 : 0.025,
     roughness: 1,
     metalness: 0,
-    envMapIntensity: 0.55,
+    envMapIntensity: 0.7,
     color: new THREE.Color(1, 1, 1),
     name: `wood-${species}-${endGrain ? 'end' : 'face'}`,
   });

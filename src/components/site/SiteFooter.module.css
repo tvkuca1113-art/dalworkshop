@@ -1,13 +1,13 @@
 .footer {
   background: var(--charcoal);
   color: var(--bone);
-  padding-block: 4rem 1.5rem;
+  padding-block: 3rem 1.5rem;
   border-top: 1px solid var(--line-dark);
 }
 .grid {
   display: grid;
   grid-template-columns: 1.2fr 1fr 1fr;
-  gap: 2.5rem;
+  gap: 2rem;
 }
 .brand {
   display: grid;
@@ -26,7 +26,8 @@
 .contact a {
   display: inline-flex;
   align-items: center;
-  min-height: 40px;
+  min-height: 36px;
+  font-size: .85rem;
   text-decoration: none;
   color: var(--bone);
   opacity: 0.86;
@@ -57,7 +58,10 @@
   color: var(--muted-dark);
 }
 @media (max-width: 860px) {
-  .grid {
-    grid-template-columns: 1fr;
-  }
+  .footer { padding-block: 2.25rem 1.25rem; }
+  .grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 1.5rem 1rem; }
+  .brand { grid-column: 1 / -1; display: flex; align-items: center; gap: 1.1rem; max-width: 100%; }
+  .brand :global(.note) { font-size: .75rem; max-width: 24rem; }
+  .links a, .contact a { min-height: 36px; font-size: .78rem; overflow-wrap: anywhere; }
+  .bottom { margin-top: 1.5rem; font-size: .68rem; padding-top: 1rem; }
 }

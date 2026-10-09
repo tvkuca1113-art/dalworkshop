@@ -105,7 +105,7 @@
   --error: #9c3a2a;
   --ok: #2f5d3a;
   --wa: #25d366;
-  --scene-bg: #e9e2d7;
+  --scene-bg: #eee8de;
 
   --font-serif: 'Cormorant Garamond', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
   --font-sans: 'Manrope', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
@@ -114,7 +114,7 @@
   --radius: 2px;
   --gutter: clamp(1.25rem, 5vw, 5rem);
   --max: 1440px;
-  --header-h: 80px;
+  --header-h: 76px;
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
   color-scheme: light;
 }
@@ -483,5 +483,14 @@ textarea {
   }
 }
 
-@media (max-width: 899px) { :root { --header-h: 72px; } }
+@media (max-width: 899px) { :root { --header-h: 68px; } }
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+
+/* Configurator fields must settle immediately and stay clear of the sticky scene. */
+html:has([data-testid='viewer']) { scroll-behavior: auto; }
+@media (max-width: 899px) {
+  html:has([data-testid='viewer']) {
+    scroll-padding-top: calc(44svh + 1rem);
+    scroll-padding-bottom: 6rem;
+  }
+}
