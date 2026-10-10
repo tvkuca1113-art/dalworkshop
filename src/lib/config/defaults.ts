@@ -26,6 +26,17 @@ export const DEFAULT_TABLE: TableConfig = Object.freeze({
   note: '',
 }) as TableConfig;
 
+/** Compact round inspiration; its availability is confirmed by the workshop. */
+export const ROUND_INSPIRATION_TABLE: TableConfig = {
+  ...DEFAULT_TABLE,
+  modelId: 'custom',
+  shapeId: 'circle',
+  woodId: 'walnut',
+  edgeId: 'rounded',
+  baseId: 'central_pedestal',
+  dimensionsMm: { ...DEFAULT_TABLE.dimensionsMm, diameter: 1000 },
+};
+
 export function boardFromModel(modelId: BoardModelId, keep?: Partial<Pick<BoardConfig, 'personalization' | 'finishId' | 'seed' | 'note'>>): BoardConfig {
   const model = boardModel(modelId);
   const d = model.defaults;

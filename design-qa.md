@@ -1,44 +1,35 @@
-# Design QA — mobilna kompozicija i usklađivanje DAL stranice
+# Design QA — kontinuirana DAL početna
 
-Final result: passed
+Završna provjera: produkcijski build i pregled nove početne završeni; objava se provjerava.
 
-## Izvor i opseg
+## Zahtjevi i provjera
 
-Topli ambijent odabrane verzije 1 (`docs/reference/selected-design-1.webp`) plus najnovije korisnikove mobilne snimke i izričite korekcije: tekst ne smije prekrivati stol, nema 3D na početnoj, logo/meni/podnožje moraju biti uklopljeni, konfigurator treba bolje vizuale.
-
-Mobilni raspored namjerno odstupa od starog overlay koncepta: fotografija je iznad tekstualnog bloka. To je tražena korekcija, ne pokušaj identične reprodukcije starog mockupa. Stare `comparison-type-actions.jpg` i referentni mockup dokumentuju prethodni koncept.
-
-## Vizuelni i funkcionalni kriteriji
-
-| Površina | Provedena korekcija | Dokaz |
+| Zahtjev | Implementacija | Dokaz |
 | --- | --- | --- |
-| Fotografija i tekst | Mobilni naslov i oba CTA su ispod slike; desktop tekst u praznom lijevom zidu | `pocetna-390.png`, `pocetna-1440.png`, test fizičke granice slike na 360 i 390px |
-| Logo i zaglavlje | Originalni raster, uklonjena tamna pozadina kroz SVG filter, manja veličina i mirnije kontrole | Snimke početne i oba konfiguratora |
-| Meni | Svijetli panel; kraći linkovi i akcije; Escape/fokus/skrol/current-page close | `meni-390.png`, mobilni testovi |
-| Prelazak kroz stranice | Iste krem površine, serif naslovi, fotografija prije copy-ja u mobilnim uvodima proizvoda | Cijela početna; ručni pregled proizvoda i materijala |
-| Podnožje | Dvije mobilne kolone; nema fixed step trake preko kontakta | `podnozje-konfigurator-390.png`, oba konfiguratora u regresijskom testu |
-| 3D | Blaže sjene, prirodniji ugao, neutralna studijska paleta i finiji materijali | Snimke oba konfiguratora, oraha, ivice i gravure |
-| Funkcije | Postojeći validirani katalog, geometrija, mjere, stanja, fallback, upiti i štampa | Cijeli E2E paket; memorijski i geometrijski budžet |
+| Slika preko cijelog prvog ekrana | Hero 100svh, poseban mobilni kadar; naslov u zidu i akcije na podu | 360×740, 390×844, 390×938; snimke početne 390 i 1440 |
+| Drugi stol, potpuno drugačiji oblik | Mali okrugli stol od oraha s centralnim postoljem | Druga ambijentalna fotografija; link otvara okrugli oblik / promjer 100 cm |
+| Nema 3D u hero kadru | Fotografija; dinamički 3D se učitava tek blizu sekcije detalja | Test bez početnog canvas elementa / viewer modula |
+| Cijeli stol i sve ivice | Validirani TableConfig i TableModel; profil cijelog oboda, dva ugla i detalj | Stvarna promjena piksela i geometryKey; kamera zadnje strane; snimke ravne i zaobljene ivice |
+| Normalno listanje na mobitelu | Touch pan-y; rotacija na izričit klik; promjena pogleda završava rotaciju | Mobilni test listanja i rotacije |
+| Stranica iz jednog komada | Zajednička topla podloga, blage promjene tona, asimetričan ritam fotografija i prelaz u završni blok | Cijela početna 390 i 1440 |
+| Sačuvan izbor | Drvo i ivica iz detalja prenose se u konfigurator | E2E do specifikacije istog izbora |
+| Bez WebGL-a | Prostorna SVG ilustracija iz istog layouta, promjena ivice i pogleda | Test bez WebGL-a, bez runtime greške |
 
-## Okruženja
+## Okruženje
 
-Produkcijski build: desktop 1440×900 i mobilni 390×844; dodatno sve rute na 360×740, 390×844 i 844×390. WebGL u automatizovanim testovima koristi SwiftShader. Cloud preglednik je dodatna provjera desktop UI-ja i 2D fallback-a jer nema WebGL2.
+Produkcijski Next.js build. Desktop Chromium 1440×900 i mobilni Chromium 390×844; dodatno 360×740, 390×938 i pejzaž 844×390. WebGL u automatizovanim testovima koristi SwiftShader. To nije test fizičkog iPhone uređaja.
 
-## Provjere
+## Završni rezultati
 
-- `npm run check`: prošlo, uključujući 111/111 unit testova.
-- Cijeli `npm run test:e2e`: 38/38 prošlo. Nakon završnih dorada: 23/23 relevantna E2E testa prošla, bez retry-a.
-- Završni pregled mobilnih i desktop snimki: prošao. Fotografija, meni, podnožje i oba 3D konfiguratora vizuelno pregledani.
+- npm run check: prošlo — TypeScript, ESLint, 111/111 unit testova i produkcijski build.
+- Puni E2E ciklus: 40/42 prošlo. Test upita zatekao je poruku iz prethodnog testiranja; test sa 100 promjena dimenzija prekoračio je vrijeme u softverskom WebGL okruženju. Ponovna provjera koristi zaseban direktorij upita i manju scenu uz iste provjere 100 promjena i isti limit resursa.
+- Mobilna i desktop početna, cijela stranica i prikaz ivica vizuelno pregledani. Ranije snimke u docs/screenshots ostaju historijski zapis prethodnih iteracija.
+- GitHub i javna objava: provjera nakon ažuriranja grane.
 
+## Istraživanje i slike
 
-## Usporedbe na istom okviru
+[CONTINUOUS-HOMEPAGE.md](docs/CONTINUOUS-HOMEPAGE.md) sadrži službene evropske i američke uzore, primijenjene principe, lokacije oba nova asseta i finalne imagegen promptove.
 
-`comparison-mobile.jpg` i `comparison-desktop.jpg`: prethodno objavljeni commit `3f4d842` lijevo, nova implementacija desno, normalizovani na isti CSS viewport. Mobilni okvir 390×844; desktop 1440×900 proporcionalno prikazan na 720×450. `comparison-configurator.jpg` poredi isti početni stol, mobitel 390×844. Nema okvira uređaja ili browser chrome-a u usporedbama.
+## Historija
 
-`pocetna-cijela-1440.jpg` i `pocetna-cijela-390.jpg` dokumentuju sve sekcije (direktne browser snimke, JPEG 85). Standardni viewporti i 3D dokazi ostaju PNG.
-
-## Zatvoren nalaz završne provjere
-
-P1: smooth skrolanje pri izmjeni koraka i fokusiranju polja moglo je pomjeriti gravura radio opciju tokom klika. Konfigurator sada skrola neposredno; dokument ima scroll-padding za sticky scenu i mobilnu traku, bez dvostrukog pomaka na panelu. Ponovljeni tokovi stolova, dasaka, gravure i mobilne snimke prolaze u završnih 23/23 testova.
-
-Nema otvorenih P0/P1/P2 nalaza u provjerenom opsegu. Cloud preglednik dodatno potvrđuje usklađen desktop UI; WebGL scene i materijali provjereni su automatizovanim produkcijskim snimkama.
+Ovaj QA zamjenjuje prethodni raspored u kojem je mobilna fotografija bila iznad krem tekstualnog bloka. Korisnik sada traži fotografiju preko cijelog prvog ekrana. Prethodne comparison-*.jpg snimke ostaju historijski dokaz prethodne iteracije.

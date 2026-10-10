@@ -1,5 +1,6 @@
 import { defineConfig, devices } from '@playwright/test';
 import path from 'node:path';
+import { randomUUID } from 'node:crypto';
 
 /**
  * End-to-end tests against the production build (`npm run build` first).
@@ -9,7 +10,10 @@ import path from 'node:path';
  *    without sending e-mails to the workshop.
  * WebGL runs on SwiftShader (software) in CI containers.
  */
-export const OUTBOX = path.join(__dirname, 'test-results', 'outbox');
+// Each invocation gets a fresh transport directory; workers inherit the run ID.
+// Old local test messages must not be counted as newly submitted requests.
+process.env.DAL_E2E_RUN_ID ??= randomUUID();
+export const OUTBOX = path.join(__dirname, 'test-results', `outbox-${process.env.DAL_E2E_RUN_ID}`);
 
 const webglArgs = ['--enable-unsafe-swiftshader', '--use-angle=swiftshader', '--ignore-gpu-blocklist'];
 

@@ -2,8 +2,7 @@ import { expect, test } from '@playwright/test';
 import fs from 'node:fs';
 import path from 'node:path';
 import { FORM_SERVER, goToStep, waitForViewer } from './helpers';
-
-const OUTBOX = path.join(__dirname, '..', 'test-results', 'outbox');
+import { OUTBOX } from '../playwright.config';
 
 function body(over: Record<string, unknown> = {}) {
   return {

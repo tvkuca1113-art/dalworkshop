@@ -6,6 +6,8 @@ import { Faq } from '@/components/home/Faq';
 import { WhatsAppIcon } from '@/components/site/WhatsAppIcon';
 import { BRAND, whatsappLink } from '@/lib/catalog/brand';
 import { WORKS } from '@/lib/catalog/works';
+import { ROUND_INSPIRATION_TABLE } from '@/lib/config/defaults';
+import { encodeTable } from '@/lib/config/url';
 import styles from './home.module.css';
 
 export const metadata = {
@@ -84,43 +86,46 @@ const FAQ = [
 
 export default function HomePage() {
   const table = WORKS[0]!;
+  const roundTableHref = `/konfigurator/stol?${encodeTable(ROUND_INSPIRATION_TABLE)}`;
   return (
-    <>
+    <div className={styles.home}>
       <HeroMedia>
         <div className={`wrap ${styles.heroText}`}>
           <p className="eyebrow">Ručno izrađeno u Mostaru</p>
           <h1 id="hero-title" className={styles.h1}>Stol koji pripada vašem prostoru.</h1>
-          <p className={styles.heroLead}>Masivno drvo. Vaše mjere. Komad oko kojeg nastaje svakodnevica.</p>
+          <p className={styles.heroLead}>Masivno drvo. Vaše mjere.<br />Mjesto za vašu svakodnevicu.</p>
           <div className={styles.ctas}>
             <Link href="/konfigurator/stol" className={`btn ${styles.heroPrimary}`}>Kreirajte svoj stol <span aria-hidden="true">↗</span></Link>
             <Link href="/daske" className={styles.heroLink}>Pogledajte daske <span aria-hidden="true">↗</span></Link>
           </div>
-          <p className={styles.heroNote}>Vi birate mjere. Mi izrađujemo.</p>
+          <p className={styles.heroNote}>150 × 70 cm · Prilagodite svom prostoru.</p>
         </div>
         <a href="#izbor" className={styles.heroExplore}>Stolovi po mjeri · Daske za rezanje i serviranje</a>
       </HeroMedia>
+      <div className={styles.story}>
       <div className={styles.promise}>
         <div className={`wrap ${styles.promiseInner}`}>
           <span>Masivno drvo</span><span>Izrada po mjeri</span><span>Direktan dogovor s radionicom</span>
         </div>
       </div>
 
-      <section className="section" aria-labelledby="izbor">
+      <section className={`section ${styles.choiceSection}`} aria-labelledby="izbor">
         <div className="wrap">
           <div className="section-head">
-            <p className="eyebrow">Za vaš dom</p>
+            <p className="eyebrow"><span className={styles.chapter}>01 /</span> Za vaš dom</p>
             <h2 id="izbor">Komadi koji ostaju dio svakodnevice.</h2>
           </div>
           <div className={styles.choice}>
             <article className={styles.choiceItem}>
-              <Link href="/konfigurator/stol" className={styles.choiceMedia} aria-label="Stol po vašoj mjeri — otvori konfigurator">
-                <Image src="/images/dal-hero-desktop.webp" alt="Hrastov stol u toplom enterijeru — vizualizacija ambijenta" fill sizes="(min-width: 900px) 46vw, 100vw" className={styles.cover} />
+              <Link href={roundTableHref} className={styles.choiceMedia} aria-label="Okrugli stol po vašoj mjeri — otvori konfigurator">
+                <Image src="/images/dal-stol-round.webp" alt="Mali okrugli stol od oraha s jednim centralnim metalnim postoljem — vizuelni prijedlog po mjeri" fill sizes="(min-width: 900px) 56vw, 100vw" className={styles.cover} />
               </Link>
               <div className={styles.choiceText}>
                 <h3>Stol po vašoj mjeri</h3>
-                <p>Masivna ploča u dimenziji koja odgovara vašem prostoru, s izborom drveta, ivice i metalnog postolja.</p>
-                <Link href="/konfigurator/stol" className="btn">
-                  Kreirajte svoj stol
+                <p>Okrugli za manje prostore ili izdužen za velika okupljanja. Počnite oblikom, a drvo, mjere i detalje prilagodite sebi.</p>
+                <p className={styles.inspirationNote}>Vizuelni prijedlog · mogućnost izrade potvrđujemo uz ponudu.</p>
+                <Link href={roundTableHref} className={styles.editorialLink}>
+                  Kreirajte svoj stol <span aria-hidden="true">↗</span>
                 </Link>
               </div>
             </article>
@@ -137,8 +142,8 @@ export default function HomePage() {
               <div className={styles.choiceText}>
                 <h3>Daska za svaki dan</h3>
                 <p>Daske za rezanje i serviranje od uzdužnih traka drveta, s utorima, ručkama ili personalizacijom po dogovoru.</p>
-                <Link href="/konfigurator/daska" className="btn">
-                  Kreirajte svoju dasku
+                <Link href="/konfigurator/daska" className={styles.editorialLink}>
+                  Kreirajte svoju dasku <span aria-hidden="true">↗</span>
                 </Link>
               </div>
             </article>
@@ -146,34 +151,25 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className={`section section--stone ${styles.materialSection}`} aria-labelledby="materijal">
-        <div className={`wrap ${styles.material}`}>
-          <div className={styles.materialMedia}>
-            <Image
-              src="/images/dal-detalj-hrasta.webp"
-              alt="Detalj ugla hrastove ploče i crnog metalnog okvira (stilizirana ilustracija)"
-              width={1536}
-              height={1024}
-              sizes="(min-width: 900px) 55vw, 100vw"
-              className={styles.materialImg}
-            />
-          </div>
-          <div className={styles.materialText}>
-            <p className="eyebrow">Materijal i detalj</p>
+      <section className={`section ${styles.materialSection}`} aria-labelledby="materijal">
+        <div className="wrap">
+          <div className={styles.materialIntro}>
+            <div className={styles.materialText}>
+            <p className="eyebrow"><span className={styles.chapter}>02 /</span> Materijal i detalj</p>
             <h2 id="materijal">Ljepota je u detaljima.</h2>
+            </div>
             <p className="lead">
-              Godovi koji pričaju svoju priču. Ivica ugodna pod rukom. Masivno drvo donosi toplinu u prostor, a svaki komad ima vlastite šare i nijanse.
+              Odaberite ivicu i pogledajte kako se mijenja cijela ploča — s prednje, bočne i zadnje strane. Približite detalj koji ćete svaki dan osjetiti pod rukom.
             </p>
-            <h3 className={styles.small}>Pogledajte razliku: ravna ili zaobljena ivica</h3>
-            <EdgeComparison />
           </div>
+          <EdgeComparison />
         </div>
       </section>
 
-      <section className="section" aria-labelledby="proces">
+      <section className={`section ${styles.processSection}`} aria-labelledby="proces">
         <div className="wrap">
           <div className="section-head">
-            <p className="eyebrow">Kako nastaje vaš komad</p>
+            <p className="eyebrow"><span className={styles.chapter}>03 /</span> Kako nastaje vaš komad</p>
             <h2 id="proces">Vaša ideja. Naša izrada.</h2>
           </div>
           <ol className={styles.steps}>
@@ -188,10 +184,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section section--stone" aria-labelledby="proizvodi">
+      <section className={`section ${styles.worksSection}`} aria-labelledby="proizvodi">
         <div className="wrap">
           <div className="section-head">
-            <p className="eyebrow">Iz radionice</p>
+            <p className="eyebrow"><span className={styles.chapter}>04 /</span> Iz radionice</p>
             <h2 id="proizvodi">Upoznajte naše radove.</h2>
             <p className="lead">Hrastov stol i daske iz naše radionice. Pogledajte izradu, površine i detalje na originalnim fotografijama.</p>
           </div>
@@ -244,8 +240,9 @@ export default function HomePage() {
           <Faq items={FAQ} />
         </div>
       </section>
+      </div>
 
-      <section className="section section--dark on-dark" aria-labelledby="ideja">
+      <section className={`section on-dark ${styles.closing}`} aria-labelledby="ideja">
         <div className={`wrap ${styles.final}`}>
           <p className="eyebrow">Od ideje do vašeg doma</p>
           <h2 id="ideja">Napravimo prostor za vaše priče.</h2>
@@ -265,6 +262,6 @@ export default function HomePage() {
           </p>
         </div>
       </section>
-    </>
+    </div>
   );
 }

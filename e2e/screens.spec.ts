@@ -1,12 +1,14 @@
-import { test } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 import path from 'node:path';
 import { goToStep, waitForViewer } from './helpers';
 
 const DIR = path.join(__dirname, '..', 'docs', 'screenshots');
 
 test('snimke provjere: početna, oba konfiguratora i pregled', async ({ page }, info) => {
+  test.setTimeout(240_000); // several material loads and camera views on software WebGL
   const w = page.viewportSize()!.width;
   const tag = `${w}`;
+  await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto('/');
   await page.waitForLoadState('networkidle');
   await page.screenshot({ path: path.join(DIR, `pocetna-${tag}.png`) });
@@ -15,6 +17,22 @@ test('snimke provjere: početna, oba konfiguratora i pregled', async ({ page }, 
   await page.setViewportSize(info.project.name.startsWith('mobile') ? { width: 390, height: 938 } : { width: 1172, height: 768 });
   await page.screenshot({ path: path.join(DIR, `pocetna-reference-${tag}.png`) });
   await page.setViewportSize(viewport);
+  await page.getByTestId('edge-stage').scrollIntoViewIfNeeded();
+  await expect(page.getByTestId('edge-stage')).toHaveAttribute('data-phase', 'ready', { timeout: 90_000 });
+  await page.locator('section[aria-labelledby="materijal"]').evaluate((el) => {
+    const header = document.querySelector('.site-header')?.getBoundingClientRect().height ?? 80;
+    window.scrollTo(0, el.getBoundingClientRect().top + window.scrollY - header - 24);
+  });
+  await page.locator('section[aria-labelledby="materijal"]').screenshot({ path: path.join(DIR, `detalji-cijeli-stol-${tag}.png`) });
+  await page.getByTestId('edge-experience').getByRole('button', { name: 'Detalj ivice' }).click();
+  await page.waitForTimeout(1500);
+  await page.getByTestId('edge-stage').screenshot({ path: path.join(DIR, `detalji-ravna-${tag}.png`) });
+  await page.getByTestId('edge-experience').getByRole('button', { name: 'Zaobljena ivica' }).click();
+  await page.waitForTimeout(800);
+  await page.getByTestId('edge-stage').screenshot({ path: path.join(DIR, `detalji-zaobljena-${tag}.png`) });
+  await page.getByTestId('edge-experience').getByRole('button', { name: 'Cijeli stol' }).click();
+  await page.waitForTimeout(1500);
+  await page.evaluate(() => window.scrollTo(0, 0));
   await page.screenshot({ path: path.join(DIR, `pocetna-cijela-${tag}.jpg`), fullPage: true, quality: 85 });
   if (info.project.name.startsWith('mobile')) {
     await page.getByRole('button', { name: 'Meni', exact: true }).click();

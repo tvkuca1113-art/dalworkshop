@@ -85,14 +85,20 @@ test('meni radi tastaturom i vraća fokus', async ({ page }) => {
 });
 
 
-test('mobilni naslov i dugmad ne pokrivaju fotografiju stola', async ({ page }) => {
-  for (const size of [{ width: 360, height: 740 }, { width: 390, height: 844 }]) {
+test('fotografija pokriva prvi ekran; naslov i dugmad ostavljaju stol vidljivim', async ({ page }) => {
+  for (const size of [{ width: 360, height: 740 }, { width: 390, height: 844 }, { width: 390, height: 938 }]) {
     await page.setViewportSize(size);
     await page.goto('/');
     const photo = (await page.getByTestId('hero-photo').boundingBox())!;
-    for (const el of [page.locator('#hero-title'), page.getByRole('link', { name: /^Kreirajte svoj stol/ }).first(), page.getByRole('link', { name: /^Pogledajte daske/ }).first()]) {
+    expect(photo.y).toBe(0);
+    expect(photo.width).toBe(size.width);
+    expect(photo.height).toBeGreaterThanOrEqual(size.height);
+    const title = (await page.locator('#hero-title').boundingBox())!;
+    expect(title.y + title.height).toBeLessThan(photo.height * .46);
+    for (const el of [page.getByRole('link', { name: /^Kreirajte svoj stol/ }).first(), page.getByRole('link', { name: /^Pogledajte daske/ }).first()]) {
       const box = (await el.boundingBox())!;
-      expect(box.y).toBeGreaterThanOrEqual(photo.y + photo.height);
+      expect(box.y).toBeGreaterThan(photo.height * .78);
+      expect(box.y + box.height).toBeLessThanOrEqual(photo.height);
     }
     await expect(page.locator('canvas')).toHaveCount(0);
   }
@@ -120,4 +126,31 @@ test('odabir trenutne stranice u meniju ga zatvara i vraća skrolanje', async ({
   await dialog.getByRole('link', { name: 'Početna', exact: true }).click();
   await expect(dialog).toBeHidden();
   expect(await page.evaluate(() => document.body.style.overflow)).toBe('');
+});
+
+test('početna: listanje preko stola i rotacija na izričit zahtjev', async ({ page }) => {
+  await page.goto('/');
+  const stage = page.getByTestId('edge-stage');
+  const experience = page.getByTestId('edge-experience');
+  await stage.scrollIntoViewIfNeeded();
+  await expect(stage).toHaveAttribute('data-phase', 'ready', { timeout: 90_000 });
+  const touchActions = () => page.evaluate(() => {
+    const actions: string[] = [];
+    let el: HTMLElement | null = document.querySelector('[data-testid="edge-stage"] canvas');
+    while (el && el.dataset.testid !== 'edge-stage') {
+      actions.push(getComputedStyle(el).touchAction);
+      el = el.parentElement;
+    }
+    return actions;
+  });
+  expect(await touchActions()).toContain('pan-y');
+  expect(await touchActions()).not.toContain('none');
+  await experience.getByRole('button', { name: 'Rotirajte stol' }).click();
+  await expect.poll(touchActions).toContain('none');
+  await experience.getByRole('button', { name: 'Cijeli stol' }).click();
+  await expect.poll(touchActions).not.toContain('none');
+  const before = await page.evaluate(() => window.scrollY);
+  await page.mouse.move(190, 420);
+  await page.mouse.wheel(0, 400);
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(before + 100);
 });

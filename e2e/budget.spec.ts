@@ -30,6 +30,10 @@ test('vizuelni budžet: trokuti i draw callovi po sceni', async ({ page }) => {
 
 test('100 promjena dimenzija ne gomila geometrije ni teksture', async ({ page }) => {
   test.setTimeout(600_000);
+  // Resource ownership is independent of viewport size. A small canvas keeps
+  // the software-rendered stress test focused on 100 committed GPU changes.
+  // The six scene-budget cases above still cover the desktop rendering path.
+  await page.setViewportSize({ width: 740, height: 540 });
   type Mem = { memory: { geometries: number; textures: number } };
   const mem = () => page.evaluate(() => (window as unknown as { __dalViewer: { info(): Mem } }).__dalViewer.info().memory);
   for (const [url, testId, stepLabel] of [
@@ -46,13 +50,26 @@ test('100 promjena dimenzija ne gomila geometrije ni teksture', async ({ page })
     await minus.click();
     await page.waitForTimeout(2500);
     const before = await mem();
+    const geometryKey = () => page.evaluate(() => (window as unknown as { __dalViewer: { info(): { geometryKey: string } } }).__dalViewer.info().geometryKey);
+    let committedChanges = 0;
     for (let i = 0; i < 50; i++) {
-      await plus.click();
-      await minus.click();
+      for (const control of [plus, minus]) {
+        const previousKey = await geometryKey();
+        // Hit testing is covered by the product-flow tests. Here force avoids
+        // spending the resource stress test waiting on pointer/layout stability.
+        await control.click({ force: true });
+        await expect.poll(geometryKey).not.toBe(previousKey);
+        // Let the debounced CSG/material work commit, then render GPU resources.
+        await page.waitForTimeout(url.endsWith('daska') ? 650 : 60);
+        await page.evaluate(() => new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve()))));
+        committedChanges++;
+      }
     }
+    expect(committedChanges).toBe(100);
     await page.waitForTimeout(3000);
     await page.mouse.move(10, 10);
     const after = await mem();
+    console.log(`${url}: 100 committed changes; geometry ${before.geometries} → ${after.geometries}, texture ${before.textures} → ${after.textures}`);
     expect(after.geometries, `${url} geometries ${before.geometries} → ${after.geometries}`).toBeLessThanOrEqual(before.geometries + 2);
     expect(after.textures, `${url} textures ${before.textures} → ${after.textures}`).toBeLessThanOrEqual(before.textures + 2);
   }

@@ -1,11 +1,12 @@
-.hero { position: relative; isolation: isolate; min-height: 740px; height: 100svh; max-height: 1000px; background: var(--bone); overflow: hidden; color: #faf6ed; }
+.hero { position: relative; isolation: isolate; min-height: 660px; height: 100svh; background: #5e4935; overflow: hidden; color: #faf6ed; }
+.hero::after { content: ''; position: absolute; pointer-events: none; inset: auto 0 0; height: 5rem; background: linear-gradient(transparent, #e8dfd0); }
 .media { position: absolute; inset: 0; z-index: -2; display: block; }
 .photo { width: 100%; height: 100%; object-fit: cover; object-position: center; }
 .shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(34, 25, 16, .52), rgba(34, 25, 16, .13) 47%, transparent 72%); z-index: -1; }
 @media (max-width: 700px) {
-  .hero { min-height: 0; height: auto; max-height: none; color: var(--ink); }
-  .media { position: relative; height: 56svh; min-height: 340px; max-height: 560px; z-index: 0; }
-  .photo { object-position: center 72%; }
-  .shade { display: none; }
+  .hero { min-height: 620px; height: 100svh; }
+  .photo { object-position: center; }
+  .shade { background: linear-gradient(180deg, rgba(34,25,16,.25), rgba(34,25,16,.3) 35%, transparent 54%, transparent 78%, rgba(34,25,16,.28) 92%); }
+  .hero::after { height: 2.5rem; }
 }
 @media (max-height: 520px) and (min-width: 701px) { .hero { height: 740px; } }

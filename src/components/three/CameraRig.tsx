@@ -21,9 +21,10 @@ export interface Framing {
   distanceScale?: number;
 }
 
-const DIRS: Record<'front' | 'top', [number, number, number]> = {
+const DIRS: Record<'front' | 'top' | 'back', [number, number, number]> = {
   front: [0, 0.2, 1],
   top: [0, 1, 0.0001],
+  back: [-0.85, 0.5, -1.4],
 };
 
 export function CameraRig({
@@ -69,7 +70,7 @@ export function CameraRig({
       const dir = new THREE.Vector3(0.75, 0.42, 1).normalize();
       return { pos: p.clone().add(dir.multiplyScalar(f.edgeDistance)), target: p };
     }
-    const dir = new THREE.Vector3(...(preset === 'front' ? DIRS.front : preset === 'top' ? DIRS.top : f.defaultDir)).normalize();
+    const dir = new THREE.Vector3(...(preset === 'front' ? DIRS.front : preset === 'top' ? DIRS.top : preset === 'back' ? DIRS.back : f.defaultDir)).normalize();
     return { pos: center.clone().add(dir.multiplyScalar(fitDistance(f.radius) * (f.distanceScale ?? 1))), target: center };
   }
 

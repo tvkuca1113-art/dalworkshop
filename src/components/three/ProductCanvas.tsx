@@ -16,7 +16,7 @@ import type { EngravingRender, TextureQualityLevel, ViewerDebugInfo, ViewerPhase
 
 export interface ProductCanvasProps {
   config: TableConfig | BoardConfig;
-  variant: 'configurator' | 'hero';
+  variant: 'configurator' | 'hero' | 'detail';
   view: ViewRequest;
   showDimensions: boolean;
   /** Orbit / pinch enabled (touch users opt in with "Rotirajte model"). */
@@ -30,10 +30,10 @@ export interface ProductCanvasProps {
   captureRef?: MutableRefObject<(() => string | null) | null>;
 }
 
-const BG = { configurator: '#eee8de', hero: '#e6dfd4' } as const;
-const FLOOR = { configurator: '#e7e1d7', hero: '#d1c8bb' } as const;
+const BG = { configurator: '#eee8de', hero: '#e6dfd4', detail: '#eee8de' } as const;
+const FLOOR = { configurator: '#e7e1d7', hero: '#d1c8bb', detail: '#eee8de' } as const;
 
-function framingFor(config: TableConfig | BoardConfig, variant: 'configurator' | 'hero'): { framing: Framing; dims: DimSpec[]; labelScale: number; shadowExtent: number } {
+function framingFor(config: TableConfig | BoardConfig, variant: ProductCanvasProps['variant']): { framing: Framing; dims: DimSpec[]; labelScale: number; shadowExtent: number } {
   if (config.productType === 'table') {
     const l = computeTableLayout(config);
     const L = l.lengthMm / 1000;
@@ -58,7 +58,7 @@ function framingFor(config: TableConfig | BoardConfig, variant: 'configurator' |
       ? [(L / 2) * Math.SQRT1_2, H - T / 2, (W / 2) * Math.SQRT1_2]
       : config.shapeId === 'oval'
         ? [0, H - T / 2, W / 2]
-        : [L / 2 - 0.12, H - T / 2, W / 2];
+        : [L / 2 - (variant === 'detail' ? 0.025 : 0.12), H - T / 2, W / 2];
     return {
       framing: {
         center: [0, H * 0.48, 0],
@@ -66,7 +66,7 @@ function framingFor(config: TableConfig | BoardConfig, variant: 'configurator' |
         edgePoint,
         edgeDistance: Math.max(0.32, T * 9),
         defaultDir: variant === 'hero' ? [0.42, 0.3, 1] : [0.85, 0.5, 1.4],
-        distanceScale: variant === 'hero' ? 0.74 : 1,
+        distanceScale: variant === 'hero' ? 0.74 : variant === 'detail' ? 0.85 : 1,
       },
       dims,
       labelScale: 0.07,
@@ -106,6 +106,7 @@ function framingFor(config: TableConfig | BoardConfig, variant: 'configurator' |
  * grounds the model without an extra render pass.
  */
 function GroundShade({ width, depth, opacity }: { width: number; depth: number; opacity: number }) {
+  // Scale a fixed unit plane; rapid edits must not queue new floor/shadow geometries.
   const texture = useMemo(() => {
     const c = document.createElement('canvas');
     c.width = 256;
@@ -123,8 +124,8 @@ function GroundShade({ width, depth, opacity }: { width: number; depth: number; 
   }, []);
   useEffect(() => () => texture.dispose(), [texture]);
   return (
-    <mesh rotation-x={-Math.PI / 2} position={[0, 0.0008, 0]} renderOrder={1}>
-      <planeGeometry args={[width, depth]} />
+    <mesh rotation-x={-Math.PI / 2} position={[0, 0.0008, 0]} scale={[width, depth, 1]} renderOrder={1}>
+      <planeGeometry args={[1, 1]} />
       <meshBasicMaterial color="#3b3025" alphaMap={texture} transparent opacity={opacity} depthWrite={false} toneMapped={false} />
     </mesh>
   );
@@ -310,9 +311,9 @@ export default function ProductCanvas(props: ProductCanvasProps) {
         <Lightformer form="rect" intensity={1.1} position={[-6, 2.5, 3]} rotation-y={Math.PI / 2.5} scale={[6, 3, 1]} color="#ffffff" />
         <Lightformer form="rect" intensity={0.5} position={[6, 1.5, -3]} rotation-y={-Math.PI / 2.5} scale={[6, 2, 1]} color="#f3e6d6" />
       </Environment>
-      <mesh rotation-x={-Math.PI / 2} receiveShadow position={[0, -0.0005, 0]}>
-        <circleGeometry args={[framing.radius * 14, 64]} />
-        <meshStandardMaterial color={FLOOR[variant]} roughness={0.95} metalness={0} envMapIntensity={0.35} />
+      <mesh rotation-x={-Math.PI / 2} receiveShadow position={[0, -0.0005, 0]} scale={framing.radius * 14}>
+        <circleGeometry args={[1, 64]} />
+        {variant === 'detail' ? <meshBasicMaterial color={FLOOR.detail} toneMapped={false} /> : <meshStandardMaterial color={FLOOR[variant]} roughness={0.95} metalness={0} envMapIntensity={0.35} />}
       </mesh>
       <GroundShade width={shade.w} depth={shade.d} opacity={shade.o} />
       <group rotation-x={flipped ? Math.PI : 0} position={[0, flipped ? T : 0, 0]}>

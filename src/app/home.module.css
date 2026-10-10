@@ -1,4 +1,8 @@
 .heroText { position: relative; padding-top: clamp(8.5rem, 19vh, 12rem); display: grid; gap: 1.2rem; justify-items: start; }
+.home { overflow-x: clip; }
+.story { background: linear-gradient(180deg, #e8dfd0 0%, var(--bone) 8%, var(--bone) 22%, #eee8de 35%, #eee8de 47%, var(--bone) 64%, var(--bone) 91%, #e8dfd0 100%); }
+.chapter { font-variant-numeric: tabular-nums; color: var(--copper-deep); margin-right: .8rem; letter-spacing: .03em; }
+.closing { background: linear-gradient(180deg, #e8dfd0, #a19783 7%, #42443b 20%, var(--charcoal) 38%); padding-top: clamp(10rem, 16vw, 15rem); color: var(--bone); }
 .heroText :global(.eyebrow) { color: #eed0a1; font-size: .7rem; }
 .h1 { font-size: clamp(3.25rem, 4.6vw, 4.8rem); line-height: 1.02; letter-spacing: -.025em; max-width: 14ch; color: #faf6ed; text-wrap: initial; }
 .heroLead { max-width: 23rem; font-size: 1.03rem; line-height: 1.6; color: #faf6ed; }
@@ -7,25 +11,32 @@
 .heroLink { display: inline-flex; gap: .7rem; align-items: center; min-height: 44px; text-underline-offset: .3rem; color: #faf6ed; font-size: .88rem; }
 .heroNote { font-size: .75rem; color: #eee4d5; }
 .heroExplore { position: absolute; left: max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter))); bottom: 2rem; font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; text-decoration: none; min-height: 44px; display: flex; align-items: center; color: #faf6ed; }
-.promise { border-bottom: 1px solid var(--line); background: var(--bone); }
+.promise { background: transparent; }
 .promiseInner { display: flex; justify-content: space-between; align-items: center; gap: 1rem; min-height: 72px; color: var(--copper-deep); font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; }
 @media (max-width: 700px) {
-  .heroText { padding-block: 1.6rem 1.5rem; gap: .8rem; }
-  .heroText :global(.eyebrow) { color: var(--copper); font-size: .6rem; letter-spacing: .12em; }
-  .h1 { color: var(--ink); font-size: clamp(2.35rem, 9.8vw, 3.5rem); line-height: 1.04; max-width: 16ch; }
-  .heroLead { color: var(--muted); font-size: .87rem; max-width: 24rem; }
-  .ctas { display: flex; flex-wrap: wrap; gap: .25rem 1.1rem; width: 100%; }
-  .heroPrimary { --btn-bg: var(--charcoal); --btn-fg: var(--bone); --btn-border: var(--charcoal); font-size: .8rem; padding-inline: 1rem; min-height: 46px; gap: .6rem; }
-  .heroLink { color: var(--ink); font-size: .8rem; gap: .3rem; }
-  .heroNote, .heroExplore { display: none; }
+  .heroText { height: 100%; padding-top: max(6.2rem, 13svh); padding-bottom: 0; gap: .8rem; align-content: start; }
+  .heroText :global(.eyebrow) { color: #eed0a1; font-size: .59rem; letter-spacing: .12em; }
+  .h1 { color: #faf6ed; font-size: clamp(2.3rem, 10.3vw, 3.5rem); line-height: 1.02; max-width: 15ch; }
+  .heroLead { color: #faf6ed; font-size: .82rem; max-width: 21rem; line-height: 1.55; }
+  .ctas { position: absolute; bottom: max(2rem, calc(env(safe-area-inset-bottom) + 1rem)); left: var(--gutter); right: var(--gutter); display: flex; flex-wrap: wrap; gap: .25rem 1rem; }
+  .heroPrimary { --btn-bg: var(--bone); --btn-fg: var(--ink); --btn-border: var(--bone); font-size: .79rem; padding-inline: .9rem; min-height: 46px; gap: .65rem; }
+  .heroLink { color: #faf6ed; font-size: .75rem; gap: .3rem; }
+  .heroNote { font-size: .65rem; color: #eee4d5; }
+  .heroExplore { display: none; }
   .promiseInner { justify-content: center; flex-wrap: wrap; min-height: 64px; padding-block: .85rem; gap: .4rem 1.2rem; font-size: .58rem; }
 }
 
 .choice {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(1.5rem, 3vw, 3rem);
+  grid-template-columns: 1.5fr 1fr;
+  gap: clamp(2rem, 5vw, 5rem);
 }
+.choiceSection { padding-top: clamp(2.5rem, 6vw, 5rem); padding-bottom: clamp(4rem, 9vw, 9rem); }
+.choiceItem:nth-child(2) { padding-top: 7rem; }
+.choiceItem:nth-child(2) .choiceMedia { aspect-ratio: 4 / 5; }
+.editorialLink { display: inline-flex; align-items: center; gap: 2rem; min-height: 44px; font-size: .88rem; text-decoration: none; border-bottom: 1px solid var(--copper); color: var(--copper-deep); }
+.editorialLink span { font-size: 1.15rem; transition: transform .2s; }
+.editorialLink:hover span { transform: translate(2px, -2px); }
 .choiceItem {
   display: grid;
   gap: 1.25rem;
@@ -59,21 +70,24 @@
 .choiceText p {
   color: var(--muted);
 }
+.choiceText .inspirationNote { font-size: .7rem; }
 @media (max-width: 860px) {
   .choice {
     grid-template-columns: 1fr;
+    gap: 3rem;
   }
+  .choiceItem:nth-child(2) { padding-top: 0; width: 88%; justify-self: end; }
+  .choiceItem:first-child .choiceMedia { margin-inline: calc(-1 * var(--gutter)); }
+  .choiceItem:nth-child(2) .choiceMedia { aspect-ratio: 4 / 3; }
+  .choiceText p { font-size: .94rem; }
 }
 
-.material {
+.materialIntro {
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  grid-template-columns: 1fr 1fr;
   gap: clamp(2rem, 5vw, 5rem);
-  align-items: center;
-}
-.materialImg {
-  width: 100%;
-  height: auto;
+  align-items: end;
+  margin-bottom: 2rem;
 }
 .materialText {
   display: grid;
@@ -82,17 +96,17 @@
 .materialText h2 {
   font-size: clamp(2.2rem, 4.4vw, 3.6rem);
 }
-.small {
-  font-size: 1.4rem;
-  margin-top: 1rem;
-}
 @media (max-width: 900px) {
-  .material {
+  .materialIntro {
     grid-template-columns: 1fr;
+    gap: 1.2rem;
   }
+  .materialIntro :global(.lead) { font-size: .97rem; }
 }
 
-.materialSection { border-block: 1px solid var(--line); }
+.materialSection { padding-top: 1rem; padding-bottom: 2rem; }
+.processSection { padding-top: clamp(3rem, 6vw, 5rem); }
+.worksSection { padding-top: clamp(2rem, 5vw, 4rem); }
 
 .steps {
   list-style: none;
@@ -220,11 +234,16 @@
 }
 
 .final {
-  border-top: 1px solid var(--line-dark);
   display: grid;
   gap: 1.75rem;
   justify-items: start;
 }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .choiceMedia, .workPhotos { animation: enter 1s linear both; animation-timeline: view(); animation-range: entry 0% entry 70%; }
+  }
+}
+@keyframes enter { from { opacity: .55; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 .final h2 {
   font-size: clamp(2.4rem, 5.6vw, 4.6rem);
   max-width: 18ch;
