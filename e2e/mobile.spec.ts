@@ -154,3 +154,26 @@ test('početna: listanje preko stola i rotacija na izričit zahtjev', async ({ p
   await page.mouse.wheel(0, 400);
   await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(before + 100);
 });
+
+test('novi meni: puni mobilni ekran, jasne kategorije i pristupačan izlaz', async ({ page }) => {
+  for (const size of [{ width: 360, height: 740 }, { width: 390, height: 844 }, { width: 844, height: 390 }]) {
+    await page.setViewportSize(size);
+    await page.goto('/');
+    await page.getByRole('button', { name: 'Meni', exact: true }).click();
+    const menu = page.getByRole('dialog', { name: 'Meni', exact: true });
+    await expect(menu).toBeVisible();
+    await expect(menu.getByRole('button', { name: 'Zatvori', exact: true })).toBeFocused();
+    if (size.width <= 520) {
+      const box = (await menu.boundingBox())!;
+      expect(box.x).toBe(0);
+      expect(box.width).toBe(size.width);
+    }
+    await expect(menu.getByRole('link', { name: 'Stolovi', exact: true })).toBeVisible();
+    await expect(menu.getByRole('link', { name: 'Daske', exact: true })).toBeVisible();
+    expect(await menu.evaluate(el => el.scrollWidth - el.clientWidth)).toBe(0);
+    await menu.getByRole('link', { name: 'Daske', exact: true }).click();
+    await expect(page).toHaveURL('/daske');
+    await expect(menu).toBeHidden();
+    expect(await page.evaluate(() => document.body.style.overflow)).toBe('');
+  }
+});

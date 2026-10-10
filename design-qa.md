@@ -1,6 +1,6 @@
 # Design QA — kontinuirana DAL početna
 
-Završna provjera: produkcijski build i pregled nove početne završeni; objava se provjerava.
+Završna provjera: početna objavljena na GitHubu (6886e13) i javnom Vercel URL-u. Dodatna revizija loga i menija: 10. 10. 2026.
 
 ## Zahtjevi i provjera
 
@@ -22,9 +22,11 @@ Produkcijski Next.js build. Desktop Chromium 1440×900 i mobilni Chromium 390×8
 ## Završni rezultati
 
 - npm run check: prošlo — TypeScript, ESLint, 111/111 unit testova i produkcijski build.
-- Puni E2E ciklus: 40/42 prošlo. Test upita zatekao je poruku iz prethodnog testiranja; test sa 100 promjena dimenzija prekoračio je vrijeme u softverskom WebGL okruženju. Ponovna provjera koristi zaseban direktorij upita i manju scenu uz iste provjere 100 promjena i isti limit resursa.
+- Puni prethodni E2E ciklus: 40/42 prošlo. Test upita zatekao je poruku iz prethodnog testiranja; test sa 100 promjena dimenzija prekoračio je vrijeme u softverskom WebGL okruženju. Ponovna provjera koristi zaseban direktorij upita i manju scenu uz iste provjere 100 promjena i isti limit resursa.
 - Mobilna i desktop početna, cijela stranica i prikaz ivica vizuelno pregledani. Ranije snimke u docs/screenshots ostaju historijski zapis prethodnih iteracija.
-- GitHub i javna objava: provjera nakon ažuriranja grane.
+- GitHub i javna objava početne: uspješno potvrđeni za commit 6886e13.
+- Dva prethodno neuspjela E2E testa ponovljena zasebno: 2/2 prošlo (100 promjena dimenzija oba proizvoda i stvarni put upita). Geometrije stola 19→19, daske 18→18; teksture oba 12→12.
+- Revizija menija: 5/5 ciljnih provjera prošlo; mobilni puni ekran, navigacija, Escape, vraćanje fokusa i bez prekrivanja stola u hero kadru. Snimke 390×844 i 1440×900 vizuelno pregledane.
 
 ## Istraživanje i slike
 

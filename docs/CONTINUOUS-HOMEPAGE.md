@@ -56,3 +56,13 @@ Hero kadrovi su uređeni ugrađenim imagegen alatom u režimu lokalne reference 
 
 Rezultati završne provjere i snimke navedeni su u [design-qa.md](../design-qa.md).
 
+
+## Revizija zaglavlja i menija — 10. 10. 2026.
+
+Pregledani službeni primjeri [TAKT](https://taktcph.com/) (EU) i [FYRN](https://fyrn.com/) (USA): prepoznatljiv jednostavan znak, kratka glavna navigacija, odvojene kategorije proizvoda i prateće informacije. TAKT je dodatno vizuelno pregledan u pregledniku. Primijenjena je vlastita izvedba, bez preuzimanja njihovih slika ili koda.
+
+- Logo koristi originalne oblike slova iz postojeće fotografije. SVG filter odvaja tamnu teksturiranu pozadinu i prikazuje svijetlu jednobojnu web varijantu, bez pravougaonika na hero fotografiji. Izvorni JPG ostaje sačuvan. Svaka instanca ima svoj filter ID.
+- Mobilni meni zauzima cijelu širinu; topla tamna podloga odgovara završetku stranice. Stolovi i daske imaju postojeće DAL ambijentalne fotografije, ostali linkovi su u kompaktnom rasporedu.
+- Jasan kružni izlaz, izvorni dialog focus trap, Escape, vraćanje fokusa i zaključavanje pozadinskog skrolanja. Automatski fokus na izlazu pokazuje samo mali fokusni prsten.
+- Desktop navigacija ima prozirnu tamnu podlogu radi čitljivosti preko svijetlog prozora; smanjena je težina cijelog zaglavlja.
+- Mali ekrani i pejzažni prikaz ostaju skrolabilni; animacija poštuje reduced-motion postavku.

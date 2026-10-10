@@ -8,7 +8,7 @@
   aspect-ratio: 1040 / 695;
 }
 .header {
-  width: 78px;
+  width: 98px;
 }
 .footer {
   width: 96px;
@@ -27,3 +27,5 @@
 }
 
 .filters { position: absolute; }
+
+@media (max-width: 520px) { .header { width: 86px; } }

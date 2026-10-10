@@ -1,6 +1,8 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
+import { Logo } from './Logo';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { NAV } from './nav';
@@ -17,7 +19,10 @@ export function MobileMenu() {
   useEffect(() => {
     const d = dialog.current;
     if (!d) return;
-    if (open && !d.open) d.showModal();
+    if (open && !d.open) {
+      d.showModal();
+      d.querySelector<HTMLButtonElement>('button')?.focus({ preventScroll: true });
+    }
     if (!open && d.open) d.close();
     if (!open) return;
     const previous = document.body.style.overflow;
@@ -47,7 +52,7 @@ export function MobileMenu() {
       </button>
       <dialog
         ref={dialog}
-        className={styles.dialog}
+        className={`${styles.dialog} on-dark`}
         aria-label="Meni"
         onClose={() => {
           setOpen(false);
@@ -59,17 +64,36 @@ export function MobileMenu() {
       >
         <div className={styles.panel}>
           <div className={styles.top}>
-            <span className="eyebrow">DAL Workshop · Mostar</span>
+            <div className={styles.brand}>
+              <Logo />
+              <span>Mostar · Ručna izrada</span>
+            </div>
             <button type="button" className={styles.close} onClick={() => setOpen(false)}>
-              Zatvori <span aria-hidden="true">×</span>
+              <span>Zatvori</span>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 5L15 15M15 5L5 15" stroke="currentColor" strokeWidth="1.5" /></svg>
             </button>
           </div>
+          <div className={styles.intro}>
+            <p className={styles.kicker}>Masivno drvo. Vaše mjere.</p>
+            <p className={styles.title}>Pronađite svoj komad.</p>
+          </div>
           <nav aria-label="Meni za mobitel" onClick={() => setOpen(false)}>
+            <ul className={styles.products}>
+              {NAV.filter((item) => item.href === '/stolovi' || item.href === '/daske').map((item) => (
+                <li key={item.href}>
+                  <Link href={item.href} aria-label={item.label} aria-current={pathname === item.href ? 'page' : undefined}>
+                    <span className={styles.productPhoto}>
+                      <Image src={item.href === '/stolovi' ? '/images/dal-stol-round.webp' : '/images/dal-daska-ambijent.webp'} alt="" fill sizes="180px" />
+                    </span>
+                    <span className={styles.productLabel}>{item.label}<span aria-hidden="true">↗</span></span>
+                    <span className={styles.productHint}>{item.href === '/stolovi' ? 'Za vaš prostor' : 'Za svaki dan'}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
             <ul className={styles.list}>
-              <li>
-                <Link href="/" aria-current={pathname === '/' ? 'page' : undefined}>Početna</Link>
-              </li>
-              {NAV.map((item) => (
+              <li><Link href="/" aria-current={pathname === '/' ? 'page' : undefined}>Početna</Link></li>
+              {NAV.filter((item) => item.href !== '/stolovi' && item.href !== '/daske').map((item) => (
                 <li key={item.href}>
                   <Link href={item.href} aria-current={pathname === item.href ? 'page' : undefined}>{item.label}<span aria-hidden="true">↗</span></Link>
                 </li>
@@ -77,15 +101,14 @@ export function MobileMenu() {
             </ul>
           </nav>
           <div className={styles.ctas} onClick={() => setOpen(false)}>
-            <p className="eyebrow">Vaše mjere. Vaš komad.</p>
-            <Link href="/konfigurator/stol" className="btn">
-              Kreirajte svoj stol
+            <Link href="/konfigurator/stol" className={styles.primary}>
+              Kreirajte svoj stol <span aria-hidden="true">↗</span>
             </Link>
-            <Link href="/konfigurator/daska" className="btn btn--ghost">
-              Kreirajte svoju dasku
+            <Link href="/konfigurator/daska" className={styles.secondary}>
+              Kreirajte svoju dasku <span aria-hidden="true">↗</span>
             </Link>
             <a href={whatsappLink()} className={styles.whatsapp} rel="noopener" target="_blank">
-              <WhatsAppIcon className="btn__wa" /> WhatsApp {BRAND.phonePrimary}
+              <WhatsAppIcon className="btn__wa" /> <span>Razgovarajmo o vašoj ideji<small>WhatsApp {BRAND.phonePrimary}</small></span><span aria-hidden="true">↗</span>
             </a>
           </div>
         </div>
