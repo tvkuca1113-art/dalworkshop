@@ -10,7 +10,7 @@ export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   title: 'Kontakt i upit',
-  description: 'Kontakt DAL Workshop, Mostar: WhatsApp i telefon +387 62 704 560, e-mail dalworkshop@hotmail.com. Pošaljite upit za stol ili dasku po mjeri.',
+  description: 'Kontakt DAL Workshop, Mostar: WhatsApp i telefon +387 62 704 560, e-mail dalworkshop@hotmail.com. Pošaljite upit za stol, dasku ili gazišta.',
   alternates: { canonical: '/kontakt' },
 };
 
@@ -30,7 +30,7 @@ export default function ContactPage() {
           <Link href="/konfigurator/daska" className="text-link">
             daske
           </Link>{' '}
-          — dobit ćete pripremljenu poruku sa specifikacijom.
+          — dobit ćete pripremljenu poruku sa specifikacijom. Za stepenice otvorite <Link href="/gazista" className="text-link">izbor gazišta</Link>.
         </p>
       </section>
       <section className="wrap" style={{ paddingBottom: 'clamp(3rem, 6vw, 6rem)' }}>

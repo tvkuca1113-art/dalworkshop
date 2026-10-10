@@ -10,7 +10,7 @@ export function SiteFooter() {
       <div className={`wrap ${styles.grid}`}>
         <div className={styles.brand}>
           <Logo size="footer" />
-          <p className="note">Stolovi i daske od masivnog drveta, ručna izrada po mjeri. {BRAND.city}, BiH.</p>
+          <p className="note">Stolovi, daske i gazišta od masivnog drveta, ručna izrada po mjeri. {BRAND.city}, BiH.</p>
         </div>
         <nav aria-label="Podnožje">
           <ul className={styles.links}>

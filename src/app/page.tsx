@@ -6,6 +6,9 @@ import { Faq } from '@/components/home/Faq';
 import { WhatsAppIcon } from '@/components/site/WhatsAppIcon';
 import { BRAND, whatsappLink } from '@/lib/catalog/brand';
 import { WORKS } from '@/lib/catalog/works';
+import { TREAD_CATALOG, TREAD_WOODS } from '@/lib/catalog/treads';
+import { DEFAULT_TREAD, treadUrl } from '@/lib/config/tread';
+import { formatKm } from '@/lib/config/units';
 import { ROUND_INSPIRATION_TABLE } from '@/lib/config/defaults';
 import { encodeTable } from '@/lib/config/url';
 import styles from './home.module.css';
@@ -100,12 +103,12 @@ export default function HomePage() {
           </div>
           <p className={styles.heroNote}>150 × 70 cm · Prilagodite svom prostoru.</p>
         </div>
-        <a href="#izbor" className={styles.heroExplore}>Stolovi po mjeri · Daske za rezanje i serviranje</a>
+        <a href="#izbor" className={styles.heroExplore}>Stolovi · Daske · Gazišta od masivnog drveta</a>
       </HeroMedia>
       <div className={styles.story}>
       <div className={styles.promise}>
         <div className={`wrap ${styles.promiseInner}`}>
-          <span>Masivno drvo</span><span>Izrada po mjeri</span><span>Direktan dogovor s radionicom</span>
+          <span>Stolovi · Daske · Gazišta</span><span>Izrada po mjeri</span><span>Direktan dogovor s radionicom</span>
         </div>
       </div>
 
@@ -151,11 +154,30 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className={`section ${styles.treadsSection}`} aria-labelledby="gazista-title">
+        <div className={`wrap ${styles.treadsStory}`}>
+          <Link href="/gazista" className={styles.treadsPhoto} aria-label="Pogledajte gazišta od masivnog drveta">
+            <Image src={TREAD_CATALOG.inspirationImage} alt="Drvena gazišta koja unose toplinu u stepenice — vizualizacija ambijenta" fill sizes="(min-width: 900px) 55vw, 100vw" className={styles.cover} />
+            <span>Vizualizacija ambijenta</span>
+          </Link>
+          <div className={styles.treadsCopy}>
+            <p className="eyebrow"><span className={styles.chapter}>02 /</span> I za vaše stepenice</p>
+            <h2 id="gazista-title">Toplina doma.<br />U svakom koraku.</h2>
+            <p>Gazišta od masivnog drveta, nauljena i spremna za vaš izbor. Hrast, jasen ili javor — povežite stepenice s ostatkom prostora.</p>
+            <p className={styles.treadPrice}>Od {formatKm(TREAD_CATALOG.variants[0].priceFening)} <span>po komadu · 100 × 30 cm</span></p>
+            <div className={styles.treadWoods} aria-label="Izaberite drvo za gazišta">
+              {TREAD_WOODS.map(w => <Link key={w.id} href={treadUrl({ ...DEFAULT_TREAD, wood: w.id })}><span style={{ backgroundColor: w.color }} aria-hidden="true" />{w.label} ↗</Link>)}
+            </div>
+            <Link href="/gazista#izbor-gazista" className={styles.editorialLink}>Prilagodite svoja gazišta <span aria-hidden="true">↗</span></Link>
+          </div>
+        </div>
+      </section>
+
       <section className={`section ${styles.materialSection}`} aria-labelledby="materijal">
         <div className="wrap">
           <div className={styles.materialIntro}>
             <div className={styles.materialText}>
-            <p className="eyebrow"><span className={styles.chapter}>02 /</span> Materijal i detalj</p>
+            <p className="eyebrow"><span className={styles.chapter}>03 /</span> Materijal i detalj</p>
             <h2 id="materijal">Ljepota je u detaljima.</h2>
             </div>
             <p className="lead">
@@ -169,7 +191,7 @@ export default function HomePage() {
       <section className={`section ${styles.processSection}`} aria-labelledby="proces">
         <div className="wrap">
           <div className="section-head">
-            <p className="eyebrow"><span className={styles.chapter}>03 /</span> Kako nastaje vaš komad</p>
+            <p className="eyebrow"><span className={styles.chapter}>04 /</span> Kako nastaje vaš komad</p>
             <h2 id="proces">Vaša ideja. Naša izrada.</h2>
           </div>
           <ol className={styles.steps}>
@@ -187,7 +209,7 @@ export default function HomePage() {
       <section className={`section ${styles.worksSection}`} aria-labelledby="proizvodi">
         <div className="wrap">
           <div className="section-head">
-            <p className="eyebrow"><span className={styles.chapter}>04 /</span> Iz radionice</p>
+            <p className="eyebrow"><span className={styles.chapter}>05 /</span> Iz radionice</p>
             <h2 id="proizvodi">Upoznajte naše radove.</h2>
             <p className="lead">Hrastov stol i daske iz naše radionice. Pogledajte izradu, površine i detalje na originalnim fotografijama.</p>
           </div>

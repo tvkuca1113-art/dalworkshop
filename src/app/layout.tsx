@@ -12,11 +12,11 @@ const ogBase = deploymentOrigin();
 export const metadata: Metadata = {
   ...(ogBase ? { metadataBase: new URL(ogBase) } : {}),
   title: {
-    default: 'DAL Workshop — stolovi i daske po mjeri, Mostar',
+    default: 'DAL Workshop — stolovi, daske i gazišta, Mostar',
     template: '%s · DAL Workshop',
   },
   description:
-    'Stolovi od masivnog drveta i daske za rezanje i serviranje, ručna izrada po mjeri u Mostaru. Konfigurišite proizvod u 3D i zatražite ponudu.',
+    'Stolovi, daske za rezanje i serviranje te nauljena gazišta od masivnog drveta, ručna izrada u Mostaru. Konfigurišite proizvod u 3D i zatražite ponudu.',
   applicationName: BRAND.name,
   robots: indexingEnabled() ? { index: true, follow: true } : { index: false, follow: false },
   openGraph: {

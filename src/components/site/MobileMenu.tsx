@@ -6,6 +6,7 @@ import { Logo } from './Logo';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { NAV } from './nav';
+import { TREAD_CATALOG } from '@/lib/catalog/treads';
 import { BRAND, whatsappLink } from '@/lib/catalog/brand';
 import { WhatsAppIcon } from './WhatsAppIcon';
 import styles from './MobileMenu.module.css';
@@ -79,21 +80,21 @@ export function MobileMenu() {
           </div>
           <nav aria-label="Meni za mobitel" onClick={() => setOpen(false)}>
             <ul className={styles.products}>
-              {NAV.filter((item) => item.href === '/stolovi' || item.href === '/daske').map((item) => (
+              {NAV.filter((item) => item.href === '/stolovi' || item.href === '/daske' || item.href === '/gazista').map((item) => (
                 <li key={item.href}>
                   <Link href={item.href} aria-label={item.label} aria-current={pathname === item.href ? 'page' : undefined}>
                     <span className={styles.productPhoto}>
-                      <Image src={item.href === '/stolovi' ? '/images/dal-stol-round.webp' : '/images/dal-daska-ambijent.webp'} alt="" fill sizes="180px" />
+                      <Image src={item.href === '/stolovi' ? '/images/dal-stol-round.webp' : item.href === '/gazista' ? TREAD_CATALOG.inspirationImage : '/images/dal-daska-ambijent.webp'} alt="" fill sizes="180px" />
                     </span>
                     <span className={styles.productLabel}>{item.label}<span aria-hidden="true">↗</span></span>
-                    <span className={styles.productHint}>{item.href === '/stolovi' ? 'Za vaš prostor' : 'Za svaki dan'}</span>
+                    <span className={styles.productHint}>{item.href === '/stolovi' ? 'Za vaš prostor' : item.href === '/gazista' ? 'Za svaki korak' : 'Za svaki dan'}</span>
                   </Link>
                 </li>
               ))}
             </ul>
             <ul className={styles.list}>
               <li><Link href="/" aria-current={pathname === '/' ? 'page' : undefined}>Početna</Link></li>
-              {NAV.filter((item) => item.href !== '/stolovi' && item.href !== '/daske').map((item) => (
+              {NAV.filter((item) => item.href !== '/stolovi' && item.href !== '/daske' && item.href !== '/gazista').map((item) => (
                 <li key={item.href}>
                   <Link href={item.href} aria-current={pathname === item.href ? 'page' : undefined}>{item.label}<span aria-hidden="true">↗</span></Link>
                 </li>

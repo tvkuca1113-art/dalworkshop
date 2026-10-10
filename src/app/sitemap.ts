@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { siteOrigin } from '@/lib/site';
 
-const ROUTES = ['/', '/stolovi', '/daske', '/konfigurator/stol', '/konfigurator/daska', '/radovi', '/odrzavanje', '/kontakt', '/privatnost'];
+const ROUTES = ['/', '/stolovi', '/daske', '/gazista', '/konfigurator/stol', '/konfigurator/daska', '/radovi', '/odrzavanje', '/kontakt', '/privatnost'];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const origin = siteOrigin();
