@@ -182,7 +182,7 @@ export function BoardConfigurator({ formEnabled }: { formEnabled: boolean }) {
                     description: m.description + (m.dimensionsEstimated ? ' Dimenzije s fotografije su procjena.' : ''),
                     status: m.status,
                     preview: m.photo ? (
-                      <Image src={m.photo} alt="" width={64} height={64} sizes="64px" style={{ objectFit: 'cover', flex: 'none', width: 64, height: 64 }} />
+                      <Image src={m.photo} alt="" width={512} height={384} sizes="(max-width: 899px) calc(100vw - 64px), 480px" />
                     ) : undefined,
                   }))}
                 />
