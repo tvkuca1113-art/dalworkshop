@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { preload } from 'react-dom';
+import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 import { SiteHeader } from '@/components/site/SiteHeader';
 import { SiteFooter } from '@/components/site/SiteFooter';
@@ -63,6 +64,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main id="sadrzaj">{children}</main>
         <SiteFooter />
         <OrganizationJsonLd />
+        <Analytics />
       </body>
     </html>
   );

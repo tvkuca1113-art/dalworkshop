@@ -2,7 +2,7 @@
   "name": "dal-workshop-web",
   "version": "0.1.0",
   "private": true,
-  "description": "DAL Workshop \u2014 web stranica s 3D konfiguratorima stolova i dasaka (prijedlog / pregled).",
+  "description": "DAL Workshop — web stranica s 3D konfiguratorima stolova i dasaka (prijedlog / pregled).",
   "engines": {
     "node": ">=20.9"
   },
@@ -20,6 +20,7 @@
   "dependencies": {
     "@react-three/drei": "10.7.9",
     "@react-three/fiber": "9.8.1",
+    "@vercel/analytics": "^2.0.1",
     "next": "16.4.0",
     "react": "19.3.0",
     "react-dom": "19.3.0",
