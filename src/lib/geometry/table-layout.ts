@@ -200,6 +200,27 @@ function framePartsAt(
       ];
       return [{ kind: 'prism', role: 'frame', polygon, x, depth }];
     }
+    case 'wood_panel_pair':
+      return [{ kind: 'prism', role: 'frame', polygon: [[-st, 0], [st, 0], [st, h], [-st, h]], x, depth }];
+    case 'wood_tapered_four': {
+      const t = face;
+      return [
+        { kind: 'prism', role: 'leg', polygon: [[-st, 0], [-st + t * .6, 0], [-st + t, h], [-st, h]], x, depth },
+        { kind: 'prism', role: 'leg', polygon: [[st - t * .6, 0], [st, 0], [st, h], [st - t, h]], x, depth },
+        { kind: 'prism', role: 'rail', polygon: [[-st, h - t], [st, h - t], [st, h], [-st, h]], x, depth },
+      ];
+    }
+    case 'a_frame_pair': {
+      const t = face;
+      const neck = st * .55;
+      const tieY = h * .32;
+      return [
+        { kind: 'prism', role: 'leg', polygon: [[-st, 0], [-st + t, 0], [-neck + t, h - t], [-neck, h - t]], x, depth },
+        { kind: 'prism', role: 'leg', polygon: [[st - t, 0], [st, 0], [neck, h - t], [neck - t, h - t]], x, depth },
+        { kind: 'prism', role: 'rail', polygon: [[-st, h - t], [st, h - t], [st, h], [-st, h]], x, depth },
+        { kind: 'prism', role: 'rail', polygon: [[-st * .82, tieY], [st * .82, tieY], [st * .82, tieY + t], [-st * .82, tieY + t]], x, depth },
+      ];
+    }
     case 'x_frame_pair': {
       const railH = face;
       const yTop = h - railH;

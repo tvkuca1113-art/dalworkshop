@@ -51,7 +51,7 @@ export async function goToStep(page: Page, name: RegExp | string) {
 }
 
 export async function setDimension(page: Page, testId: string, value: string) {
-  const input = page.getByTestId(testId).locator('input');
+  const input = page.getByTestId(testId).locator('input[type="text"]');
   await input.fill(value);
   await input.press('Enter');
 }

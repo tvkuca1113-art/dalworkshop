@@ -33,9 +33,13 @@ export default function PrivacyPage() {
           <h2>„Sačuvaj izbor“</h2>
           <p>
             Klikom na „Sačuvaj izbor“ konfiguracija proizvoda sprema se u lokalnu pohranu vašeg preglednika (localStorage). Ne sprema
-            se ime, telefon, e-mail ni poruka. Podatak ostaje samo na vašem uređaju; obrišete ga brisanjem podataka stranice u
+            se ime, telefon ni e-mail. Poseban zahtjev i tekst personalizacije, ako su upisani u konfigurator, spremaju se s izborom. Podatak ostaje samo na vašem uređaju; obrišete ga brisanjem podataka stranice u
             pregledniku.
           </p>
+
+          <h2>Fotografije inspiracije</h2>
+          <p>Odabrane fotografije prikazuju se lokalno u otvorenom konfiguratoru. Stranica ih ne šalje na server i ne uključuje ih u sačuvani izbor ili javni link. Dostupne su dok je stranica otvorena; nakon osvježavanja dodajte ih ponovo.</p>
+          <p>Klikom na dijeljenje možete ih predati aplikaciji koju sami odaberete. WhatsApp link prenosi tekst upita; fotografije dodajte u razgovor ili koristite sistemski izbornik dijeljenja. Ispis upita uključuje odabrane fotografije.</p>
 
           <h2>Upit putem WhatsAppa</h2>
           <p>
@@ -58,7 +62,7 @@ export default function PrivacyPage() {
             Možete zatražiti uvid, ispravku ili brisanje podataka iz svog upita pisanjem na{' '}
             <a className="text-link" href={`mailto:${BRAND.email}`}>{BRAND.email}</a>.
           </p>
-          <p className="note">Posljednja izmjena: 9. 10. 2026. Nacrt politike pripremljen uz izradu stranice.</p>
+          <p className="note">Posljednja izmjena: 11. 10. 2026. Nacrt politike pripremljen uz izradu stranice.</p>
         </div>
       </section>
     </>

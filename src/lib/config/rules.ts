@@ -28,7 +28,7 @@ import { computeBoardLayout, handleSpacingFor } from '../geometry/board-layout';
 import { computeTableLayout, tablePlanSize } from '../geometry/table-layout';
 import { boardFromModel, cloneBoard, cloneTable } from './defaults';
 import { formatCm, inRange } from './units';
-import type { BoardConfig, BoardDimensionKey, TableConfig, TableDimensionKey } from './types';
+import type { BoardConfig, BoardDimensionKey, TableConfig, TableDimensionKey, TableUncertainKey } from './types';
 
 /**
  * Compatibility rules for the visual proposal. They keep the 3D result
@@ -125,7 +125,8 @@ export type TablePatch =
   | { type: 'finish'; value: TableConfig['finishId'] }
   | { type: 'dimension'; key: TableDimensionKey; value: number }
   | { type: 'reseed'; value: number }
-  | { type: 'note'; value: string };
+  | { type: 'note'; value: string }
+  | { type: 'uncertain'; key: TableUncertainKey; value: boolean };
 
 export function deriveTableModelId(c: TableConfig): TableConfig['modelId'] {
   const d = c.dimensionsMm;
@@ -168,7 +169,18 @@ export function applyTablePatch(prev: TableConfig, patch: TablePatch): { config:
     case 'note':
       next.note = patch.value;
       break;
+    case 'uncertain':
+      next.uncertain = patch.value
+        ? [...new Set([...(next.uncertain ?? []), patch.key])]
+        : (next.uncertain ?? []).filter((key) => key !== patch.key);
+      break;
   }
+
+  if (patch.type !== 'uncertain' && patch.type !== 'note' && patch.type !== 'reseed') {
+    const key = patch.type === 'dimension' ? patch.key : patch.type;
+    if (next.uncertain) next.uncertain = next.uncertain.filter((item) => item !== key);
+  }
+  if (next.uncertain?.length === 0) delete next.uncertain;
 
   // Keep dimensions inside the ranges of the (possibly new) shape.
   if (patch.type === 'shape') {

@@ -96,7 +96,7 @@ export function MobileMenu() {
               <li><Link href="/" aria-current={pathname === '/' ? 'page' : undefined}>Početna</Link></li>
               {NAV.filter((item) => item.href !== '/stolovi' && item.href !== '/daske' && item.href !== '/gazista').map((item) => (
                 <li key={item.href}>
-                  <Link href={item.href} aria-current={pathname === item.href ? 'page' : undefined}>{item.label}<span aria-hidden="true">↗</span></Link>
+                  <Link href={item.href === '/kontakt' && pathname === '/' ? '/#kontakt' : item.href} aria-current={pathname === item.href ? 'page' : undefined}>{item.label}<span aria-hidden="true">↗</span></Link>
                 </li>
               ))}
             </ul>

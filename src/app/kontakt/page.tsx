@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { BRAND, whatsappLink } from '@/lib/catalog/brand';
 import { WhatsAppIcon } from '@/components/site/WhatsAppIcon';
 import { QuoteForm } from '@/components/configurator/QuoteForm';
+import { ProductIntro } from '@/components/site/ProductIntro';
 import { isQuoteFormEnabled } from '@/lib/quote/env';
 import styles from '../content.module.css';
 
@@ -18,21 +19,10 @@ export default function ContactPage() {
   const formEnabled = isQuoteFormEnabled();
   return (
     <>
-      <section className="wrap page-hero">
-        <p className="eyebrow">Kontakt</p>
-        <h1>Recite nam šta imate na umu.</h1>
-        <p className="lead">
-          Pošaljite ideju, mjere ili fotografiju prostora na WhatsApp. Za pregled svog izbora otvorite{' '}
-          <Link href="/konfigurator/stol" className="text-link">
-            konfigurator stola
-          </Link>{' '}
-          ili{' '}
-          <Link href="/konfigurator/daska" className="text-link">
-            daske
-          </Link>{' '}
-          — dobit ćete pripremljenu poruku sa specifikacijom. Za stepenice otvorite <Link href="/gazista" className="text-link">izbor gazišta</Link>.
-        </p>
-      </section>
+      <ProductIntro eyebrow="Razgovarajmo · Mostar" title="Recite nam šta imate na umu." image="/images/dal-detalj-hrasta.webp" alt="Detalj obrađene hrastove ploče — ilustracija materijala" caption="Karakter masivnog drveta · ilustracija materijala" href="#upit" action="Započnite svoj upit">
+        <p>Pošaljite ideju, mjere ili fotografiju. Ako još niste sigurni oko drveta ili postolja, odabrat ćemo ih zajedno.</p>
+        <p>Želite prvo vidjeti svoj izbor? Otvorite <Link href="/konfigurator/stol" className="text-link">konfigurator stola</Link> ili <Link href="/konfigurator/daska" className="text-link">daske</Link>.</p>
+      </ProductIntro>
       <section className="wrap" style={{ paddingBottom: 'clamp(3rem, 6vw, 6rem)' }}>
         <div className={styles.split}>
           <div className={styles.stack}>

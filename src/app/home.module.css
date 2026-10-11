@@ -273,3 +273,23 @@
 .treadWoods a { display: inline-flex; align-items: center; gap: .4rem; min-height: 44px; text-decoration: none; font-size: .72rem; border-bottom: 1px solid var(--line); }
 .treadWoods a > span { width: 18px; height: 18px; border-radius: 50%; }
 @media (max-width: 899px) { .treadsStory { grid-template-columns: 1fr; gap: 2rem; } .treadsPhoto { aspect-ratio: 4 / 3; margin-inline: calc(-1 * var(--gutter)); } }
+
+/* Sections move over the preceding scene, like turning a page of materials. */
+.story { position: relative; z-index: 2; margin-top: -2.5rem; background: var(--bone); border-radius: 1.25rem 1.25rem 0 0; }
+.promiseInner a { color: var(--copper-deep); min-height: 44px; display: flex; align-items: center; text-decoration: none; border-bottom: 1px solid var(--copper); }
+.craftSection { position: relative; height: 125svh; background: #4b3728; }
+.craftScene { position: sticky; top: var(--header-h); height: calc(100svh - var(--header-h)); overflow: hidden; }
+.craftScene > .cover { object-position: center; }
+.craftShade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(29, 23, 18, .78), rgba(29, 23, 18, .4) 45%, rgba(29,23,18,.08)); }
+.craftCopy { position: relative; height: 100%; display: grid; align-content: center; justify-items: start; gap: 1.25rem; color: #fff8eb; padding-bottom: 5rem; }
+.craftCopy :global(.eyebrow) { color: #eed0a1; }
+.craftCopy h2 { font-size: clamp(3rem, 6.4vw, 6.5rem); max-width: 15ch; line-height: 1.02; }
+.craftCopy > p:not(:global(.eyebrow)) { max-width: 25rem; font-size: .95rem; color: #f0e4d3; }
+.craftCopy small { font-size: .65rem; color: #e0cfb8; }
+.treadsSection { position: relative; z-index: 2; margin-top: -12svh; border-radius: 1.25rem 1.25rem 0 0; background: var(--bone); padding-top: clamp(3rem, 7vw, 7rem); }
+.materialSection { background: #e9e1d4; }
+.processSection { background: var(--bone); }
+.worksSection { background: #eae2d6; }
+.closing { position: relative; z-index: 3; background: #171e18; padding-top: clamp(4rem, 8vw, 8rem); }
+@media (max-width: 700px) { .story { margin-top: -1.25rem; } .craftSection { height: 110svh; } .craftScene { height: 88svh; top: var(--header-h); } .craftCopy { gap: 1rem; padding-block: 2rem 5rem; } .craftCopy h2 { font-size: clamp(3rem, 12vw, 4rem); } .craftCopy > p:not(:global(.eyebrow)) { font-size: .85rem; max-width: 24rem; } .craftCopy :global(.btn) { font-size: .8rem; } .craftShade { background: linear-gradient(90deg, rgba(29,23,18,.78), rgba(29,23,18,.25)); } .treadsSection { margin-top: -8svh; } }
+@media (prefers-reduced-motion: reduce) { .home > :first-child, .craftScene { position: relative; top: 0; } .craftSection { height: auto; } .treadsSection { margin-top: 0; } }

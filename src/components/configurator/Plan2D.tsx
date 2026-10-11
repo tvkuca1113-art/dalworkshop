@@ -59,7 +59,7 @@ function DimLine({ x1, y1, x2, y2, label, offset = 0, vertical = false }: { x1: 
   );
 }
 
-export function TablePlan2D({ config, compact = false }: { config: TableConfig; compact?: boolean }) {
+export function TablePlan2D({ config, compact = true }: { config: TableConfig; compact?: boolean }) {
   const layout: TableLayout = computeTableLayout(config);
   const L = layout.lengthMm;
   const W = layout.widthMm;
@@ -68,7 +68,7 @@ export function TablePlan2D({ config, compact = false }: { config: TableConfig; 
   const fill = tint(wood.base, finishOption(config.finishId).tint);
   // plan view box
   const VW = 640;
-  const pad = 46;
+  const pad = 78;
   const scale = Math.min((VW - 2 * pad) / L, 260 / W);
   const planH = W * scale + 2 * pad;
   const sx = (x: number) => VW / 2 + x * scale;

@@ -6,7 +6,8 @@ import { NOTE_MAX } from '@/lib/config/types';
 import { specFor, GRAIN_NOTE, PRICE_QUOTE_COPY } from '@/lib/config/summary';
 import { calculatePrice } from '@/lib/config/pricing';
 import { encodeConfig, permalink } from '@/lib/config/url';
-import { whatsappInquiryHref } from '@/lib/config/message';
+import { inquiryText } from '@/lib/config/message';
+import { whatsappLink } from '@/lib/catalog/brand';
 import { saveConfig } from '@/lib/config/storage';
 import { formatKm } from '@/lib/config/units';
 import { CUSTOM_PROPOSAL_COPY } from '@/lib/catalog/status';
@@ -14,6 +15,7 @@ import { WhatsAppIcon } from '../site/WhatsAppIcon';
 import { QuoteForm } from './QuoteForm';
 import { SpecList } from './ui';
 import { useOrigin } from '../useClient';
+import { ReferenceUpload, referenceText, type useReferenceImages } from './ReferenceUpload';
 import styles from './ReviewPanel.module.css';
 
 export function ReviewPanel({
@@ -23,6 +25,7 @@ export function ReviewPanel({
   onPrint,
   blockingIssue,
   blockingActions,
+  references,
 }: {
   config: TableConfig | BoardConfig;
   formEnabled: boolean;
@@ -31,6 +34,7 @@ export function ReviewPanel({
   /** A conflict that needs the customer's decision before sending. */
   blockingIssue?: string | null;
   blockingActions?: React.ReactNode;
+  references?: ReturnType<typeof useReferenceImages>;
 }) {
   const origin = useOrigin();
   const lines = useMemo(() => specFor(config), [config]);
@@ -40,10 +44,25 @@ export function ReviewPanel({
   const [copyState, setCopyState] = useState<{ kind: 'idle' } | { kind: 'copied' } | { kind: 'manual'; link: string }>({ kind: 'idle' });
   const [saveMsg, setSaveMsg] = useState<string | null>(null);
   const [waStarted, setWaStarted] = useState(false);
+  const [photoShareStatus, setPhotoShareStatus] = useState<string | null>(null);
 
   const shareLink = () => permalink(origin, config, { includePersonalText: includeText && hasPersonalText });
   // The WhatsApp message carries the personalised text itself; the link inside stays public by default.
-  const waHref = whatsappInquiryHref(config, permalink(origin, config));
+  const message = inquiryText(config, permalink(origin, config)) + referenceText(references?.files ?? []);
+  const waHref = whatsappLink(message);
+  const sharePhotos = async () => {
+    const files = references?.files.map((item) => item.file) ?? [];
+    if (!navigator.canShare?.({ files }) || !navigator.share) {
+      setPhotoShareStatus('Ovaj preglednik ne može direktno dijeliti fotografije. Otvorite WhatsApp ispod i dodajte ove fotografije kao prilog, ili sačuvajte PDF upita s fotografijama.');
+      return;
+    }
+    try {
+      await navigator.share({ files, text: message, title: 'Moj stol · DAL Workshop' });
+      setPhotoShareStatus('Dovršite slanje u odabranoj aplikaciji.');
+    } catch (error) {
+      if (!(error instanceof Error && error.name === 'AbortError')) setPhotoShareStatus('Dijeljenje nije uspjelo. Fotografije možete dodati u WhatsApp razgovor.');
+    }
+  };
 
   const copy = async () => {
     const link = shareLink();
@@ -71,6 +90,7 @@ export function ReviewPanel({
         Pregled i upit
       </h2>
       <SpecList lines={lines} />
+      {references && <ReferenceUpload references={references} />}
       <div className={styles.price} data-testid="price">
         {price.status === 'priced' ? (
           <p>
@@ -108,6 +128,11 @@ export function ReviewPanel({
       )}
 
       <div className={styles.primary}>
+        {references && references.files.length > 0 && !blockingIssue && <>
+          <button type="button" className="btn btn--ghost" onClick={sharePhotos} disabled={references.busy}>Podijelite upit s fotografijama ({references.files.length})</button>
+          <p className="note">Na podržanim uređajima odaberite WhatsApp u izborniku dijeljenja. Ako fotografije nisu priložene, dodajte ih u razgovor.</p>
+          <div role="status">{photoShareStatus && <p className="note">{photoShareStatus}</p>}</div>
+        </>}
         {blockingIssue ? (
           <button type="button" className="btn" disabled aria-disabled="true">
             <WhatsAppIcon className="btn__wa" /> Pošaljite upit na WhatsApp
@@ -126,7 +151,7 @@ export function ReviewPanel({
         </a>
         )}
         <p id="wa-hint" className="note">
-          Otvara WhatsApp s pripremljenom porukom na +387 62 704 560. Poruka se šalje tek kad je vi pošaljete u WhatsAppu.
+          Otvara pripremljen upit. Vi dovršavate slanje u WhatsAppu.{references?.files.length ? ' Ovaj link prenosi tekst; fotografije dodajte kao prilog ili koristite dijeljenje iznad.' : ''}
         </p>
         {waStarted && (
           <p className={styles.waNotice} role="status" data-testid="wa-status">
@@ -165,7 +190,7 @@ export function ReviewPanel({
         </div>
       </div>
 
-      {formEnabled && <div className={styles.form} id="web-upit" hidden={Boolean(blockingIssue)}>
+      {formEnabled && !references?.files.length && <div className={styles.form} id="web-upit" hidden={Boolean(blockingIssue)}>
         <QuoteForm enabled={formEnabled} product={config.productType} configQuery={encodeConfig(config, { includePersonalText: true })} whatsappHref={waHref} />
       </div>}
     </section>

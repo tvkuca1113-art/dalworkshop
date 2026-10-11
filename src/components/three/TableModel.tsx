@@ -6,7 +6,7 @@ import type { TableConfig } from '@/lib/config/types';
 import { computeTableLayout } from '@/lib/geometry/table-layout';
 import { buildTableBase, buildTableTop } from '@/lib/three/table-geometry';
 import { applyTint, tableMaterials, type WoodMaterialSet } from '@/lib/three/wood-materials';
-import { finishOption, woodOption } from '@/lib/catalog/table';
+import { baseOption, finishOption, woodOption } from '@/lib/catalog/table';
 import { frameMaterial } from './materials';
 import { useDisposable } from './useDisposable';
 import type { TextureQualityLevel } from './types';
@@ -38,7 +38,8 @@ export function TableModel({
       }),
     [layout],
   );
-  const base = useMemo(() => buildTableBase(layout), [layout]);
+  const wooden = baseOption(config.baseId).material === 'wood';
+  const base = useMemo(() => buildTableBase(layout, wooden), [layout, wooden]);
   useEffect(() => () => top.dispose(), [top]);
   useEffect(() => () => base.dispose(), [base]);
 
@@ -62,7 +63,7 @@ export function TableModel({
   return (
     <group name="table">
       <mesh name="table-top" geometry={top} material={[mats.face, mats.face, mats.end]} castShadow receiveShadow />
-      <mesh name="table-base" geometry={base} material={frameMaterial()} castShadow receiveShadow />
+      <mesh name="table-base" geometry={base} material={wooden ? mats.face : frameMaterial()} castShadow receiveShadow />
     </group>
   );
 }

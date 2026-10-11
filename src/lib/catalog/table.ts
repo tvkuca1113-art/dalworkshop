@@ -16,7 +16,7 @@ export type TableWoodId = (typeof TABLE_WOOD_IDS)[number];
 export const TABLE_EDGE_IDS = ['straight', 'rounded'] as const;
 export type TableEdgeId = (typeof TABLE_EDGE_IDS)[number];
 
-export const TABLE_BASE_IDS = ['trapezoid_pair', 'u_frame_pair', 'x_frame_pair', 'central_pedestal'] as const;
+export const TABLE_BASE_IDS = ['trapezoid_pair', 'u_frame_pair', 'x_frame_pair', 'a_frame_pair', 'wood_tapered_four', 'wood_panel_pair', 'central_pedestal'] as const;
 export type TableBaseId = (typeof TABLE_BASE_IDS)[number];
 
 export const TABLE_FINISH_IDS = ['natural', 'lighter', 'warmer', 'darker'] as const;
@@ -66,6 +66,7 @@ export interface BaseOption {
   /** Steel profile: in-plane face width × depth along the table (mm). */
   profileMm: { face: number; depth: number };
   shapes: readonly TableShapeId[];
+  material?: 'wood' | 'metal';
 }
 
 export interface FinishOption {
@@ -83,7 +84,7 @@ export const TABLE_SHAPES: readonly ShapeOption[] = [
     label: 'Pravougaoni',
     short: 'Pravougaoni',
     status: 'observed_example',
-    description: 'Oblik objavljenog hrastovog stola, s blago oborenim uglovima.',
+    description: 'Jasne linije i puna korisna ploha. Za svakodnevne obroke i okupljanja.',
     dims: 'length_width',
     cornerRadiusMm: 6,
   },
@@ -92,7 +93,7 @@ export const TABLE_SHAPES: readonly ShapeOption[] = [
     label: 'Pravougaoni sa zaobljenim uglovima',
     short: 'Zaobljeni uglovi',
     status: 'proposed_custom',
-    description: 'Mekši uglovi, radijus 9 cm u tlocrtu.',
+    description: 'Poznati pravougaoni oblik s mekšim, zaobljenim uglovima.',
     dims: 'length_width',
     cornerRadiusMm: 90,
   },
@@ -101,7 +102,7 @@ export const TABLE_SHAPES: readonly ShapeOption[] = [
     label: 'Ovalni (elipsa)',
     short: 'Ovalni',
     status: 'requires_confirmation',
-    description: 'Ploča u obliku prave elipse. Za razgovor s radionicom.',
+    description: 'Meke linije i otvoreniji prolaz oko stola. Oblik dogovaramo prema prostoru.',
     dims: 'length_width',
   },
   {
@@ -109,7 +110,7 @@ export const TABLE_SHAPES: readonly ShapeOption[] = [
     label: 'Okrugli',
     short: 'Okrugli',
     status: 'requires_confirmation',
-    description: 'Okrugla ploča s centralnim postoljem. Za razgovor s radionicom.',
+    description: 'Mjesto za razgovor licem u lice. Centralno postolje ostavlja otvoren rub ploče.',
     dims: 'diameter',
   },
   {
@@ -130,21 +131,21 @@ export const TABLE_WOODS: readonly WoodOption[] = [
     species: 'oak',
     label: 'Hrast',
     status: 'observed_example',
-    description: 'Drvo objavljenog stola. Tople zlatne nijanse i izražena vlakna.',
+    description: 'Tople zlatne nijanse i izraženi godovi. Karakter našeg izvornog stola.',
   },
   {
     id: 'walnut',
     species: 'walnut',
     label: 'Orah',
     status: 'proposed_custom',
-    description: 'Tamnije, čokoladne nijanse. Prijedlog po mjeri.',
+    description: 'Duboke smeđe nijanse i mirniji kontrast. Za izražajan, topao prostor.',
   },
   {
     id: 'ash',
     species: 'ash',
     label: 'Jasen',
     status: 'proposed_custom',
-    description: 'Svijetlo drvo s jasnim, ravnim šarama. Prijedlog po mjeri.',
+    description: 'Svijetle nijanse i jasna vlakna. Lagan vizuelni dojam u prostoru.',
   },
 ];
 
@@ -153,7 +154,7 @@ export const TABLE_EDGES: readonly EdgeOption[] = [
     id: 'straight',
     label: 'Ravna ivica',
     status: 'observed_example',
-    description: 'Ravan bok ploče s blago oborenom ivicom (2 mm), kao na objavljenom stolu.',
+    description: 'Čista linija ploče, s blago oborenim rubom. Naglašava debljinu drveta.',
     profileMm: 2,
     segments: 1,
   },
@@ -161,7 +162,7 @@ export const TABLE_EDGES: readonly EdgeOption[] = [
     id: 'rounded',
     label: 'Zaobljena ivica',
     status: 'proposed_custom',
-    description: 'Ivica zaobljena radijusom 8 mm. DAL je objavio usporedbu ravne i zaobljene ivice.',
+    description: 'Mekši prelaz plohe u rub. Detalj koji ćete osjetiti pod rukom.',
     profileMm: 8,
     segments: 6,
   },
@@ -172,7 +173,7 @@ export const TABLE_BASES: readonly BaseOption[] = [
     id: 'trapezoid_pair',
     label: 'Crni trapezni okviri',
     status: 'observed_example',
-    description: 'Dva crna metalna okvira blago trapeznog oblika, kao na objavljenom stolu.',
+    description: 'Blago kosi okviri i čista crna linija. Postolje izvornog DAL stola.',
     profileMm: { face: 40, depth: 60 },
     shapes: ['rectangle', 'rounded_rectangle', 'oval', 'natural_edge'],
   },
@@ -193,6 +194,32 @@ export const TABLE_BASES: readonly BaseOption[] = [
     shapes: ['rectangle', 'rounded_rectangle', 'oval', 'natural_edge'],
   },
   {
+    id: 'a_frame_pair',
+    label: 'A metalni nosači',
+    status: 'proposed_custom',
+    description: 'Kose noge s poprečnom vezom. Naglašen, arhitektonski izgled.',
+    profileMm: { face: 40, depth: 60 },
+    shapes: ['rectangle', 'rounded_rectangle', 'oval', 'natural_edge'],
+  },
+  {
+    id: 'wood_tapered_four',
+    label: 'Četiri drvene noge',
+    status: 'proposed_custom',
+    description: 'Blago sužene noge u drvetu ploče. Topao, miran izgled.',
+    material: 'wood',
+    profileMm: { face: 65, depth: 65 },
+    shapes: ['rectangle', 'rounded_rectangle', 'oval', 'natural_edge'],
+  },
+  {
+    id: 'wood_panel_pair',
+    label: 'Puni drveni nosači',
+    status: 'proposed_custom',
+    description: 'Dvije pune drvene plohe. Skulpturalan karakter masivnog drveta.',
+    material: 'wood',
+    profileMm: { face: 55, depth: 55 },
+    shapes: ['rectangle', 'rounded_rectangle', 'oval', 'natural_edge'],
+  },
+  {
     id: 'central_pedestal',
     label: 'Centralno postolje',
     status: 'requires_confirmation',
@@ -201,6 +228,9 @@ export const TABLE_BASES: readonly BaseOption[] = [
     shapes: ['rectangle', 'rounded_rectangle', 'oval', 'circle'],
   },
 ];
+
+/** A displayed proposal stays valid while the customer asks the workshop to advise. */
+export const TABLE_UNCERTAIN_KEYS = ['shape', 'wood', 'length', 'width', 'diameter', 'topThickness', 'totalHeight', 'edge', 'base', 'finish'] as const;
 
 export const TABLE_FINISHES: readonly FinishOption[] = [
   { id: 'natural', label: 'Prirodan izgled', status: 'requires_confirmation', tint: null, swatch: '#b98d5c' },

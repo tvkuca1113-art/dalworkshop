@@ -153,3 +153,10 @@
 .caption span { font-size: .55rem; letter-spacing: .17em; text-transform: uppercase; }
 .caption strong { font-weight: 500; font-size: .8rem; }
 @media (max-width: 899px) { .caption { top: .85rem; left: var(--gutter); } .caption strong { font-size: .73rem; } }
+
+.configurator .stage { background: radial-gradient(ellipse at 55% 35%, #f5f0e6, #ded5c6); }
+.configurator .poster { inset: 5rem 0 4.5rem; padding: clamp(1rem, 2.5vw, 2.5rem); }
+.caption small { margin-top: .3rem; font-size: .72rem; color: var(--copper-deep); }
+.fail { background: transparent; border: 0; font-size: .74rem; color: var(--muted); }
+.tool[aria-pressed='true']:hover { background: var(--charcoal); color: var(--bone); }
+@media (max-width: 899px) { .configurator .poster { inset: 3.25rem 0 2.65rem; padding: 0 .6rem; } .fail { bottom: .1rem; left: .5rem; right: .5rem; padding: .3rem .5rem; font-size: .6rem; } .caption small { font-size: .61rem; } .caption { gap: .05rem; } }

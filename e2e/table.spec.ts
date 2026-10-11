@@ -97,7 +97,7 @@ test.describe('Konfigurator stola', () => {
     await expect.poll(viewDirY, { timeout: 15_000 }).toBeGreaterThan(0.99);
     await page.getByRole('button', { name: 'Vrati pogled' }).click();
     await expect.poll(viewDirY, { timeout: 15_000 }).toBeLessThan(0.6);
-    await expect(page.getByTestId('dim-length').locator('input')).toHaveValue('220');
+    await expect(page.getByTestId('dim-length').locator('input[type="text"]')).toHaveValue('220');
 
     await page.getByTestId('reset-config').click();
     const dialog = page.getByRole('dialog', { name: 'Vratiti početne opcije?' });
@@ -105,11 +105,11 @@ test.describe('Konfigurator stola', () => {
     await dialog.getByRole('button', { name: 'Odustani' }).click();
     await expect(dialog).toBeHidden();
     await goToStep(page, /Drvo i dimenzije/);
-    await expect(page.getByTestId('dim-length').locator('input')).toHaveValue('220');
+    await expect(page.getByTestId('dim-length').locator('input[type="text"]')).toHaveValue('220');
     await page.getByTestId('reset-config').click();
     await page.getByRole('button', { name: 'Da, vrati početne opcije' }).click();
     await goToStep(page, /Drvo i dimenzije/);
-    await expect(page.getByTestId('dim-length').locator('input')).toHaveValue('150');
+    await expect(page.getByTestId('dim-length').locator('input[type="text"]')).toHaveValue('150');
     await expect(page).toHaveURL(/l=1500/);
   });
 

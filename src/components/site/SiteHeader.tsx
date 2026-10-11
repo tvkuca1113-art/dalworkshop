@@ -26,13 +26,13 @@ export function SiteHeader() {
           <ul>
             {NAV.filter((item) => item.href !== '/odrzavanje').map((item) => (
               <li key={item.href}>
-                <Link href={item.href} aria-current={pathname === item.href ? 'page' : undefined}>{item.label}</Link>
+                <Link href={item.href === '/kontakt' && pathname === '/' ? '/#kontakt' : item.href} aria-current={pathname === item.href ? 'page' : undefined}>{item.label}</Link>
               </li>
             ))}
           </ul>
         </nav>
         <div className={styles.actions}>
-          <Link href="/kontakt" className={`btn btn--ghost-light btn--small ${styles.cta}`}>
+          <Link href={pathname === '/' ? '/#kontakt' : '/kontakt'} className={`btn btn--ghost-light btn--small ${styles.cta}`}>
             Zatražite ponudu
           </Link>
           <MobileMenu />

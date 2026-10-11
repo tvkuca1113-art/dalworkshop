@@ -21,7 +21,7 @@ import {
 
 export const MAX_QUERY_LENGTH = 1500;
 
-const TABLE_KEYS = ['v', 'sh', 'w', 'l', 'wd', 'd', 't', 'h', 'e', 'b', 'f', 's', 'n'] as const;
+const TABLE_KEYS = ['v', 'sh', 'w', 'l', 'wd', 'd', 't', 'h', 'e', 'b', 'f', 's', 'n', 'u'] as const;
 const BOARD_KEYS = ['v', 'm', 'p', 'c', 'l', 'wd', 'd', 't', 'e', 'g', 'hd', 'f', 's', 'pe', 'px', 'pf', 'pp', 'pz', 'n'] as const;
 /** Harmless tracking parameters some apps append; ignored, never applied. */
 const IGNORED = /^(utm_[a-z]+|fbclid|gclid|igshid)$/;
@@ -52,6 +52,7 @@ export function encodeTable(c: TableConfig, opts: EncodeOptions = {}): string {
   p.set('b', c.baseId);
   p.set('f', c.finishId);
   p.set('s', String(c.seed));
+  if (c.uncertain?.length) p.set('u', c.uncertain.join(','));
   if (opts.includePersonalText && c.note) p.set('n', c.note);
   return p.toString();
 }
@@ -173,6 +174,7 @@ export function decodeTable(search: string): DecodeResult<TableConfig> {
     finishId: raw.f,
     seed: int(raw.s ?? null, SEED),
     note: raw.n ?? '',
+    ...(raw.u !== undefined ? { uncertain: raw.u.split(',') } : {}),
   };
   const parsed = tableConfigSchema.safeParse(candidate);
   if (!parsed.success) return INVALID;

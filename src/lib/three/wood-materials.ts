@@ -61,7 +61,7 @@ function makeMaterial(set: WoodTextureSet, species: WoodSpecies, endGrain: boole
     roughnessMap: set.data,
     bumpMap: set.data,
     // Satin wood has fine pores rather than centimetre-deep ridges.
-    bumpScale: endGrain ? 0.045 : 0.025,
+    bumpScale: endGrain ? 0.0008 : 0.0005,
     roughness: 1,
     metalness: 0,
     envMapIntensity: 0.7,

@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { HeroMedia } from '@/components/home/HeroMedia';
 import { EdgeComparison } from '@/components/home/EdgeComparison';
 import { Faq } from '@/components/home/Faq';
+import { HomeContact } from '@/components/home/HomeContact';
 import { WhatsAppIcon } from '@/components/site/WhatsAppIcon';
 import { BRAND, whatsappLink } from '@/lib/catalog/brand';
 import { WORKS } from '@/lib/catalog/works';
@@ -18,8 +19,8 @@ export const metadata = {
 };
 
 const STEPS = [
-  { title: 'Zamislite svoj komad', text: 'U konfiguratoru podesite oblik, drvo, dimenzije i detalje te pogledajte rezultat u 3D.' },
-  { title: 'Podijelite svoj izbor', text: 'Jednim klikom pripremite poruku za WhatsApp sa svim mjerama i linkom na vaš izbor.' },
+  { title: 'Izaberite što vam se sviđa', text: 'Pogledajte svoj stol u 3D. Oblik, drvo i mjere birate vi; uz „Nisam siguran“ tražite naš prijedlog.' },
+  { title: 'Pošaljite izbor ili inspiraciju', text: 'Pripremite upit s mjerama i linkom. Dodajte fotografiju stola ili postolja koje vam se sviđa.' },
   { title: 'Dogovorimo detalje', text: 'Radionica provjerava mogućnost izrade i šalje ponudu za vašu konfiguraciju.' },
   { title: 'Izrađujemo za vas', text: 'Ručna izrada od masivnog drveta, preuzimanje ili dostava prema dogovoru.' },
 ];
@@ -76,7 +77,7 @@ const FAQ = [
     q: 'Mogu li poslati poseban zahtjev?',
     a: (
       <p>
-        Da. Na kraju konfiguratora postoji polje „Poseban zahtjev“ za drugu mjeru, oblik ili ideju. Možete pisati i direktno na
+        Da. U konfigurator dodajte fotografiju nogu, stola ili svog prostora. Za izbor koji još niste odlučili označite „Nisam siguran“. Tu je i polje „Poseban zahtjev“. Možete pisati direktno na
         WhatsApp {BRAND.phonePrimary} ili e-mail {BRAND.email}.
       </p>
     ),
@@ -108,7 +109,7 @@ export default function HomePage() {
       <div className={styles.story}>
       <div className={styles.promise}>
         <div className={`wrap ${styles.promiseInner}`}>
-          <span>Stolovi · Daske · Gazišta</span><span>Izrada po mjeri</span><span>Direktan dogovor s radionicom</span>
+          <span>Masivno drvo · Ručna izrada</span><span>Vaše mjere, vaš komad</span><a href="#kontakt">Imate pitanje? Razgovarajmo ↗</a>
         </div>
       </div>
 
@@ -150,6 +151,20 @@ export default function HomePage() {
                 </Link>
               </div>
             </article>
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.craftSection} aria-labelledby="karakter-drveta">
+        <div className={styles.craftScene}>
+          <Image src="/images/dal-detalj-hrasta.webp" alt="Detalj vlakana i obrađene ivice hrastove ploče — ilustracija karaktera drveta" fill sizes="100vw" className={styles.cover} />
+          <div className={styles.craftShade} />
+          <div className={`wrap ${styles.craftCopy}`}>
+            <p className="eyebrow">Masivno drvo. Blisko pod rukom.</p>
+            <h2 id="karakter-drveta">Vidite godove.<br />Osjetite karakter.</h2>
+            <p>Toplina ploče. Linija ivice. Šara koja se ne ponavlja. Od tih detalja gradimo komad koji ćete koristiti svaki dan.</p>
+            <Link href="/konfigurator/stol" className="btn btn--light">Pronađite svoj karakter drveta <span aria-hidden="true">↗</span></Link>
+            <small>Ilustracija materijala · svaki komad drveta ima svoje šare.</small>
           </div>
         </div>
       </section>
@@ -252,6 +267,8 @@ export default function HomePage() {
           </p>
         </div>
       </section>
+
+      <HomeContact />
 
       <section className="section" aria-labelledby="pitanja">
         <div className={`wrap ${styles.faq}`}>

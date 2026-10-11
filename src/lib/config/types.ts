@@ -6,6 +6,7 @@ import {
   TABLE_MODEL_IDS,
   TABLE_SHAPE_IDS,
   TABLE_WOOD_IDS,
+  TABLE_UNCERTAIN_KEYS,
 } from '../catalog/table';
 import {
   BOARD_CONSTRUCTION_IDS,
@@ -51,6 +52,7 @@ export const tableConfigSchema = z
     finishId: z.enum(TABLE_FINISH_IDS),
     seed,
     note: z.string().max(NOTE_MAX),
+    uncertain: z.array(z.enum(TABLE_UNCERTAIN_KEYS)).max(TABLE_UNCERTAIN_KEYS.length).refine((items) => new Set(items).size === items.length).optional(),
   })
   .strict();
 
@@ -91,6 +93,7 @@ export const boardConfigSchema = z
   .strict();
 
 export type TableConfig = z.infer<typeof tableConfigSchema>;
+export type TableUncertainKey = (typeof TABLE_UNCERTAIN_KEYS)[number];
 export type BoardConfig = z.infer<typeof boardConfigSchema>;
 export type Personalization = z.infer<typeof personalizationSchema>;
 export type ProductConfig = TableConfig | BoardConfig;

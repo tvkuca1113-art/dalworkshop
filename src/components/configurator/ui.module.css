@@ -309,3 +309,18 @@
 }
 
 @media (max-width: 899px) { .tileLabel { font-size: .88rem; } .tileDesc { font-size: .76rem; } .legend { font-size: 1.4rem; } }
+
+/* Material-led product choices; the thumbnail is an exact spatial drawing. */
+.tile[data-preview] { display: grid; grid-template-columns: 18px minmax(0, 1fr); align-content: start; gap: .45rem .5rem; padding: .7rem; }
+.tile[data-preview] > svg { width: 100%; height: 100px; grid-column: 1 / -1; grid-row: 1; background: #eae3d8; }
+.tile[data-preview] .radio { grid-column: 1; grid-row: 2; }
+.tile[data-preview] .tileText { grid-column: 2; grid-row: 2; }
+.tile[data-preview] .tileLabel { font-size: .78rem; }
+.tile[data-preview] .tileDesc { font-size: .72rem; line-height: 1.5; }
+.unsureTile { grid-column: 1 / -1; border-style: dashed; background: #eae4d8; }
+.unsureTile .tileLabel { font-size: .86rem; }
+.unsureTile .tileDesc { font-size: .75rem; }
+.unsureDimension { display: flex; align-items: center; gap: .4rem; font-size: .73rem; color: var(--copper-deep); min-height: 32px; cursor: pointer; }
+.unsureDimension input { accent-color: var(--copper-deep); width: 16px; height: 16px; }
+.swatch { width: 48px; height: 48px; border-radius: 2px; }
+@media (max-width: 420px) { .tiles:has(.tile[data-preview]) { grid-template-columns: repeat(2, minmax(0, 1fr)); } .tile[data-preview] > svg { height: 86px; } }

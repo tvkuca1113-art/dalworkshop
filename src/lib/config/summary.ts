@@ -44,7 +44,7 @@ export const GRAIN_NOTE = 'Prirodno drvo: šare, nijanse i obris konačnog komad
 export const PRICE_QUOTE_COPY = 'Cijena prema odabranoj konfiguraciji — šaljemo ponudu';
 
 export function tableTitle(c: TableConfig): string {
-  return c.modelId === 'dal-oak-table-150-70' ? 'Stol po mjeri — polazni hrastov model' : 'Stol po mjeri';
+  return c.modelId === 'dal-oak-table-150-70' && !c.uncertain?.length ? 'Stol po mjeri — polazni hrastov model' : 'Stol po mjeri';
 }
 
 export function tableDimensionsText(c: TableConfig): string {
@@ -88,7 +88,7 @@ export function tableSpec(c: TableConfig): SpecLine[] {
       key: 'totalHeight',
       label: 'Ukupna visina',
       value: formatCmUnit(d.totalHeight),
-      note: d.totalHeight === TABLE_RULES.suggestedHeightMm ? 'Prijedlog dimenzije; visina objavljenog stola nije navedena.' : undefined,
+      note: d.totalHeight === TABLE_RULES.suggestedHeightMm ? 'Predložena visina za blagovaonički stol.' : undefined,
     },
     { key: 'edge', label: 'Ivica', value: edge.label, status: edge.status },
     { key: 'base', label: 'Postolje', value: base.label, status: base.status },
@@ -98,7 +98,9 @@ export function tableSpec(c: TableConfig): SpecLine[] {
     lines.push({ key: 'seed', label: 'Obris prirodne ivice', value: `varijanta ${c.seed}` });
   }
   if (c.note.trim()) lines.push({ key: 'note', label: 'Poseban zahtjev', value: c.note.trim() });
-  return lines;
+  return lines.map((line) => c.uncertain?.includes(line.key as NonNullable<TableConfig['uncertain']>[number])
+    ? { ...line, value: `Nisam siguran — želim savjet (prikaz: ${line.value})`, status: undefined, note: undefined }
+    : line);
 }
 
 export function boardTitle(c: BoardConfig): string {

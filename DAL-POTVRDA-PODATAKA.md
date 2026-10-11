@@ -6,7 +6,7 @@ Gdje se mijenja: katalog `src/lib/catalog/*.ts` (statusi, rasponi, opcije), cije
 
 ## 1. Oblici i postolja stolova
 - Koje oblike izrađujete: pravougaoni (objavljen), zaobljeni uglovi, ovalni (prava elipsa), okrugli, prirodna ivica?
-- Koja postolja nudite: trapezni okviri (objavljeni), U okviri, X okviri, centralno postolje? Profili čelika (konfigurator koristi 40 × 60 mm za trapez, 40 × 80 mm za U, 40 × 40 mm za X, stub Ø 90 mm).
+- Koja postolja nudite: trapezni okviri (objavljeni), U okviri, X okviri, A metalni nosači, četiri sužene drvene noge, puni drveni nosači, centralno postolje? Tri nova modela su vizuelni prijedlozi, a ne potvrđena ponuda. Profili čelika (konfigurator koristi 40 × 60 mm za trapez, 40 × 80 mm za U, 40 × 40 mm za X, stub Ø 90 mm).
 - Pravilo za centralno postolje (konfigurator: do 160 cm dužine i za okrugle stolove).
 - Da li je ivica objavljenog stola blago oborena (konfigurator: 2 mm), i radijus zaobljene ivice (konfigurator: 8 mm).
 

@@ -132,3 +132,6 @@
 }
 
 @media (max-width: 899px) { .head h1 { font-size: 2.15rem; } .head :global(.lead) { font-size: .86rem; } .head :global(.eyebrow) { font-size: .62rem; } .panel { gap: 1.25rem; } }
+
+.advice { padding: 1rem 1.1rem; border-left: 2px solid var(--copper); background: #e8e1d4; font-size: .79rem; line-height: 1.6; }
+.advice strong { display: block; margin-bottom: .35rem; font-size: .83rem; }

@@ -1,0 +1,18 @@
+.contact { position: relative; z-index: 3; background: #2d3027; color: #f8f3e9; padding-block: clamp(3.5rem, 7vw, 7rem); scroll-margin-top: var(--header-h); }
+.layout { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(3rem, 8vw, 8rem); }
+.story { display: grid; gap: 1.4rem; align-content: start; }
+.story :global(.eyebrow) { color: #d7bc8e; }
+.story h2 { font-size: clamp(2.8rem, 5vw, 4.9rem); max-width: 14ch; }
+.story > p { max-width: 36rem; font-size: .94rem; color: #e1dccf; }
+.links { display: grid; gap: .3rem; }
+.links a { display: flex; align-items: center; justify-content: space-between; min-height: 44px; border-bottom: 1px solid #747565; font-size: .9rem; text-decoration: none; max-width: 23rem; }
+.inquiry { display: grid; gap: .7rem; padding: 2rem; border: 1px solid #747565; background: #35392f; align-content: start; }
+.inquiry h3 { font-size: 2rem; margin-bottom: .3rem; }
+.inquiry label { font-size: .8rem; font-weight: 600; }
+.inquiry label span { font-size: .7rem; font-weight: 400; }
+.inquiry select, .inquiry textarea { width: 100%; padding: .8rem; border: 1px solid #a3a18e; background: #f6f0e5; color: #252820; font: inherit; font-size: .85rem; border-radius: 0; }
+.inquiry textarea { resize: vertical; }
+.inquiry :global(.btn) { margin-top: .5rem; }
+.small { font-size: .73rem !important; color: #d8d4c7 !important; line-height: 1.6; }
+.configLink { min-height: 44px; display: flex; align-items: center; font-size: .74rem; text-underline-offset: 4px; }
+@media (max-width: 899px) { .layout { grid-template-columns: 1fr; gap: 2rem; } .inquiry { padding: 1.25rem; } .story h2 { font-size: 3rem; } }

@@ -5,8 +5,8 @@ import { whatsappLink } from '@/lib/catalog/brand';
 import { WhatsAppIcon } from './WhatsAppIcon';
 import styles from './ProductIntro.module.css';
 
-export function ProductIntro({ eyebrow, title, children, image, alt, href, action }: {
-  eyebrow: string; title: string; children: ReactNode; image: string; alt: string; href: string; action: string;
+export function ProductIntro({ eyebrow, title, children, image, alt, href, action, caption }: {
+  eyebrow: string; title: string; children: ReactNode; image: string; alt: string; href: string; action: string; caption?: string;
 }) {
   return (
     <section className={`wrap ${styles.intro}`}>
@@ -22,7 +22,7 @@ export function ProductIntro({ eyebrow, title, children, image, alt, href, actio
       </div>
       <figure className={styles.figure}>
         <div className={styles.media}><Image src={image} alt={alt} fill sizes="(min-width: 900px) 50vw, 100vw" loading="eager" fetchPriority="high" quality={80} /></div>
-        <figcaption>Vizualizacija ambijenta prema DAL proizvodu</figcaption>
+        <figcaption>{caption ?? 'Vizualizacija ambijenta prema DAL proizvodu'}</figcaption>
       </figure>
     </section>
   );

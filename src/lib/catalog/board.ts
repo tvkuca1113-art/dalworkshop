@@ -221,7 +221,7 @@ export const BOARD_CONSTRUCTIONS: readonly ConstructionOption[] = [
     id: 'maple_beech_strips',
     label: 'Javor i bukva, uzdužne trake',
     status: 'observed_example',
-    description: 'Sastav naveden u DAL objavi. Raspored traka prati fotografiju (procjena).',
+    description: 'Svijetle uzdužne trake i prirodan kontrast. Kombinacija našeg izvornog modela.',
     strips: [
       { species: 'maple', share: 0.164 },
       { species: 'beech', share: 0.079 },
@@ -236,7 +236,7 @@ export const BOARD_CONSTRUCTIONS: readonly ConstructionOption[] = [
     id: 'walnut_ash',
     label: 'Orah i jasen',
     status: 'requires_confirmation',
-    description: 'Prema oznakama uz objavu. Sastav drveta potvrđuje radionica.',
+    description: 'Kontrast tamnijih i svjetlijih traka. Predloženi sastav dogovaramo s radionicom.',
     strips: [
       { species: 'ash', share: 0.135 },
       { species: 'ash', share: 0.135 },
@@ -250,7 +250,7 @@ export const BOARD_CONSTRUCTIONS: readonly ConstructionOption[] = [
     id: 'oak',
     label: 'Hrast',
     status: 'proposed_custom',
-    description: 'Puno hrastovo drvo. Vrsta drveta daske s ručkama nije navedena u objavi.',
+    description: 'Topla nijansa i izražena vlakna. Hrast je prijedlog za vaš model.',
     strips: [
       { species: 'oak', share: 0.34 },
       { species: 'oak', share: 0.33 },
@@ -292,7 +292,7 @@ export const BOARD_CONSTRUCTIONS: readonly ConstructionOption[] = [
 ];
 
 export const BOARD_EDGES: readonly (SimpleOption<BoardEdgeId> & { profileMm: number; segments: number })[] = [
-  { id: 'eased', label: 'Blago oborena ivica', status: 'observed_example', description: 'Kao na objavljenim daskama.', profileMm: 2, segments: 1 },
+  { id: 'eased', label: 'Blago oborena ivica', status: 'observed_example', description: 'Čista linija s blagim prelazom na rub.', profileMm: 2, segments: 1 },
   { id: 'rounded', label: 'Zaobljena ivica', status: 'proposed_custom', description: 'Mekši rub, radijus 5 mm.', profileMm: 5, segments: 5 },
 ];
 
@@ -349,7 +349,7 @@ export const BOARD_FINISHES: readonly SimpleOption<BoardFinishId>[] = [
     id: 'mineral_oil',
     label: 'Mineralno ulje',
     status: 'observed_example',
-    description: 'Spomenuto u objavi cjenovnika. Tačan proizvod nije naveden.',
+    description: 'Izbor premaza dogovaramo prema namjeni daske.',
   },
 ];
 

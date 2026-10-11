@@ -6,6 +6,8 @@ import { formatKm } from '@/lib/config/units';
 import { BRAND } from '@/lib/catalog/brand';
 import { Plan2D, type EngravingDraw } from './Plan2D';
 import styles from './PrintSheet.module.css';
+import type { ReferenceImage } from './ReferenceUpload';
+import { REFERENCE_KINDS } from '@/lib/catalog/references';
 
 /** Printed specification (window.print → "Sačuvaj kao PDF"). */
 export function PrintSheet({
@@ -14,12 +16,14 @@ export function PrintSheet({
   snapshot,
   link,
   engravingDraw,
+  references,
 }: {
   config: TableConfig | BoardConfig;
   lines: readonly SpecLine[];
   snapshot: string | null;
   link: string;
   engravingDraw?: EngravingDraw | null;
+  references?: readonly ReferenceImage[];
 }) {
   const price = calculatePrice(config);
   return (
@@ -58,6 +62,14 @@ export function PrintSheet({
           </tr>
         </tbody>
       </table>
+      {references && references.length > 0 && <section className={styles.references}>
+        <h3>Fotografije inspiracije</h3>
+        <div>{references.map((item) => <figure key={item.id}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={item.url} alt={`Inspiracija: ${item.file.name}`} />
+          <figcaption>{REFERENCE_KINDS.find((kind) => kind.id === item.kind)!.label} · {item.file.name}</figcaption>
+        </figure>)}</div>
+      </section>}
       <p className={styles.note}>{GRAIN_NOTE} Mogućnost izrade, cijenu i rok potvrđuje radionica uz ponudu.</p>
       <p className={styles.link}>Konfiguracija: {link}</p>
       <p className={styles.contact}>

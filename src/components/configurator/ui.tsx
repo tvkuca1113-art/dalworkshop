@@ -37,6 +37,8 @@ export function OptionGroup<Id extends string>({
   onChange,
   columns = 2,
   hint,
+  unsure,
+  quietStatus = false,
 }: {
   legend: string;
   name: string;
@@ -45,6 +47,8 @@ export function OptionGroup<Id extends string>({
   onChange: (id: Id) => void;
   columns?: 1 | 2 | 3;
   hint?: ReactNode;
+  unsure?: { checked: boolean; onSelect: () => void };
+  quietStatus?: boolean;
 }) {
   const hintId = useId();
   return (
@@ -60,13 +64,13 @@ export function OptionGroup<Id extends string>({
           const id = `${name}-${o.id}`;
           const reasonId = `${id}-reason`;
           return (
-            <label key={o.id} className={styles.tile} data-checked={value === o.id} data-disabled={o.disabled || undefined} htmlFor={id}>
+            <label key={o.id} className={styles.tile} data-preview={Boolean(o.preview) || undefined} data-checked={!unsure?.checked && value === o.id} data-disabled={o.disabled || undefined} htmlFor={id}>
               <input
                 type="radio"
                 id={id}
                 name={name}
                 value={o.id}
-                checked={value === o.id}
+                checked={!unsure?.checked && value === o.id}
                 disabled={o.disabled}
                 onChange={() => onChange(o.id)}
                 aria-describedby={o.disabled && o.reason ? reasonId : undefined}
@@ -79,7 +83,7 @@ export function OptionGroup<Id extends string>({
                   {o.label}
                 </span>
                 {o.description && <span className={styles.tileDesc}>{o.description}</span>}
-                {o.status && <StatusBadge status={o.status} withHint />}
+                {o.status && !quietStatus && <StatusBadge status={o.status} withHint />}
                 {o.disabled && o.reason && (
                   <span id={reasonId} className={styles.reason}>
                     {o.reason}
@@ -89,6 +93,12 @@ export function OptionGroup<Id extends string>({
             </label>
           );
         })}
+        {unsure && (
+          <label className={`${styles.tile} ${styles.unsureTile}`} data-checked={unsure.checked} htmlFor={`${name}-unsure`}>
+            <input className={styles.radio} id={`${name}-unsure`} name={name} type="radio" checked={unsure.checked} onChange={unsure.onSelect} />
+            <span className={styles.tileText}><span className={styles.tileLabel}>Nisam siguran</span><span className={styles.tileDesc}>Želim prijedlog radionice. Prikaz ostaje kao inspiracija.</span></span>
+          </label>
+        )}
       </div>
     </fieldset>
   );
@@ -106,6 +116,7 @@ export function DimensionField({
   onCommit,
   help,
   testId,
+  unsure,
 }: {
   label: string;
   valueMm: number;
@@ -114,6 +125,7 @@ export function DimensionField({
   onCommit: (mm: number) => void;
   help?: string;
   testId?: string;
+  unsure?: { checked: boolean; onChange: (checked: boolean) => void };
 }) {
   const id = useId();
   const [text, setText] = useState(formatCm(valueMm));
@@ -140,7 +152,7 @@ export function DimensionField({
     }
     setError(null);
     if (r.mm !== valueMm) onCommit(r.mm);
-    else setText(formatCm(valueMm));
+    setText(formatCm(r.mm));
   };
 
   const stepBy = (dir: 1 | -1) => {
@@ -154,6 +166,7 @@ export function DimensionField({
       <label htmlFor={id} className={styles.dimLabel}>
         {label}
       </label>
+      {unsure && <label className={styles.unsureDimension}><input type="checkbox" aria-label={`${label}: Nisam siguran`} checked={unsure.checked} onChange={(e) => unsure.onChange(e.target.checked)} />Nisam siguran</label>}
       <div className={styles.dimRow}>
         <button type="button" className={styles.stepBtn} onClick={() => stepBy(-1)} disabled={valueMm <= range[0]} aria-label={`${label}: smanji za ${formatCm(step)} cm`}>
           −
@@ -186,7 +199,7 @@ export function DimensionField({
         </button>
       </div>
       <p id={`${id}-hint`} className={styles.dimHint}>
-        {help ? `${help} ` : ''}Raspon prijedloga {formatCm(range[0])}–{formatCm(range[1])} cm.
+        {unsure?.checked ? 'Ova mjera je samo prijedlog za prikaz. Radionica će vam pomoći odabrati. ' : ''}{help ? `${help} ` : ''}Raspon prijedloga {formatCm(range[0])}–{formatCm(range[1])} cm.
       </p>
       {error && (
         <p id={`${id}-err`} className={styles.error} role="alert">

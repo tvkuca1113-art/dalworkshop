@@ -4,6 +4,9 @@ import dynamic from 'next/dynamic';
 import { Component, useCallback, useEffect, useMemo, useRef, useState, type MutableRefObject, type ReactNode } from 'react';
 import type { BoardConfig, TableConfig } from '@/lib/config/types';
 import { Plan2D, type EngravingDraw } from '../configurator/Plan2D';
+import { SpatialTableDrawing } from '../configurator/SpatialTableDrawing';
+import { tableDimensionsText } from '@/lib/config/summary';
+import { woodOption } from '@/lib/catalog/table';
 import type { EngravingRender, ViewerPhase, ViewPreset, ViewRequest } from './types';
 import { useMediaQuery, useMounted, useWebgl2 } from '../useClient';
 import styles from './ViewerShell.module.css';
@@ -55,6 +58,7 @@ export function ViewerShell({ config, variant, engraving, engravingDraw, capture
   const [flipped, setFlipped] = useState(false);
   const [rotateMode, setRotateMode] = useState(false);
   const [expanded, setExpanded] = useState(false);
+  const [fallbackPlan, setFallbackPlan] = useState(false);
   const expandBtn = useRef<HTMLButtonElement>(null);
   const coarse = useMediaQuery('(pointer: coarse)');
   const small = useMediaQuery('(max-width: 767px)');
@@ -120,7 +124,7 @@ export function ViewerShell({ config, variant, engraving, engravingDraw, capture
       case 'timeout':
         return '3D prikaz se učitava predugo. Prikazujemo 2D nacrt istog izbora.';
       case 'unsupported':
-        return 'Ovaj preglednik ne podržava 3D prikaz (WebGL2). Prikazujemo 2D nacrt istog izbora.';
+        return '3D rotacija nije dostupna na ovom uređaju. Prostorni prikaz i nacrt prate sve vaše izbore.';
       default:
         return '3D prikaz se nije mogao pokrenuti. Prikazujemo 2D nacrt istog izbora.';
     }
@@ -135,10 +139,11 @@ export function ViewerShell({ config, variant, engraving, engravingDraw, capture
       aria-label={label}
     >
       <div className={styles.stage}>
-        {variant === 'configurator' && !failed && (
+        {variant === 'configurator' && (
           <div className={styles.caption} aria-hidden="true">
             <span>DAL Workshop</span>
             <strong>{isBoard ? 'Vaša daska' : 'Vaš stol'}</strong>
+            {!isBoard && <small>{woodOption(config.woodId).label} · {tableDimensionsText(config).split(',')[0]}</small>}
           </div>
         )}
         {!failed && env && (
@@ -169,7 +174,7 @@ export function ViewerShell({ config, variant, engraving, engravingDraw, capture
         )}
         {(loading || failed) && (
           <div className={styles.poster} data-testid={failed ? 'viewer-fallback' : 'viewer-poster'}>
-            {variant === 'hero' && poster && !failed ? poster : <Plan2D config={config} engraving={engravingDraw} />}
+            {variant === 'hero' && poster && !failed ? poster : !isBoard && !fallbackPlan ? <SpatialTableDrawing config={config} /> : <Plan2D config={config} engraving={engravingDraw} />}
           </div>
         )}
         {loading && (
@@ -197,7 +202,11 @@ export function ViewerShell({ config, variant, engraving, engravingDraw, capture
             {rotateMode ? 'Završi rotaciju' : 'Rotirajte model'}
           </button>
         )}
-        {variant === 'configurator' && (
+        {failed && !isBoard && <>
+          <button type="button" className={styles.tool} aria-pressed={!fallbackPlan} onClick={() => setFallbackPlan(false)}>Prostorni prikaz</button>
+          <button type="button" className={styles.tool} aria-pressed={fallbackPlan} onClick={() => setFallbackPlan(true)}>Nacrt s mjerama</button>
+        </>}
+        {variant === 'configurator' && !failed && (
           <>
             <button type="button" className={styles.tool} onClick={() => request('front')} disabled={loading || failed}>
               Sprijeda
@@ -218,7 +227,7 @@ export function ViewerShell({ config, variant, engraving, engravingDraw, capture
             </button>
           </>
         )}
-        <button
+        {!failed && <button
           type="button"
           className={styles.tool}
           onClick={() => {
@@ -228,7 +237,7 @@ export function ViewerShell({ config, variant, engraving, engravingDraw, capture
           disabled={loading || failed}
         >
           Vrati pogled
-        </button>
+        </button>}
         {variant === 'configurator' && (
           <button ref={expandBtn} type="button" className={`${styles.tool} ${styles.expandTool}`} aria-pressed={expanded} onClick={() => setExpanded((v) => !v)}>
             {expanded ? 'Zatvori prošireni prikaz' : 'Proširi prikaz'}

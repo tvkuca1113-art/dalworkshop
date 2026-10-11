@@ -11,7 +11,7 @@ export function buildTableTop(layout: TableLayout, mapping: WoodMapping): THREE.
   return geom;
 }
 
-export function buildTableBase(layout: TableLayout): THREE.BufferGeometry {
+export function buildTableBase(layout: TableLayout, wooden = false): THREE.BufferGeometry {
   const parts: THREE.BufferGeometry[] = [];
   for (const part of layout.baseParts) {
     let g: THREE.BufferGeometry;
@@ -34,6 +34,17 @@ export function buildTableBase(layout: TableLayout): THREE.BufferGeometry {
   }
   const merged = mergeGeometries(parts, false)!;
   parts.forEach((p) => p.dispose());
+  if (wooden) {
+    // Upright supports have grain along their height, with physical texture scale.
+    const position = merged.getAttribute('position');
+    const normal = merged.getAttribute('normal');
+    const uv = new Float32Array(position.count * 2);
+    for (let i = 0; i < position.count; i++) {
+      uv[i * 2] = Math.abs(normal.getY(i)) > .6 ? position.getX(i) / 2.9 + .5 : position.getY(i) / 2.9;
+      uv[i * 2 + 1] = (Math.abs(normal.getX(i)) > .6 ? position.getZ(i) : position.getX(i)) / 1.6 + .5;
+    }
+    merged.setAttribute('uv', new THREE.BufferAttribute(uv, 2));
+  }
   merged.computeBoundingBox();
   merged.computeBoundingSphere();
   return merged;

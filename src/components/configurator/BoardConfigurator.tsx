@@ -233,7 +233,7 @@ export function BoardConfigurator({ formEnabled }: { formEnabled: boolean }) {
                       {formatCm(layout.usable.width)} cm.
                     </p>
                   )}
-                  {model.dimensionsEstimated && <p className="note">Dimenzije objavljene daske nisu navedene; polazne mjere su procjena prema fotografiji.</p>}
+                  {model.dimensionsEstimated && <p className="note">Polazne mjere su prijedlog. Prilagodite ih svojoj kuhinji i načinu upotrebe.</p>}
                   <p className="note">{CUSTOM_PROPOSAL_COPY} Trebate drugu mjeru? Dodajte je u poseban zahtjev na pregledu.</p>
                 </fieldset>
               </>

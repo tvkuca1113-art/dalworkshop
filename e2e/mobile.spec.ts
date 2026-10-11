@@ -56,9 +56,9 @@ test('ljepljiva traka ne prekriva polja kad je tastatura otvorena', async ({ pag
   await goToStep(page, /Drvo i dimenzije/);
   const bar = page.locator('[data-hidden]').filter({ hasText: 'Korak' });
   await expect(bar).toHaveAttribute('data-hidden', 'false');
-  await page.getByTestId('dim-length').locator('input').focus();
+  await page.getByTestId('dim-length').locator('input[type="text"]').focus();
   await expect(bar).toHaveAttribute('data-hidden', 'true');
-  await page.getByTestId('dim-length').locator('input').blur();
+  await page.getByTestId('dim-length').locator('input[type="text"]').blur();
   await expect(bar).toHaveAttribute('data-hidden', 'false');
 });
 

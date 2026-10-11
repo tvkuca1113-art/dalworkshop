@@ -18,7 +18,6 @@ import { dimensionLabel, tableBaseStates, tableDimensionKeys, tableDimensionRang
 import { tableSpec } from '@/lib/config/summary';
 import { naturalEdgeWidthRange } from '@/lib/geometry/outline';
 import { formatCm } from '@/lib/config/units';
-import { WOOD_LOOK } from '@/lib/catalog/woods';
 import { ViewerShell } from '../three/ViewerShell';
 import { DimensionField, NoticeList, OptionGroup, SpecList, Stepper } from './ui';
 import { ReviewPanel } from './ReviewPanel';
@@ -28,6 +27,9 @@ import { useConfigUrl, useFooterVisible, useTyping } from './useConfigUrl';
 import { usePrint } from './usePrint';
 import { permalink } from '@/lib/config/url';
 import { useMounted, useOrigin } from '../useClient';
+import type { TableUncertainKey } from '@/lib/config/types';
+import { ReferenceUpload, useReferenceImages } from './ReferenceUpload';
+import { SpatialTableDrawing } from './SpatialTableDrawing';
 import styles from './Frame.module.css';
 
 const STEPS = ['Oblik', 'Drvo i dimenzije', 'Ivica i postolje', 'Detalji', 'Pregled'] as const;
@@ -45,6 +47,8 @@ export function TableConfigurator({ formEnabled }: { formEnabled: boolean }) {
   const dismiss = useTableStore((s) => s.dismiss);
   const reset = useTableStore((s) => s.reset);
   const [step, setStep] = useState(0);
+  const references = useReferenceImages();
+  const unsure = (key: TableUncertainKey) => ({ checked: Boolean(config.uncertain?.includes(key)), onSelect: () => apply({ type: 'uncertain', key, value: true }) });
   const [confirmReset, setConfirmReset] = useState(false);
   const captureRef = useRef<(() => string | null) | null>(null);
   const { snapshot, print } = usePrint(captureRef);
@@ -85,7 +89,7 @@ export function TableConfigurator({ formEnabled }: { formEnabled: boolean }) {
             <p className="eyebrow">Konfigurator · stol po mjeri</p>
             <h1>Kreirajte svoj stol</h1>
             <p className="note">
-              Počnite od hrastovog stola 150 × 70 cm i prilagodite ga sebi. Izradu i cijenu potvrđujemo uz ponudu.
+              Birajte ono što vam se sviđa. Za sve ostalo izaberite „Nisam siguran“ — zajedno ćemo pronaći rješenje. Na kraju tražite ponudu, bez obaveze naručivanja.
             </p>
           </header>
 
@@ -129,26 +133,29 @@ export function TableConfigurator({ formEnabled }: { formEnabled: boolean }) {
             {step === 0 && (
               <OptionGroup
                 legend="Oblik ploče"
+                unsure={unsure('shape')} quietStatus
                 name="oblik"
-                columns={1}
+                columns={2}
                 value={config.shapeId}
                 onChange={(v) => apply({ type: 'shape', value: v })}
-                options={TABLE_SHAPES.map((s) => ({ id: s.id, label: s.label, description: s.description, status: s.status }))}
+                options={TABLE_SHAPES.map((s) => ({ id: s.id, label: s.label, description: s.description, status: s.status, preview: <SpatialTableDrawing config={{ ...DEFAULT_TABLE, shapeId: s.id, baseId: s.id === 'circle' ? 'central_pedestal' : DEFAULT_TABLE.baseId }} preview /> }))}
               />
             )}
             {step === 1 && (
               <>
                 <OptionGroup
                   legend="Drvo"
+                  unsure={unsure('wood')} quietStatus
                   name="drvo"
                   columns={1}
                   value={config.woodId}
                   onChange={(v) => apply({ type: 'wood', value: v })}
-                  options={TABLE_WOODS.map((w) => ({ id: w.id, label: w.label, description: w.description, status: w.status, swatch: WOOD_LOOK[w.species].base }))}
+                  options={TABLE_WOODS.map((w) => ({ id: w.id, label: w.label, description: w.description, status: w.status, swatch: `url(/materials/${w.id}.webp) center / cover`, preview: undefined }))}
                   hint="Izaberite karakter drveta koji vam se sviđa. Cijenu potvrđujemo uz ponudu."
                 />
                 <fieldset className="dims" style={{ border: 0, padding: 0, margin: 0, display: 'grid', gap: '1rem' }}>
                   <legend style={{ fontFamily: 'var(--font-serif)', fontSize: '1.45rem', marginBottom: '0.5rem' }}>Dimenzije</legend>
+                  <div className={styles.advice}><strong>Koliko mjesta za stolom?</strong><p>Za početno planiranje računajte oko 60–70 cm po osobi duž strane stola. Provjerite i prostor za izvlačenje stolica. Postolje utiče na stvaran raspored sjedenja.</p></div>
                   {dims.map((key) => (
                     <DimensionField
                       key={`${config.shapeId}-${key}`}
@@ -157,7 +164,8 @@ export function TableConfigurator({ formEnabled }: { formEnabled: boolean }) {
                       range={tableDimensionRange(config.shapeId, key)}
                       step={TABLE_STEPS[key]}
                       onCommit={(mm) => apply({ type: 'dimension', key, value: mm })}
-                      help={key === 'totalHeight' ? 'Prijedlog dimenzije; visina objavljenog stola nije navedena.' : undefined}
+                      help={key === 'totalHeight' ? 'Izmjerite i visinu sjedišta i naslona za ruke na svojim stolicama.' : undefined}
+                      unsure={{ checked: Boolean(config.uncertain?.includes(key)), onChange: (value) => apply({ type: 'uncertain', key, value }) }}
                       testId={`dim-${key}`}
                     />
                   ))}
@@ -175,6 +183,7 @@ export function TableConfigurator({ formEnabled }: { formEnabled: boolean }) {
               <>
                 <OptionGroup
                   legend="Ivica"
+                  unsure={unsure('edge')} quietStatus
                   name="ivica"
                   value={config.edgeId}
                   onChange={(v) => apply({ type: 'edge', value: v })}
@@ -182,22 +191,26 @@ export function TableConfigurator({ formEnabled }: { formEnabled: boolean }) {
                 />
                 <OptionGroup
                   legend="Postolje"
+                  unsure={unsure('base')} quietStatus
                   name="postolje"
-                  columns={1}
+                  columns={2}
                   value={config.baseId}
                   onChange={(v) => apply({ type: 'base', value: v })}
                   options={TABLE_BASES.map((b) => {
                     const st = baseStates.find((s) => s.id === b.id)!;
-                    return { id: b.id, label: b.label, description: b.description, status: b.status, disabled: st.disabled, reason: st.reason };
+                    return { id: b.id, label: b.label, description: b.description, status: b.status, disabled: st.disabled, reason: st.reason, preview: <SpatialTableDrawing config={{ ...DEFAULT_TABLE, woodId: config.woodId, baseId: b.id }} preview /> };
                   })}
-                  hint="Postolje prilagođavamo obliku ploče. Konačnu konstrukciju potvrđujemo uz ponudu."
+                  hint="Pogledajte karakter svakog postolja. Predložene modele i konstrukciju dogovaramo s radionicom."
                 />
+                <div className={styles.advice}><strong>Postolje biramo i zbog udobnosti.</strong><p>Pošaljite širinu svojih stolica i recite želite li sjediti na krajevima stola. Tako dogovaramo položaj nogu i prostor ispod ploče.</p></div>
+                <ReferenceUpload references={references} />
               </>
             )}
             {step === 3 && (
               <>
                 <OptionGroup
                   legend="Nijansa (vizuelni prijedlog)"
+                  unsure={unsure('finish')} quietStatus
                   name="nijansa"
                   value={config.finishId}
                   onChange={(v) => apply({ type: 'finish', value: v })}
@@ -220,6 +233,7 @@ export function TableConfigurator({ formEnabled }: { formEnabled: boolean }) {
                 formEnabled={formEnabled}
                 onNote={(v) => apply({ type: 'note', value: v })}
                 onPrint={print}
+                references={references}
                 blockingIssue={issues.length ? issues.map((i) => i.message).join(' ') : null}
               />
             )}
@@ -266,7 +280,7 @@ export function TableConfigurator({ formEnabled }: { formEnabled: boolean }) {
           )}
         </div>
       </div>
-      {mounted && <PrintSheet config={config} lines={spec} snapshot={snapshot} link={permalink(origin, config)} />}
+      {mounted && <PrintSheet config={config} lines={spec} snapshot={snapshot} link={permalink(origin, config)} references={references.files} />}
       <ConfirmDialog
         open={confirmReset}
         title="Vratiti početne opcije?"
