@@ -5,21 +5,23 @@ import { TREAD_CATALOG } from '@/lib/catalog/treads';
 import { readTreadSelection } from '@/lib/config/tread';
 import { formatCm, formatKm } from '@/lib/config/units';
 import { TreadSelector } from '@/components/treads/TreadSelector';
+import { ServiceJsonLd } from '@/components/site/ServiceJsonLd';
 import styles from './page.module.css';
 
 export const metadata: Metadata = {
-  title: 'Gazišta od hrasta, jasena i javora',
-  description: 'Nauljena gazišta 100 × 30 cm od hrasta, jasena ili javora. Debljine 4, 6 i 8 cm od 110 KM po komadu. Izaberite drvo, pogledajte gazište i pošaljite upit.',
+  title: 'Drvena gazišta za stepenice — Mostar',
+  description: 'Drvena gazišta za stepenice iz Mostara: hrast, jasen i javor, nauljena, 100 × 30 cm. Debljine 4, 6 i 8 cm od 110 KM po komadu. Izaberite drvo i zatražite ponudu.',
   alternates: { canonical: '/gazista' },
 };
 export default async function TreadsPage({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
   const { selection, reset } = readTreadSelection(await searchParams);
   return (
     <div className={styles.page}>
+      <ServiceJsonLd name="Drvena gazišta za stepenice u Mostaru" description="Nauljena gazišta 100 × 30 cm od hrasta, jasena i javora, debljine 4, 6 ili 8 cm, u ponudi DAL Workshop radionice." path="/gazista" />
       <section className={`wrap ${styles.hero}`}>
         <div className={styles.copy}>
-          <p className="eyebrow">Gazišta od masivnog drveta</p>
-          <h1>Prirodna ljepota u svakom koraku.</h1>
+          <p className="eyebrow">DAL Workshop · Mostar</p>
+          <h1>Drvena gazišta za vaše stepenice.</h1>
           <p className="lead">Hrast, jasen ili javor. Izaberite drvo koje povezuje vaše stepenice s ostatkom doma — i debljinu koja odgovara vašem projektu.</p>
           <p className={styles.startPrice}>Od {formatKm(TREAD_CATALOG.variants[0].priceFening)} <span>po komadu · nauljeno</span></p>
           <a href="#izbor-gazista" className="btn">Izaberite svoja gazišta <span aria-hidden="true">↓</span></a>

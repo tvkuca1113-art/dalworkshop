@@ -15,6 +15,7 @@ import { encodeTable } from '@/lib/config/url';
 import styles from './home.module.css';
 
 export const metadata = {
+  description: 'Ručna izrada stolova po mjeri u Mostaru. Stolovi od masivnog drveta, daske za rezanje i serviranje te drvena gazišta. Kreirajte svoj stol u 3D i zatražite ponudu.',
   alternates: { canonical: '/' },
 };
 
@@ -95,8 +96,8 @@ export default function HomePage() {
     <div className={styles.home}>
       <HeroMedia>
         <div className={`wrap ${styles.heroText}`}>
-          <p className="eyebrow">Ručno izrađeno u Mostaru</p>
-          <h1 id="hero-title" className={styles.h1}>Stol koji pripada vašem prostoru.</h1>
+          <p className="eyebrow">Stolovi po mjeri · Ručna izrada u Mostaru</p>
+          <h1 id="hero-title" className={styles.h1}>Stol po mjeri za vaš prostor.</h1>
           <p className={styles.heroLead}>Masivno drvo. Vaše mjere.<br />Mjesto za vašu svakodnevicu.</p>
           <div className={styles.ctas}>
             <Link href="/konfigurator/stol" className={`btn ${styles.heroPrimary}`}>Kreirajte svoj stol <span aria-hidden="true">↗</span></Link>
@@ -118,6 +119,7 @@ export default function HomePage() {
           <div className="section-head">
             <p className="eyebrow"><span className={styles.chapter}>01 /</span> Za vaš dom</p>
             <h2 id="izbor">Komadi koji ostaju dio svakodnevice.</h2>
+            <p>DAL Workshop u Mostaru izrađuje stolove od masivnog drveta po vašim mjerama, daske za rezanje i serviranje te drvena gazišta. Izaberite svoj komad i dogovorite detalje direktno s radionicom.</p>
           </div>
           <div className={styles.choice}>
             <article className={styles.choiceItem}>

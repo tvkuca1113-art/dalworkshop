@@ -14,10 +14,11 @@ import { WORKS } from '@/lib/catalog/works';
 import { formatCm, formatKm } from '@/lib/config/units';
 import { visibleConstructions } from '@/lib/config/rules';
 import { ProductIntro } from '@/components/site/ProductIntro';
+import { ServiceJsonLd } from '@/components/site/ServiceJsonLd';
 import styles from '../content.module.css';
 
 export const metadata: Metadata = {
-  title: 'Daske za rezanje i serviranje',
+  title: 'Drvene daske za rezanje i serviranje — Mostar',
   description: 'Daske za rezanje i serviranje od masivnog drveta iz Mostara: javor i bukva, crne metalne ručke, kombinacije drveta. Konfigurišite dasku u 3D.',
   alternates: { canonical: '/daske' },
 };
@@ -31,8 +32,9 @@ export default function BoardsPage() {
   const reviewed = new Date(PUBLISHED_BOARD_PRICES.reviewedOn).toLocaleDateString('bs-BA', { timeZone: 'UTC' });
   return (
     <>
-      <ProductIntro eyebrow="Daske za rezanje i serviranje" title="Od pripreme do lijepog serviranja." image="/images/dal-daska-ambijent.webp" alt="Daska od javora i bukve na kamenoj kuhinjskoj ploči — vizualizacija ambijenta" href="/konfigurator/daska" action="Kreirajte svoju dasku">
-        <p>Masivno drvo za male svakodnevne rituale. Izaberite model i dimenzije, dodajte detalje za lakše korištenje ili predložite personalizaciju za poseban poklon.</p>
+      <ServiceJsonLd name="Izrada drvenih dasaka za rezanje i serviranje u Mostaru" description="Daske od masivnog drveta po dimenzijama i detaljima dogovorenim s DAL Workshop radionicom u Mostaru." path="/daske" />
+      <ProductIntro eyebrow="Ručna izrada u Mostaru" title="Drvene daske za rezanje i serviranje." image="/images/dal-daska-ambijent.webp" alt="Daska od javora i bukve na kamenoj kuhinjskoj ploči — vizualizacija ambijenta" href="/konfigurator/daska" action="Kreirajte svoju dasku">
+        <p>Daske od masivnog drveta iz DAL Workshop radionice u Mostaru, za male svakodnevne rituale. Izaberite model i dimenzije, dodajte detalje za lakše korištenje ili predložite personalizaciju za poseban poklon.</p>
       </ProductIntro>
 
       <section className="section section--stone" aria-labelledby="primjeri">

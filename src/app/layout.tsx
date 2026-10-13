@@ -13,7 +13,7 @@ const ogBase = deploymentOrigin();
 export const metadata: Metadata = {
   ...(ogBase ? { metadataBase: new URL(ogBase) } : {}),
   title: {
-    default: 'DAL Workshop — stolovi, daske i gazišta, Mostar',
+    default: 'DAL Workshop Mostar — stolovi po mjeri, daske i gazišta',
     template: '%s · DAL Workshop',
   },
   description:
@@ -41,6 +41,7 @@ function OrganizationJsonLd() {
   const data = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
+    ...(origin ? { '@id': `${origin}#organization` } : {}),
     name: BRAND.name,
     ...(origin ? { url: origin, logo: `${origin}${BRAND.logo.src}` } : {}),
     areaServed: { '@type': 'City', name: BRAND.city },

@@ -6,11 +6,12 @@ import { AVAILABILITY_LABEL } from '@/lib/catalog/status';
 import { WORKS } from '@/lib/catalog/works';
 import { formatCm } from '@/lib/config/units';
 import { ProductIntro } from '@/components/site/ProductIntro';
+import { ServiceJsonLd } from '@/components/site/ServiceJsonLd';
 import styles from '../content.module.css';
 
 export const metadata: Metadata = {
-  title: 'Stolovi po mjeri',
-  description: 'Stolovi od masivnog drveta po mjeri iz Mostara. Iz naše radionice: hrastov stol 150 × 70 cm s crnim metalnim postoljem. Konfigurišite svoj stol u 3D.',
+  title: 'Izrada stolova po mjeri u Mostaru',
+  description: 'DAL Workshop: izrada stolova po mjeri u Mostaru od masivnog drveta. Izaberite oblik, dimenzije i postolje u 3D konfiguratoru i zatražite ponudu radionice.',
   alternates: { canonical: '/stolovi' },
 };
 
@@ -23,8 +24,9 @@ export default function TablesPage() {
   const r = TABLE_RANGES;
   return (
     <>
-      <ProductIntro eyebrow="Stolovi od masivnog drveta" title="Mjesto za sve vaše trenutke." image="/images/dal-hero-desktop.webp" alt="Hrastov stol s crnim metalnim postoljem u toploj blagovaonici — vizualizacija ambijenta" href="/konfigurator/stol" action="Kreirajte svoj stol">
-        <p>Jutarnja kafa, zajednički ručak, razgovori koji potraju. Izaberite drvo, dimenzije i detalje stola koji se uklapa u vaš prostor i način života.</p>
+      <ServiceJsonLd name="Izrada stolova po mjeri u Mostaru" description="Ručna izrada stolova od masivnog drveta po mjeri, uz izbor dimenzija, oblika, ivice i postolja te dogovor s radionicom u Mostaru." path="/stolovi" />
+      <ProductIntro eyebrow="Masivno drvo · Ručna izrada" title="Stolovi po mjeri iz Mostara." image="/images/dal-hero-desktop.webp" alt="Hrastov stol s crnim metalnim postoljem u toploj blagovaonici — vizualizacija ambijenta" href="/konfigurator/stol" action="Kreirajte svoj stol">
+        <p>U DAL Workshop radionici u Mostaru izrađujemo stolove od masivnog drveta po vašoj mjeri. Izaberite oblik, drvo, dimenzije i postolje — za jutarnju kafu, zajednički ručak i razgovore koji potraju.</p>
       </ProductIntro>
 
       <section className="section section--stone" aria-labelledby="primjer">
@@ -132,6 +134,24 @@ export default function TablesPage() {
             <Link href="/konfigurator/stol" className="btn">
               Kreirajte svoj stol
             </Link>
+          </div>
+        </div>
+      </section>
+      <section className="section section--stone" aria-labelledby="izrada-mostar">
+        <div className="wrap">
+          <div className="section-head">
+            <p className="eyebrow">Od mjere do ponude</p>
+            <h2 id="izrada-mostar">Kako naručiti stol po mjeri u Mostaru?</h2>
+            <p className="lead">Pošaljite izbor iz konfiguratora ili fotografiju stola koji vam se sviđa. Mjere i detalje dogovarate direktno s DAL Workshop radionicom.</p>
+          </div>
+          <div className={styles.options}>
+            <div><h3>Koje mjere trebam poslati?</h3><p>Navedite dužinu i širinu ploče ili promjer okruglog stola. Ako niste sigurni, opišite prostor i broj mjesta; u konfiguratoru možete zatražiti naš prijedlog.</p></div>
+            <div><h3>Koliko košta izrada stola?</h3><p>Cijena zavisi od dimenzija, drveta, ploče i postolja. Radionica provjerava vaš izbor i priprema ponudu prije dogovora o izradi.</p></div>
+            <div><h3>Kako dogovaramo preuzimanje?</h3><p>Radionica je u Mostaru. Rok izrade, mogućnost preuzimanja i dostavu dogovaramo pojedinačno, uz vašu ponudu.</p></div>
+          </div>
+          <div className={styles.ctaRow}>
+            <Link href="/radovi" className="text-link">Pogledajte stolove i daske iz radionice ↗</Link>
+            <Link href="/kontakt" className="text-link">Kontaktirajte DAL Workshop u Mostaru ↗</Link>
           </div>
         </div>
       </section>
