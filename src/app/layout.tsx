@@ -57,7 +57,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   preload('/fonts/manrope-latin-wght-normal.woff2', { as: 'font', type: 'font/woff2', crossOrigin: '' });
   return (
     <html lang="bs" data-scroll-behavior="smooth">
-      <body>
+      <body id="vrh">
         <a href="#sadrzaj" className="skip-link">
           Preskoči na sadržaj
         </a>

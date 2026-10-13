@@ -66,7 +66,7 @@ export function MobileMenu() {
         <div className={styles.panel}>
           <div className={styles.top}>
             <div className={styles.brand}>
-              <Logo />
+              <Logo onNavigate={() => setOpen(false)} />
               <span>Mostar · Ručna izrada</span>
             </div>
             <button type="button" className={styles.close} onClick={() => setOpen(false)}>

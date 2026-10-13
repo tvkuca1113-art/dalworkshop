@@ -1,5 +1,8 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useId } from 'react';
 import styles from './Logo.module.css';
 import { BRAND } from '@/lib/catalog/brand';
@@ -10,10 +13,19 @@ import { BRAND } from '@/lib/catalog/brand';
  * A luminance cutoff removes the photographed background (including its texture),
  * without replacing the original letter shapes. The source raster stays intact.
  */
-export function Logo({ size = 'header', eager = false }: { size?: 'header' | 'footer'; eager?: boolean }) {
+export function Logo({ size = 'header', eager = false, onNavigate }: { size?: 'header' | 'footer'; eager?: boolean; onNavigate?: () => void }) {
   const filterId = `dal-logo-${useId().replaceAll(':', '')}`;
+  const pathname = usePathname();
   return (
-    <Link href="/" className={`${styles.logo} ${styles[size]}`} aria-label={`${BRAND.name} — početna`}>
+    <Link href="/#vrh" className={`${styles.logo} ${styles[size]}`} aria-label={`${BRAND.name} — početna`}
+      onClick={(event) => {
+        if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+        onNavigate?.();
+        // A repeated link to the current route can preserve its scroll position.
+        if (pathname === '/') {
+          window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
+        }
+      }}>
       <svg width="0" height="0" className={styles.filters} aria-hidden="true">
         <defs>
           <filter id={filterId} colorInterpolationFilters="sRGB">
